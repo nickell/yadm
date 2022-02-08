@@ -1,0 +1,6 @@
+lcov-report
+coverage-final.json
+node_modules
+*.png
+*.svg
+*.snap

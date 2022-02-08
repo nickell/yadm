@@ -1,0 +1,61 @@
+[user]
+    name = Chad Nickell
+    email = chad@yaguara.co
+[include]
+    path = ~/.gitconfig.local
+[push]
+    default = current
+[core]
+    editor = nvim
+    excludesfile = ~/.dotfiles/generic/config/gitignore
+[filter "lfs"]
+    clean = git-lfs clean %f
+    smudge = git-lfs smudge %f
+    required = true
+[fetch]
+    prune = true
+[color]
+    diff = auto
+    status = auto
+    branch = auto
+    ui = true
+[format]
+    pretty = format:%Cgreen%h%Creset %an %Cred::%Creset %s %Cred::%Creset %ad (%Cblue%ar%Creset)
+[log]
+    date = format:%m/%d/%Y %H:%M
+    abbrevCommit = true
+[commit]
+    template = ~/.dotfiles/generic/config/git_commit_msg
+[alias]
+    branch-prune = "!git fetch -p && for b in $(git for-each-ref --format='%(if:equals=[gone])%(upstream:track)%(then)%(refname:short)%(end)' refs/heads); do git branch -d $b; done"
+    b = branch --verbose
+    ba = branch --all --verbose
+    bd = branch -D
+    cm = !git commit -m
+    cma = !git add -A && git commit -m
+    co = checkout
+    cob = checkout -b
+    cof = "!f() { git branch | grep -i "$1" | head -1 | xargs git checkout; }; f"
+    cp = cherry-pick
+    ec = config --global -e
+    f = fetch -p
+    files = !git diff --name-only `git merge-base HEAD $REVIEW_BASE`
+    lm = log --pretty=medium
+    m = merge
+    p = pull
+    pu = push
+    ; pod = push origin --delete --no-verify
+    reset-to-remote = !git reset --hard origin/`git rev-parse --abbrev-ref HEAD`
+    review = !nvim -p $(git files) +\"tabdo Gdiff $REVIEW_BASE\" +\"let g:gitgutter_diff_base = '$REVIEW_BASE'\"
+    s = switch
+    save = "!f() { git add -A; git commit -m ${1-SAVEPOINT} --no-verify; }; f"
+    stat = !git diff --stat `git merge-base HEAD $REVIEW_BASE`
+    undo = reset HEAD~1 --mixed
+[rebase]
+	instructionFormat = (%an <%ae>) %s
+[pull]
+	ff = only
+[checkout]
+	defaultRemote = origin
+[init]
+	defaultBranch = main
