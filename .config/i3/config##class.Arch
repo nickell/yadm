@@ -1,0 +1,567 @@
+# vim: set fdm=marker fmr={{{,}}} fdl=0:
+
+# i3 config file (v4)
+# Please see http://i3wm.org/docs/userguide.html for a complete reference!
+
+# {{{ Appearance
+# set default desktop layout (default is tiling)
+workspace_layout tabbed
+
+# Configure border style <normal|1pixel|pixel xx|none|pixel>
+default_border pixel 1
+default_floating_border pixel 3
+
+# Hide borders
+hide_edge_borders none
+
+set_from_resource $fontSize      i3FontSize    14
+set_from_resource $barFontSize   i3BarFontSize 11
+
+# Font for window titles. Will also be used by the bar unless a different font
+# is used in the bar {} block below.
+font xft:SF Pro Display $fontSize
+font pango:SF Pro Display $fontSize
+
+for_window [class=".*"] title_format "<span size=\\"small\\"> %title</span>"
+
+# {{{ i3-gaps
+#############################
+### settings for i3-gaps: ###
+#############################
+
+# Set inner/outer gaps
+gaps inner 14
+gaps outer -2
+
+# Additionally, you can issue commands with the following syntax. This is useful to bind keys to changing the gap size.
+# gaps inner|outer current|all set|plus|minus <px>
+# gaps inner all set 10
+# gaps outer all plus 5
+
+# Smart gaps (gaps used if only more than one container on the workspace)
+# smart_gaps on
+
+# Smart borders (draw borders around container only if it is not the only container on this workspace) 
+# on|no_gaps (on=always activate and no_gaps=only activate if the gap size to the edge of the screen is 0)
+smart_borders on
+
+# Press $mod+Shift+g to enter the gap mode. Choose o or i for modifying outer/inner gaps. Press one of + / - (in-/decrement for current workspace) or 0 (remove gaps for current workspace). If you also press Shift with these keys, the change will be global for all workspaces.
+# set $mode_gaps Gaps: (o) outer, (i) inner
+# set $mode_gaps_outer Outer Gaps: +|-|0 (local), Shift + +|-|0 (global)
+# set $mode_gaps_inner Inner Gaps: +|-|0 (local), Shift + +|-|0 (global)
+# bindsym $mod+Shift+g mode "$mode_gaps"
+
+# mode "$mode_gaps" {
+#         bindsym o      mode "$mode_gaps_outer"
+#         bindsym i      mode "$mode_gaps_inner"
+#         bindsym Return mode "default"
+#         bindsym Escape mode "default"
+# }
+# mode "$mode_gaps_inner" {
+#         bindsym plus  gaps inner current plus 5
+#         bindsym minus gaps inner current minus 5
+#         bindsym 0     gaps inner current set 0
+
+#         bindsym Shift+plus  gaps inner all plus 5
+#         bindsym Shift+minus gaps inner all minus 5
+#         bindsym Shift+0     gaps inner all set 0
+
+#         bindsym Return mode "default"
+#         bindsym Escape mode "default"
+# }
+# mode "$mode_gaps_outer" {
+#         bindsym plus  gaps outer current plus 5
+#         bindsym minus gaps outer current minus 5
+#         bindsym 0     gaps outer current set 0
+
+#         bindsym Shift+plus  gaps outer all plus 5
+#         bindsym Shift+minus gaps outer all minus 5
+#         bindsym Shift+0     gaps outer all set 0
+
+#         bindsym Return mode "default"
+#         bindsym Escape mode "default"
+# }
+# }}}
+# }}}
+
+# {{{ Behavior
+set $mod Mod4
+floating_modifier $mod
+workspace_auto_back_and_forth yes
+
+# switch to workspace with urgent window automatically
+for_window [urgent=latest] focus
+
+# {{{ Workspace keybindings
+#navigate workspaces next / previous
+bindsym $mod+Ctrl+Right workspace next
+bindsym $mod+Ctrl+Left workspace prev
+
+# Workspace names
+# to display names or symbols instead of plain workspace numbers you can use
+# something like: set $ws1 1:mail
+#                 set $ws2 2:
+set $ws1 1
+set $ws2 2
+set $ws3 3
+set $ws4 4
+set $ws5 5
+set $ws6 6
+set $ws7 7
+set $ws8 8
+
+# switch to workspace
+bindsym $mod+1 workspace $ws1
+bindsym $mod+2 workspace $ws2
+bindsym $mod+3 workspace $ws3
+bindsym $mod+4 workspace $ws4
+bindsym $mod+5 workspace $ws5
+bindsym $mod+6 workspace $ws6
+bindsym $mod+7 workspace $ws7
+bindsym $mod+8 workspace $ws8
+
+# Move focused container to workspace
+bindsym $mod+Ctrl+1 move container to workspace $ws1; workspace $ws1
+bindsym $mod+Ctrl+2 move container to workspace $ws2; workspace $ws2
+bindsym $mod+Ctrl+3 move container to workspace $ws3; workspace $ws3
+bindsym $mod+Ctrl+4 move container to workspace $ws4; workspace $ws4
+bindsym $mod+Ctrl+5 move container to workspace $ws5; workspace $ws5
+bindsym $mod+Ctrl+6 move container to workspace $ws6; workspace $ws6
+bindsym $mod+Ctrl+7 move container to workspace $ws7; workspace $ws7
+bindsym $mod+Ctrl+8 move container to workspace $ws8; workspace $ws8
+
+# Move to workspace with focused container
+bindsym $mod+Shift+1 move container to workspace $ws1
+bindsym $mod+Shift+2 move container to workspace $ws2
+bindsym $mod+Shift+3 move container to workspace $ws3
+bindsym $mod+Shift+4 move container to workspace $ws4
+bindsym $mod+Shift+5 move container to workspace $ws5
+bindsym $mod+Shift+6 move container to workspace $ws6
+bindsym $mod+Shift+7 move container to workspace $ws7
+bindsym $mod+Shift+8 move container to workspace $ws8
+# }}}
+
+# {{{ Floating windows
+# Open specific applications in floating mode
+for_window [title="alsamixer"] floating enable border pixel 1
+for_window [class="Galculator"] floating enable border pixel 1
+for_window [class="GParted"] floating enable border normal
+for_window [title="i3_help"] floating enable sticky enable border normal
+for_window [class="Lightdm-settings"] floating enable
+for_window [class="Lxappearance"] floating enable sticky enable border normal
+for_window [class="Nitrogen"] floating enable sticky enable border normal
+for_window [class="Oblogout"] fullscreen enable
+for_window [class="octopi"] floating enable
+for_window [class="Pamac-manager"] floating enable
+for_window [class="Pavucontrol"] floating enable
+for_window [class="qt5ct"] floating enable sticky enable border normal
+for_window [class="Qtconfig-qt4"] floating enable sticky enable border normal
+for_window [class="Simple-scan"] floating enable border normal
+for_window [class="(?i)System-config-printer.py"] floating enable border normal
+for_window [class="Skype"] floating enable border normal
+for_window [class="Timeset-gui"] floating enable border normal
+for_window [class="(?i)virtualbox"] floating enable border normal
+for_window [class="Xfburn"] floating enable
+for_window [class="Xfce4-power-manager-settings"] floating enable
+for_window [class="Alacritty" title="Scratchpad"] move scratchpad
+# }}}
+# }}}
+
+# {{{ Bar Config
+# Start i3bar to display a workspace bar (plus the system information i3status if available)
+bar {
+	i3bar_command i3bar
+	status_command py3status
+	position bottom
+    font pango:Weather Icons $barFontSize, SF Pro Display $barFontSize
+    font xft:Weather Icons $barFontSize, SF Pro Display $barFontSize
+
+## please set your primary output first. Example: 'xrandr --output eDP1 --primary'
+#	tray_output primary
+#	tray_output eDP1
+
+	bindsym button4 nop
+	bindsym button5 nop
+#   font xft:URWGothic-Book 11
+	strip_workspace_numbers yes
+
+    colors {
+        background #282A36
+        statusline #F8F8F2
+        separator  #44475A
+
+        focused_workspace  #44475A #44475A #F8F8F2
+        active_workspace   #282A36 #44475A #F8F8F2
+        inactive_workspace #282A36 #282A36 #BFBFBF
+        urgent_workspace   #FF5555 #FF5555 #F8F8F2
+        binding_mode       #FF5555 #FF5555 #F8F8F2
+    }
+}
+
+# hide/unhide i3status bar
+# bindsym $mod+m bar mode toggle
+# }}}
+
+# {{{ Theme Colors
+# class                 border  bground text    indicator child_border
+client.focused          #6272A4 #6272A4 #F8F8F2 #6272A4   #6272A4
+client.focused_inactive #44475A #44475A #F8F8F2 #44475A   #44475A
+client.unfocused        #282A36 #282A36 #BFBFBF #282A36   #282A36
+client.urgent           #44475A #FF5555 #F8F8F2 #FF5555   #FF5555
+client.placeholder      #282A36 #282A36 #F8F8F2 #282A36   #282A36
+
+client.background       #F8F8F2
+# }}}
+
+# {{{ Variables
+# set $browser google-chrome-stable
+set $browser firefox
+# }}}
+
+# {{{ Keybindings
+bindsym $mod+9 exec --no-startup-id /usr/bin/xtrlock
+bindsym $mod+Return exec alacritty --config-file /home/chad/.dotfiles/generic/config/alacritty-tmux.yml
+bindsym $mod+Tab workspace back_and_forth
+bindsym $mod+a focus parent
+bindsym $mod+b exec alacritty --title="Ranger" -e /usr/bin/zsh --login -c /usr/bin/ranger
+bindsym $mod+bracketright mode $shortcut_mode
+bindsym $mod+c exec $browser
+bindsym $mod+d exec --no-startup-id rofi -show drun
+bindsym $mod+e workspace Email-Cal
+bindsym $mod+f fullscreen toggle
+bindsym $mod+h focus left
+bindsym $mod+j focus down
+bindsym $mod+k focus up
+bindsym $mod+l focus right
+bindsym $mod+minus scratchpad show
+bindsym $mod+n workspace Notion
+bindsym $mod+o workspace Spotify
+bindsym $mod+q kill
+bindsym $mod+r mode "resize"
+bindsym $mod+s workspace Slack
+bindsym $mod+space focus mode_toggle
+bindsym $mod+x workspace DB
+bindsym $mod+p mode $print_mode
+bindsym $mod+u mode $launch_app_mode
+bindsym $mod+z workspace Zoom
+
+bindsym $mod+Ctrl+h focus parent; focus left
+bindsym $mod+Ctrl+l focus parent; focus right
+bindsym $mod+Ctrl+m exec pavucontrol
+bindsym $mod+Shift+Down move workspace to output down
+bindsym $mod+Shift+Left move workspace to output left
+bindsym $mod+Shift+Right move workspace to output right
+bindsym $mod+Shift+Up move workspace to output up
+bindsym $mod+Shift+b exec alacritty -t "Sudo Ranger" -e bash -c "sudo -E ranger"
+bindsym $mod+Shift+e move container to workspace Email-Cal
+bindsym $mod+Shift+equal floating toggle; move scratchpad; scratchpad show
+bindsym $mod+Shift+h move left
+bindsym $mod+Shift+j move down
+bindsym $mod+Shift+k move up
+bindsym $mod+Shift+l move right
+bindsym $mod+Shift+minus move scratchpad
+bindsym $mod+Shift+n move container to workspace Notion
+bindsym $mod+Shift+o move container to workspace Spotify
+bindsym $mod+Shift+q split toggle
+bindsym $mod+Shift+r restart
+bindsym $mod+Shift+s move container to workspace Slack
+bindsym $mod+Shift+space floating toggle
+bindsym $mod+Shift+x move container to workspace DB
+bindsym $mod+Shift+z move container to workspace Zoom
+
+# Media player controls
+bindsym XF86AudioNext exec playerctl next
+bindsym XF86AudioPlay exec playerctl play-pause
+bindsym XF86AudioPrev exec playerctl previous
+bindsym XF86AudioRaiseVolume exec --no-startup-id /home/chad/.dotfiles/arch/bin/change-volume-and-notify.sh +2dB
+bindsym XF86AudioLowerVolume exec --no-startup-id /home/chad/.dotfiles/arch/bin/change-volume-and-notify.sh -2dB
+bindsym XF86AudioMute exec --no-startup-id pamixer -t
+bindsym XF86Favorites exec playerctl play-pause
+
+# Brightness controls
+bindsym XF86MonBrightnessDown exec --no-startup-id /home/chad/.dotfiles/arch/bin/change-brightness-and-notify.sh 10%-
+bindsym XF86MonBrightnessUp exec --no-startup-id /home/chad/.dotfiles/arch/bin/change-brightness-and-notify.sh +10%
+# }}}
+
+# {{{ Modes
+# {{{ mode_system: Set shut down, restart and locking features
+bindsym $mod+0 mode "$mode_system"
+set $mode_system (l)ogout, (s)uspend, (r)eboot, (S)hutdown
+mode "$mode_system" {
+    bindsym l exec --no-startup-id kill -9 -1
+    bindsym s exec --no-startup-id systemctl suspend, mode "default"
+    bindsym r exec --no-startup-id systemctl reboot, mode "default"
+    bindsym Shift+s exec --no-startup-id systemctl poweroff, mode "default"
+
+    # exit system mode: "Enter" or "Escape"
+    bindsym Return mode "default"
+    bindsym Escape mode "default"
+}
+# }}}
+
+# {{{ Resize mode
+# Resize window (you can also use the mouse for that)
+mode "resize" {
+        # These bindings trigger as soon as you enter the resize mode
+        # Pressing left will shrink the window’s width.
+        # Pressing right will grow the window’s width.
+        # Pressing up will shrink the window’s height.
+        # Pressing down will grow the window’s height.
+        bindsym h resize shrink width 5 px or 5 ppt
+        bindsym j resize grow height 5 px or 5 ppt
+        bindsym k resize shrink height 5 px or 5 ppt
+        bindsym l resize grow width 5 px or 5 ppt
+
+        # same bindings, but for the arrow keys
+        bindsym Left resize shrink width 10 px or 10 ppt
+        bindsym Down resize grow height 10 px or 10 ppt
+        bindsym Up resize shrink height 10 px or 10 ppt
+        bindsym Right resize grow width 10 px or 10 ppt
+
+        # exit resize mode: Enter or Escape
+        bindsym Return mode "default"
+        bindsym Escape mode "default"
+}
+# }}}
+
+# {{{ Change layout mode
+# change container layout (stacked, tabbed, toggle split)
+set $change_container_layout_mode Container Layout: (s)tacked | (t)abbed | t(o)ggle split
+bindsym $mod+Shift+c mode $change_container_layout_mode
+mode "$change_container_layout_mode" {
+        bindsym s layout stacking
+        bindsym t layout tabbed
+        bindsym o layout toggle split
+
+        # exit mode: Enter or Escape
+        bindsym Return mode "default"
+        bindsym Escape mode "default"
+}
+# }}}
+
+# {{{ mode: launch_app_mode
+set $launch_app_mode Launch app: (c)hrome | sp(o)tify | (s)lack | (1)password | (z)oom | (v)im mode | (e)mail | (i)cloud launch mode
+mode "$launch_app_mode" {
+        bindsym o exec spotify; mode "default"
+        bindsym c exec $browser; mode "default"
+        bindsym n exec /usr/bin/notion-app; mode "default"
+        bindsym s exec /usr/bin/slack; mode "default"
+        bindsym 1 exec /usr/bin/1password; mode "default"
+        bindsym z exec /usr/bin/zoom; mode "default"
+        bindsym v mode $vim_launch_mode
+        bindsym e mode $email_launch_mode
+        bindsym i mode $icloud_launch_mode
+
+        # exit mode: Enter or Escape
+        bindsym Return mode "default"
+        bindsym Escape mode "default"
+}
+
+# {{{ mode: vim_launch_mode
+set $vim_launch_mode Launch vim project: (c)hord internal | (d)otfiles | cara(w)ay
+mode "$vim_launch_mode" {
+        bindsym c mode $chord_internal_launch_mode
+        bindsym d exec alacritty --title="Dotfiles" -e /usr/bin/zsh --login -c "start-nvim-inside-tmux /home/chad/.dotfiles"; mode "default"
+        bindsym w exec alacritty --title="Caraway" -e /usr/bin/zsh --login -c "start-nvim-inside-tmux /home/chad/src/Caraway/chord-caraway"; mode "default"
+
+        # exit mode: Enter or Escape
+        bindsym Return mode "default"
+        bindsym Escape mode "default"
+}
+
+set $chord_internal_launch_mode Launch chord internal project: (a)utonomy | (c)hord-ui | chord-(j)s | (p)erformance | provisioning (t)ools
+mode "$chord_internal_launch_mode" {
+        bindsym a mode $chord_autonomy_launch_mode
+        bindsym c exec alacritty --title="Chord UI" -e /usr/bin/zsh --login -c "start-nvim-inside-tmux /home/chad/src/chord-ui"
+        bindsym j mode $chord_js_launch_mode
+        bindsym p mode $chord_performance_launch_mode
+        bindsym t exec alacritty --title="Provisioning Tools" -e /usr/bin/zsh --login -c "start-nvim-inside-tmux /home/chad/src/provisioning-tools"
+
+        # exit mode: Enter or Escape
+        bindsym Return mode "default"
+        bindsym Escape mode "default"
+}
+
+set $chord_performance_launch_mode Launch chord performance project: (s)tarter | (t)heme
+mode "$chord_performance_launch_mode" {
+        bindsym s exec alacritty --title="Gatsby Starter Performance" -e /usr/bin/zsh --login -c "start-nvim-inside-tmux /home/chad/src/chord-ui/packages/gatsby-starter-performance"
+        bindsym t exec alacritty --title="Gatsby Theme Performance" -e /usr/bin/zsh --login -c "start-nvim-inside-tmux /home/chad/src/chord-ui/packages/gatsby-theme-performance"
+
+        # exit mode: Enter or Escape
+        bindsym Return mode "default"
+        bindsym Escape mode "default"
+}
+
+set $chord_autonomy_launch_mode Launch chord autonomy project: (s)tarter | (t)heme
+mode "$chord_autonomy_launch_mode" {
+        bindsym s exec alacritty --title="Gatsby Starter Autonomy" -e /usr/bin/zsh --login -c "start-nvim-inside-tmux /home/chad/src/chord-ui/packages/gatsby-starter-autonomy"
+        bindsym t exec alacritty --title="Gatsby Theme Autonomy" -e /usr/bin/zsh --login -c "start-nvim-inside-tmux /home/chad/src/chord-ui/packages/gatsby-theme-autonomy"
+
+        # exit mode: Enter or Escape
+        bindsym Return mode "default"
+        bindsym Escape mode "default"
+}
+
+set $chord_js_launch_mode Launch chord js project: (a)nalytics | (c)ore | (p)erformance
+mode "$chord_js_launch_mode" {
+        bindsym a exec alacritty --title="Chord JS Analytics" -e /usr/bin/zsh --login -c "start-nvim-inside-tmux /home/chad/src/chord-js/packages/chord-js-analytics"
+        bindsym c exec alacritty --title="Chord JS Core" -e /usr/bin/zsh --login -c "start-nvim-inside-tmux /home/chad/src/chord-js/packages/chord-js-core"
+        bindsym p exec alacritty --title="Chord JS Performance" -e /usr/bin/zsh --login -c "start-nvim-inside-tmux /home/chad/src/chord-js/packages/chord-js-performance"
+
+        # exit mode: Enter or Escape
+        bindsym Return mode "default"
+        bindsym Escape mode "default"
+}
+# }}}
+
+# {{{ mode: email_launch_mode
+set $email_launch_mode (p)ersonal | (w)ork | (y)aguara | personal c(a)lendar | work ca(l)endar | (r)obin
+mode "$email_launch_mode" {
+        bindsym p exec google-chrome-stable --app="https://mail.google.com/mail/u/0/#inbox"
+        bindsym y exec google-chrome-stable --app="https://mail.google.com/mail/u/1/#inbox"
+        bindsym w exec google-chrome-stable --app="https://mail.google.com/mail/u/2/#inbox"
+        bindsym r exec google-chrome-stable --app="https://mail.google.com/mail/u/4/#inbox"
+        bindsym a exec google-chrome-stable --app="https://calendar.google.com/calendar/u/0/r"
+        bindsym l exec google-chrome-stable --app="https://calendar.google.com/calendar/u/2/r"
+
+        # exit mode: Enter or Escape
+        bindsym Return mode "default"
+        bindsym Escape mode "default"
+}
+# }}}
+
+# {{{ mode: icloud_launch_mode
+set $icloud_launch_mode (r)eminders | (n)otes | (p)hotos
+mode "$icloud_launch_mode" {
+        bindsym r exec google-chrome-stable --app="https://www.icloud.com/reminders/"
+        bindsym n exec google-chrome-stable --app="https://www.icloud.com/notes/"
+        bindsym p exec google-chrome-stable --app="https://www.icloud.com/photos/"
+
+        # exit mode: Enter or Escape
+        bindsym Return mode "default"
+        bindsym Escape mode "default"
+}
+# }}}
+# }}}
+
+# {{{ mode: shortcut_mode
+set $shortcut_mode Shortcut: (a)udio mode | (m)onitor mode | (k)ill mode | (s)hortcut mode | (n)/(p) variety
+mode "$shortcut_mode" {
+        bindsym k mode $kill_mode
+        bindsym m mode $monitor_mode
+        bindsym a mode $audio_mode
+        bindsym s mode $seldom_shortcut_mode
+        bindsym n exec /usr/bin/variety --next
+        bindsym p exec /usr/bin/variety --previous
+
+        # exit mode: Enter or Escape
+        bindsym Return mode "default"
+        bindsym Escape mode "default"
+}
+
+# {{{ mode: audio_mode
+set $audio_mode Audio: (h)eadset mode (a)2dp mode
+mode "$audio_mode" {
+        # bindsym a exec pactl set-card-profile bluez_card.94_DB_56_A3_2B_BF a2dp_sink; mode "default"
+        # bindsym h exec pactl set-card-profile bluez_card.94_DB_56_A3_2B_BF headset_head_unit; mode "default"
+
+        bindsym a exec pactl set-card-profile bluez_card.F8_4D_89_05_7F_48 a2dp_sink; mode "default"
+        bindsym h exec pactl set-card-profile bluez_card.F8_4D_89_05_7F_48 handsfree_head_unit; mode "default"
+
+        # exit mode: Enter or Escape
+        bindsym Return mode "default"
+        bindsym Escape mode "default"
+}
+# }}}
+
+# {{{ mode: kill_mode
+set $kill_mode Kill: (c)hrome | (f)irefox
+mode "$kill_mode" {
+        bindsym c exec killall chrome; mode "default"
+        bindsym f exec killall firefox; mode "default"
+
+        # exit mode: Enter or Escape
+        bindsym Return mode "default"
+        bindsym Escape mode "default"
+}
+# }}}
+
+# {{{ mode: seldom_shortcut_mode
+set $seldom_shortcut_mode Seldom Used Shortcuts: restart (d)unst
+mode "$seldom_shortcut_mode" {
+        bindsym d exec "killall dunst; exec notify-send 'restart dunst'"; mode "default"
+
+        # exit mode: Enter or Escape
+        bindsym Return mode "default"
+        bindsym Escape mode "default"
+}
+# }}}
+
+# {{{ mode: monitor_mode
+set $monitor_mode Monitor: (a)uto (h)igh (m)ed (n)low/med (l)ow (x)tra low | (c)losed docked | (o)pen docked
+mode "$monitor_mode" {
+        # Auto detect monitors
+        bindsym a exec xrandr --auto, mode "default"
+
+        # Scripted setups
+        bindsym h exec /bin/bash /home/chad/.screenlayout/high.sh; exec $HOME/.fehbg &, mode "default"
+        bindsym m exec /bin/bash /home/chad/.screenlayout/medium.sh; exec $HOME/.fehbg &, mode "default"
+        bindsym n exec /bin/bash /home/chad/.screenlayout/low-medium.sh; exec $HOME/.fehbg &, mode "default"
+        bindsym l exec /bin/bash /home/chad/.screenlayout/low.sh; exec $HOME/.fehbg &, mode "default"
+        bindsym x exec /bin/bash /home/chad/.screenlayout/extra-low.sh; exec $HOME/.fehbg &, mode "default"
+        bindsym c exec /bin/bash /home/chad/.screenlayout/Closed\ Docked.sh, mode "default"
+        bindsym o exec /bin/bash /home/chad/.screenlayout/Open\ Docked.sh, mode "default"
+
+        # exit monitor mode: Enter or Escape
+        bindsym Return mode "default"
+        bindsym Escape mode "default"
+}
+# }}}
+# }}}
+
+# {{{ mode: print_mode
+set $print_mode Print screen: (w)indow | (s)election to clipboard | (c)ast screen | (k)ill screencast
+mode "$print_mode" {
+        bindsym w --release exec --no-startup-id /home/chad/.bin/current-window-to-clipboard, mode "default"
+        bindsym s --release exec scrot -s 'screenshot_%Y%m%d_%H%M%S.png' -e 'mkdir -p ~/Pictures/screenshots && mv $f ~/Pictures/screenshots && xclip -selection clipboard -t image/png -i ~/Pictures/screenshots/`ls -1 -t ~/Pictures/screenshots | head -1`', mode "default"
+        bindsym c --release exec ffcast -q -s rec /home/chad/Videos/screencast-"$(date +%F\ %T)".mp4, mode "default"
+        bindsym k --release exec pkill -fxn '(/\S+)*ffmpeg\s.*\sx11grab\s.*', mode "default"
+
+        bindsym Return mode "default"
+        bindsym Escape mode "default"
+}
+# }}}
+
+# {{{ mode: Wallpaper
+# Wallpaper
+set $wallpaper_mode Wallpaper: (n)ext | (p)revious | (f)avorite | (t)oggle pause | (q)uotes next | quotes p(r)evious
+bindsym $mod+Shift+w mode $wallpaper_mode
+mode "$wallpaper_mode" {
+        bindsym n exec --no-startup-id /usr/bin/variety --next
+        bindsym p exec --no-startup-id /usr/bin/variety --previous
+        bindsym f exec --no-startup-id /usr/bin/variety --favorite
+        bindsym t exec --no-startup-id /usr/bin/variety --toggle-pause
+        bindsym q exec --no-startup-id /usr/bin/variety --quotes-next
+        bindsym r exec --no-startup-id /usr/bin/variety --quotes-previous
+
+        # exit mode: Enter or Escape
+        bindsym Return mode "default"
+        bindsym Escape mode "default"
+}
+# }}}
+# }}}
+
+# {{{ Autostart programs
+# exec --no-startup-id $HOME/.dotfiles/arch/bin/launch-polybar.sh
+exec --no-startup-id /usr/bin/variety
+exec --no-startup-id /usr/bin/dunst
+exec --no-startup-id nm-applet
+# exec --no-startup-id pa-applet
+exec --no-startup-id xfce4-power-manager
+exec --no-startup-id /usr/lib/xfce-polkit/xfce-polkit
+exec --no-startup-id /usr/bin/pamac-tray
+exec --no-startup-id /usr/bin/blueberry-tray
+exec --no-startup-id /usr/bin/picom -b
+# exec --no-startup-id /home/chad/.fehbg &
+exec --no-startup-id /usr/bin/alacritty --config-file /home/chad/.dotfiles/generic/config/alacritty-tmux.yml --title="Scratchpad"
+# }}}

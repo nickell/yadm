@@ -1,0 +1,41 @@
+# -*- coding: utf-8 -*-
+"""
+Module that toggles dunst
+"""
+
+import subprocess
+
+class Py3status:
+    format = r"[\?color=state [\?if=state 🎧|👂]]"
+    thresholds = [(True, "bad"), (False, "good")]
+
+    def post_config_hook(self):
+        self.is_do_not_disturb_mode = subprocess.run(['dunstctl', 'is-paused'], capture_output=True, text=True).stdout.rstrip() == 'true'
+        self.thresholds_init = self.py3.get_color_names_list(self.format)
+
+    def do_not_disturb_mode(self):
+        do_not_disturb_mode_data = {"state": self.is_do_not_disturb_mode}
+
+        for x in self.thresholds_init:
+            if x in do_not_disturb_mode_data:
+                self.py3.threshold_get_color(do_not_disturb_mode_data[x], x)
+
+        return {
+            'full_text': self.py3.safe_format(self.format, do_not_disturb_mode_data),
+            'cached_until': self.py3.CACHE_FOREVER
+        }
+
+    def on_click(self, event):
+        if event['button'] == 1:
+            subprocess.run(['dunstctl', 'set-paused', 'toggle'])
+            self.is_do_not_disturb_mode = not self.is_do_not_disturb_mode
+        # elif event['button'] == 3:
+        #     subprocess.run(['xfce4-power-manager-settings'])
+
+if __name__ == "__main__":
+    """
+    Run module in test mode.
+    """
+    from py3status.module_test import module_test
+
+    module_test(Py3status)

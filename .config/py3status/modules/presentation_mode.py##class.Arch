@@ -1,0 +1,41 @@
+# -*- coding: utf-8 -*-
+"""
+Module that toggles xfce4-power-manager presentation mode
+"""
+
+import subprocess
+
+class Py3status:
+    format = r"[\?color=state [\?if=state ☕|😴]]"
+    thresholds = [(True, "bad"), (False, "good")]
+
+    def post_config_hook(self):
+        self.is_presentation_mode = subprocess.run(['xfconf-query', '-c', 'xfce4-power-manager', '-p', '/xfce4-power-manager/presentation-mode', '-v'], capture_output=True, text=True).stdout.rstrip() == 'true'
+        self.thresholds_init = self.py3.get_color_names_list(self.format)
+
+    def presentation_mode(self):
+        presentation_mode_data = {"state": self.is_presentation_mode}
+
+        for x in self.thresholds_init:
+            if x in presentation_mode_data:
+                self.py3.threshold_get_color(presentation_mode_data[x], x)
+
+        return {
+            'full_text': self.py3.safe_format(self.format, presentation_mode_data),
+            'cached_until': self.py3.CACHE_FOREVER
+        }
+
+    def on_click(self, event):
+        if event['button'] == 1:
+            subprocess.run(['xfconf-query', '-c', 'xfce4-power-manager', '-p', '/xfce4-power-manager/presentation-mode', '-T'])
+            self.is_presentation_mode = not self.is_presentation_mode
+        elif event['button'] == 3:
+            subprocess.run(['xfce4-power-manager-settings'])
+
+if __name__ == "__main__":
+    """
+    Run module in test mode.
+    """
+    from py3status.module_test import module_test
+
+    module_test(Py3status)
