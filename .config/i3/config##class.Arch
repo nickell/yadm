@@ -220,7 +220,7 @@ set $browser firefox
 
 # {{{ Keybindings
 bindsym $mod+9 exec --no-startup-id /usr/bin/xtrlock
-bindsym $mod+Return exec alacritty --config-file /home/chad/.dotfiles/generic/config/alacritty-tmux.yml
+bindsym $mod+Return exec alacritty --config-file /home/chad/.config/alacritty/tmux.yml
 bindsym $mod+Tab workspace back_and_forth
 bindsym $mod+a focus parent
 bindsym $mod+b exec alacritty --title="Ranger" -e /usr/bin/zsh --login -c /usr/bin/ranger
@@ -563,5 +563,5 @@ exec --no-startup-id /usr/bin/pamac-tray
 exec --no-startup-id /usr/bin/blueberry-tray
 exec --no-startup-id /usr/bin/picom -b
 # exec --no-startup-id /home/chad/.fehbg &
-exec --no-startup-id /usr/bin/alacritty --config-file /home/chad/.dotfiles/generic/config/alacritty-tmux.yml --title="Scratchpad"
+exec --no-startup-id /usr/bin/alacritty --config-file /home/chad/.config/alacritty/tmux.yml --title="Scratchpad"
 # }}}
