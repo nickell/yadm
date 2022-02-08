@@ -314,7 +314,7 @@ font:
 # }}}
 
 import:
-  - ~/.dotfiles/generic/config/alacritty-dracula.yml
+  - ~/.config/alacritty/dracula.yml
 # }}}
 
 # {{{ Visual Bell
