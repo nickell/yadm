@@ -45,6 +45,7 @@ alias v="vim"
 alias vu="nvim +PlugUpgrade +PlugUpdate"
 alias x='exit'
 alias y="yarn"
+alias ya="yadm"
 alias ystart="systemctl --user start app"
 alias ystop="systemctl --user stop app"
 alias z='fasd_cd -d'
