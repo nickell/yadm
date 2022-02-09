@@ -355,10 +355,11 @@ mode "$launch_app_mode" {
 }
 
 # {{{ mode: vim_launch_mode
-set $vim_launch_mode Launch vim project: (c)hord internal | (d)otfiles | cara(w)ay
+set $vim_launch_mode Launch vim project: (c)hord internal | (d)otfiles | cara(w)ay | (y)adm
 mode "$vim_launch_mode" {
         bindsym c mode $chord_internal_launch_mode
         bindsym d exec alacritty --title="Dotfiles" -e /usr/bin/zsh --login -c "start-nvim-inside-tmux /home/chad/.dotfiles"; mode "default"
+        bindsym y exec alacritty --title="YADM" -e /usr/bin/zsh --login -c "start-nvim-inside-tmux /home/chad/src/yadm"; mode "default"
         bindsym w exec alacritty --title="Caraway" -e /usr/bin/zsh --login -c "start-nvim-inside-tmux /home/chad/src/Caraway/chord-caraway"; mode "default"
 
         # exit mode: Enter or Escape
