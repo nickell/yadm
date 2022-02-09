@@ -1,0 +1,10 @@
+.nerdtreeignore
+.yvmrc
+.vscode
+.stack-work
+.agignore
+Session.vim
+.solargraph.yml
+node_modules
+.vim/coc-settings.json
+.vim

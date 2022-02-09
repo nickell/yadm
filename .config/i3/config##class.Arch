@@ -234,7 +234,6 @@ bindsym $mod+j focus down
 bindsym $mod+k focus up
 bindsym $mod+l focus right
 bindsym $mod+minus scratchpad show
-bindsym $mod+n workspace Notion
 bindsym $mod+o workspace Spotify
 bindsym $mod+q kill
 bindsym $mod+r mode "resize"
@@ -260,7 +259,6 @@ bindsym $mod+Shift+j move down
 bindsym $mod+Shift+k move up
 bindsym $mod+Shift+l move right
 bindsym $mod+Shift+minus move scratchpad
-bindsym $mod+Shift+n move container to workspace Notion
 bindsym $mod+Shift+o move container to workspace Spotify
 bindsym $mod+Shift+q split toggle
 bindsym $mod+Shift+r restart
@@ -273,14 +271,14 @@ bindsym $mod+Shift+z move container to workspace Zoom
 bindsym XF86AudioNext exec playerctl next
 bindsym XF86AudioPlay exec playerctl play-pause
 bindsym XF86AudioPrev exec playerctl previous
-bindsym XF86AudioRaiseVolume exec --no-startup-id /home/chad/.dotfiles/arch/bin/change-volume-and-notify.sh +2dB
-bindsym XF86AudioLowerVolume exec --no-startup-id /home/chad/.dotfiles/arch/bin/change-volume-and-notify.sh -2dB
+bindsym XF86AudioRaiseVolume exec --no-startup-id /home/chad/.bin/change-volume-and-notify +2dB
+bindsym XF86AudioLowerVolume exec --no-startup-id /home/chad/.bin/change-volume-and-notify -2dB
 bindsym XF86AudioMute exec --no-startup-id pamixer -t
 bindsym XF86Favorites exec playerctl play-pause
 
 # Brightness controls
-bindsym XF86MonBrightnessDown exec --no-startup-id /home/chad/.dotfiles/arch/bin/change-brightness-and-notify.sh 10%-
-bindsym XF86MonBrightnessUp exec --no-startup-id /home/chad/.dotfiles/arch/bin/change-brightness-and-notify.sh +10%
+bindsym XF86MonBrightnessDown exec --no-startup-id /home/chad/.bin/change-brightness-and-notify 10%-
+bindsym XF86MonBrightnessUp exec --no-startup-id /home/chad/.bin/change-brightness-and-notify +10%
 # }}}
 
 # {{{ Modes
@@ -344,7 +342,6 @@ set $launch_app_mode Launch app: (c)hrome | sp(o)tify | (s)lack | (1)password | 
 mode "$launch_app_mode" {
         bindsym o exec spotify; mode "default"
         bindsym c exec $browser; mode "default"
-        bindsym n exec /usr/bin/notion-app; mode "default"
         bindsym s exec /usr/bin/slack; mode "default"
         bindsym 1 exec /usr/bin/1password; mode "default"
         bindsym z exec /usr/bin/zoom; mode "default"
