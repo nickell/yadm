@@ -11,3 +11,23 @@ then
 fi
 
 {% endif %}
+
+prezto="$HOME/.zprezto"
+tpm="$HOME/.tmux/plugins/tpm"
+vim_plug="$HOME/.local/share/nvim/site/autoload/plug.vim"
+
+if [ ! -d $tpm ]
+then
+    git clone https://github.com/tmux-plugins/tpm $tpm
+fi
+
+if [ ! -d $prezto ]
+then
+    git clone --recursive https://github.com/sorin-ionescu/prezto.git $prezto
+fi
+
+if [ ! -f "$vim_plug" ]
+then
+    curl -fLo ~/.local/share/nvim/site/autoload/plug.vim --create-dirs \
+        https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
+fi

@@ -1,0 +1,141 @@
+# vim: fdm=marker foldlevel=0
+
+# {{{ Imports and requires
+# {{{ Imports
+snippet iu "@yaguara/utils import statement" b
+import * as utils from '@yaguara/utils'
+endsnippet
+
+snippet ira "Import ramda" b
+import * as R from 'ramda'
+endsnippet
+
+snippet ig "Import generic" b
+import $2 from '$1'
+endsnippet
+
+snippet iga "Import generic all" b
+import * as $1 from '$2'
+endsnippet
+
+snippet ih "hooks import statement" b
+import * as hooks from '../hooks'
+endsnippet
+
+snippet ir "Import React" b
+import * as React from 'react'
+endsnippet
+
+snippet it "Import type" b
+import { ${1} } from '@yaguara/ts-types'
+endsnippet
+
+snippet ita "Import @yaguara/ts-types" b
+import * as T from '@yaguara/ts-types'
+endsnippet
+# }}}
+
+# {{{ Requires
+snippet ru "Require util" b
+const util = require('util')
+endsnippet
+
+snippet rra "Require ramda" b
+const R = require('ramda')
+endsnippet
+
+snippet rg "Require generic" b
+const $1 = require('$2')
+endsnippet
+
+snippet eg "Export generic" b
+export { default as $1 } from './$1'
+endsnippet
+# }}}
+# }}}
+
+# {{{ Redux
+snippet reduxmapstate "Redux mapStateToProps function" b
+const mapStateToProps = (state: State) => ({
+  $1
+})
+endsnippet
+
+snippet reduxmakemapstate "Redux mapStateToProps function" b
+const makeMapStateToProps = () {
+	const mapStateToProp = (state, props) => ({})
+	return mapStateToProps
+}
+endsnippet
+# }}}
+
+snippet todo "TODO"
+// TODO: ${1:desc} `!v strftime("%D %I:%M %p")` `echo $USER`
+endsnippet
+
+snippet umounting "Unmounting useEffect" b
+React.useEffect(() => () => console.log('unmounting'), [])
+endsnippet
+
+snippet co "Comment" b
+/**
+ * $0
+ */
+endsnippet
+
+snippet clo "console.log"
+console.log(${0:'here'})
+endsnippet
+
+snippet cloo "console.log with clipboard"
+console.log({ ${0:`!v @+`} })
+endsnippet
+
+# snippet cloo "console.log with clipboard"
+# console.log(${1:`!p
+# snip.rv = snip.v.text
+# `})
+# endsnippet
+
+snippet try "Try catch"
+try {
+	${1:${VISUAL}}
+} catch (err) {
+	${0}
+}
+endsnippet
+
+snippet if "If statement"
+if (${1:Condition}) {
+	${0:${VISUAL}}
+}
+endsnippet
+
+snippet ? "Ternary statement"
+? $1 : $2
+endsnippet
+
+snippet e "Export" b
+export default $1
+endsnippet
+
+snippet t "HTML tag"
+<${1:div}>${0:${VISUAL:contents}}</${1/([\w.]+).*/$1/}>
+endsnippet
+
+snippet te "HTML tag expanded" b
+<${1:div}>
+	${0:${VISUAL:contents}}
+</${1/([\w.]+).*/$1/}>
+endsnippet
+
+snippet st "setTimeout" b
+setTimeout(function() {
+	${1:${VISUAL:contents}}
+}, ${0:200});
+endsnippet
+
+snippet fo "Fold" b
+// {{{ $1
+// }}}
+endsnippet
