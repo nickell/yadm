@@ -8,7 +8,7 @@ filetype plugin indent on
 set autoindent
 set backspace=indent,eol,start
 set cmdheight=1
-set completeopt-=preview
+" set completeopt-=preview
 set expandtab
 set hidden
 set listchars=trail:-
