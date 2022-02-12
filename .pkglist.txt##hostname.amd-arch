@@ -46,7 +46,6 @@ i3lock
 i3status
 inetutils
 inotify-tools
-intel-ucode
 iperf
 iperf3
 kcalc
@@ -62,7 +61,6 @@ linux
 linux-firmware
 luit
 lxappearance
-m4
 make
 mesa
 mkcert
@@ -95,11 +93,11 @@ py3status
 python-pip
 python-pynvim
 python-tzlocal
+qmk
 qt5ct
 ranger
 rclone
 redis
-refind
 reflector
 reptyr
 ripgrep
@@ -109,8 +107,7 @@ ruby
 seahorse
 sof-firmware
 sshfs
-sudo
-texinfo
+thunar
 tmux
 ttf-dejavu
 ttf-liberation
@@ -118,6 +115,7 @@ ufw
 unrar
 unzip
 usbutils
+v4l2loopback-dkms
 variety
 vi
 vim
@@ -128,17 +126,15 @@ xarchiver
 xclip
 xdg-user-dirs
 xdg-utils
-xdotool
+xf86-video-amdgpu
 xf86-video-vesa
 xfce4-power-manager
-xorg-bdftopcf
 xorg-docs
 xorg-font-util
 xorg-fonts-100dpi
 xorg-fonts-75dpi
-xorg-fonts-encodings
+xorg-fonts-misc
 xorg-iceauth
-xorg-mkfontscale
 xorg-server
 xorg-server-common
 xorg-server-devel
@@ -146,7 +142,6 @@ xorg-server-xephyr
 xorg-server-xnest
 xorg-server-xvfb
 xorg-sessreg
-xorg-setxkbmap
 xorg-smproxy
 xorg-x11perf
 xorg-xauth
@@ -160,7 +155,6 @@ xorg-xev
 xorg-xgamma
 xorg-xhost
 xorg-xinput
-xorg-xkbcomp
 xorg-xkbevd
 xorg-xkbutils
 xorg-xkill
