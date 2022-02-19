@@ -1,6 +1,7 @@
 {
   "typescript.suggestionActions.enabled": false,
   "codeLens.enable": true,
+  "css.lint.unknownAtRules": "ignore",
   "snippets.userSnippetsDirectory": "/home/chad/.config/nvim/ultisnips",
   "coc.preferences.formatOnSaveFiletypes": [
     "css",
