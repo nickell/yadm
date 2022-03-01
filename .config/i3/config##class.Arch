@@ -418,7 +418,7 @@ mode "$email_launch_mode" {
         bindsym p exec google-chrome-stable --app="https://mail.google.com/mail/u/0/#inbox"
         bindsym y exec google-chrome-stable --app="https://mail.google.com/mail/u/1/#inbox"
         bindsym w exec google-chrome-stable --app="https://mail.google.com/mail/u/2/#inbox"
-        bindsym r exec google-chrome-stable --app="https://mail.google.com/mail/u/4/#inbox"
+        bindsym r exec google-chrome-stable --app="https://mail.google.com/mail/u/3/#inbox"
         bindsym a exec google-chrome-stable --app="https://calendar.google.com/calendar/u/0/r"
         bindsym l exec google-chrome-stable --app="https://calendar.google.com/calendar/u/2/r"
 
