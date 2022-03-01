@@ -353,6 +353,7 @@ mode "$launch_app_mode" {
         bindsym Return mode "default"
         bindsym Escape mode "default"
 }
+# }}}
 
 # {{{ mode: vim_launch_mode
 set $vim_launch_mode Launch vim project: (c)hord internal | (d)otfiles | cara(w)ay | (y)adm
@@ -440,7 +441,6 @@ mode "$icloud_launch_mode" {
         bindsym Escape mode "default"
 }
 # }}}
-# }}}
 
 # {{{ mode: shortcut_mode
 set $shortcut_mode Shortcut: (a)udio mode | (m)onitor mode | (k)ill mode | (s)hortcut mode | (n)/(p) variety
@@ -456,6 +456,7 @@ mode "$shortcut_mode" {
         bindsym Return mode "default"
         bindsym Escape mode "default"
 }
+# }}}
 
 # {{{ mode: audio_mode
 set $audio_mode Audio: (h)eadset mode (a)2dp mode
@@ -514,7 +515,6 @@ mode "$monitor_mode" {
         bindsym Return mode "default"
         bindsym Escape mode "default"
 }
-# }}}
 # }}}
 
 # {{{ mode: print_mode
