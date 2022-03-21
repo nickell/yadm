@@ -163,7 +163,8 @@ for_window [class="Timeset-gui"] floating enable border normal
 for_window [class="(?i)virtualbox"] floating enable border normal
 for_window [class="Xfburn"] floating enable
 for_window [class="Xfce4-power-manager-settings"] floating enable
-for_window [class="Alacritty" title="Scratchpad"] move scratchpad
+for_window [class="Alacritty" title="Scratchpad"] mark "scratchpad", move scratchpad
+for_window [class="Alacritty" title="Ranger"] mark "ranger", move scratchpad
 # }}}
 # }}}
 
@@ -223,7 +224,7 @@ bindsym $mod+9 exec --no-startup-id /usr/bin/xtrlock
 bindsym $mod+Return exec alacritty --config-file /home/chad/.config/alacritty/tmux.yml
 bindsym $mod+Tab workspace back_and_forth
 bindsym $mod+a focus parent
-bindsym $mod+b exec alacritty --title="Ranger" -e /usr/bin/zsh --login -c /usr/bin/ranger
+bindsym $mod+b [con_mark="ranger"] scratchpad show
 bindsym $mod+bracketright mode $shortcut_mode
 bindsym $mod+c exec $browser
 bindsym $mod+d exec --no-startup-id rofi -show drun
@@ -233,7 +234,7 @@ bindsym $mod+h focus left
 bindsym $mod+j focus down
 bindsym $mod+k focus up
 bindsym $mod+l focus right
-bindsym $mod+minus scratchpad show
+bindsym $mod+minus [con_mark="scratchpad"] scratchpad show
 bindsym $mod+o workspace Spotify
 bindsym $mod+q kill
 bindsym $mod+r mode "resize"
@@ -486,9 +487,10 @@ mode "$kill_mode" {
 # }}}
 
 # {{{ mode: seldom_shortcut_mode
-set $seldom_shortcut_mode Seldom Used Shortcuts: restart (d)unst
+set $seldom_shortcut_mode Seldom Used Shortcuts: restart (d)unst | (r)anger
 mode "$seldom_shortcut_mode" {
         bindsym d exec "killall dunst; exec notify-send 'restart dunst'"; mode "default"
+        bindsym r exec --no-startup-id alacritty --title="Ranger" -e /usr/bin/zsh --login -c /usr/bin/ranger; mode "default"
 
         # exit mode: Enter or Escape
         bindsym Return mode "default"
@@ -562,4 +564,5 @@ exec --no-startup-id /usr/bin/blueberry-tray
 exec --no-startup-id /usr/bin/picom -b
 # exec --no-startup-id /home/chad/.fehbg &
 exec --no-startup-id /usr/bin/alacritty --config-file /home/chad/.config/alacritty/tmux.yml --title="Scratchpad"
+exec --no-startup-id alacritty --title="Ranger" -e /usr/bin/zsh --login -c /usr/bin/ranger
 # }}}
