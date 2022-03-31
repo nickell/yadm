@@ -415,15 +415,15 @@ mode "$chord_js_launch_mode" {
 # }}}
 
 # {{{ mode: email_launch_mode
-set $email_launch_mode (p)ersonal | (w)ork | (y)aguara | personal c(a)lendar | work ca(l)endar | (r)obin | a(s)ana
+set $email_launch_mode (p)ersonal | (w)ork | (y)aguara | p(e)rsonal calendar | work ca(l)endar | (r)obin | (a)sana
 mode "$email_launch_mode" {
         bindsym p exec google-chrome-stable --app="https://mail.google.com/mail/u/0/#inbox"
         bindsym y exec google-chrome-stable --app="https://mail.google.com/mail/u/1/#inbox"
         bindsym w exec google-chrome-stable --app="https://mail.google.com/mail/u/2/#inbox"
         bindsym r exec google-chrome-stable --app="https://mail.google.com/mail/u/3/#inbox"
-        bindsym a exec google-chrome-stable --app="https://calendar.google.com/calendar/u/0/r"
+        bindsym e exec google-chrome-stable --app="https://calendar.google.com/calendar/u/0/r"
         bindsym l exec google-chrome-stable --app="https://calendar.google.com/calendar/u/2/r"
-        bindsym s exec google-chrome-stable --app="https://app.asana.com/0/home/1201258476203538"
+        bindsym a exec google-chrome-stable --app="https://app.asana.com/0/home/1201258476203538"
 
         # exit mode: Enter or Escape
         bindsym Return mode "default"
