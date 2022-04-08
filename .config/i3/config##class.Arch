@@ -339,13 +339,12 @@ mode "$change_container_layout_mode" {
 # }}}
 
 # {{{ mode: launch_app_mode
-set $launch_app_mode Launch app: (c)hrome | sp(o)tify | (s)lack | (1)password | (z)oom | (v)im mode | (e)mail | (i)cloud launch mode | (t)rello
+set $launch_app_mode Launch app: (a)sana | sp(o)tify | (s)lack | (1)password | (v)im mode | (e)mail | (i)cloud launch mode | (t)rello
 mode "$launch_app_mode" {
+        bindsym a exec google-chrome-stable --app="https://app.asana.com/0/home/1201258476203538"
         bindsym o exec spotify; mode "default"
-        bindsym c exec $browser; mode "default"
         bindsym s exec /usr/bin/slack; mode "default"
         bindsym 1 exec /usr/bin/1password; mode "default"
-        bindsym z exec /usr/bin/zoom; mode "default"
         bindsym t exec google-chrome-stable --app="https://trello.com/b/w4p1rq2O/house"
         bindsym v mode $vim_launch_mode
         bindsym e mode $email_launch_mode
@@ -424,7 +423,6 @@ mode "$email_launch_mode" {
         bindsym r exec google-chrome-stable --app="https://mail.google.com/mail/u/3/#inbox"
         bindsym e exec google-chrome-stable --app="https://calendar.google.com/calendar/u/0/r"
         bindsym l exec google-chrome-stable --app="https://calendar.google.com/calendar/u/2/r"
-        bindsym a exec google-chrome-stable --app="https://app.asana.com/0/home/1201258476203538"
 
         # exit mode: Enter or Escape
         bindsym Return mode "default"
@@ -433,11 +431,12 @@ mode "$email_launch_mode" {
 # }}}
 
 # {{{ mode: icloud_launch_mode
-set $icloud_launch_mode (r)eminders | (n)otes | (p)hotos
+set $icloud_launch_mode (r)eminders | (n)otes | (p)hotos | (d)rive
 mode "$icloud_launch_mode" {
         bindsym r exec google-chrome-stable --app="https://www.icloud.com/reminders/"
         bindsym n exec google-chrome-stable --app="https://www.icloud.com/notes/"
         bindsym p exec google-chrome-stable --app="https://www.icloud.com/photos/"
+        bindsym d exec google-chrome-stable --app="https://www.icloud.com/iclouddrive/"
 
         # exit mode: Enter or Escape
         bindsym Return mode "default"
