@@ -339,16 +339,30 @@ mode "$change_container_layout_mode" {
 # }}}
 
 # {{{ mode: launch_app_mode
-set $launch_app_mode Launch app: (a)sana | sp(o)tify | (s)lack | (1)password | (v)im mode | (e)mail | (i)cloud launch mode | (t)rello
+set $launch_app_mode Launch app: (a)sana | sp(o)tify | (s)lack | (1)password | (v)im mode | (e)mail | (i)cloud launch mode | (t)rello | a(l)acritty mode
 mode "$launch_app_mode" {
         bindsym a exec google-chrome-stable --app="https://app.asana.com/0/home/1201258476203538"
         bindsym o exec spotify; mode "default"
         bindsym s exec /usr/bin/slack; mode "default"
         bindsym 1 exec /usr/bin/1password; mode "default"
         bindsym t exec google-chrome-stable --app="https://trello.com/b/w4p1rq2O/house"
+        bindsym l mode $alacritty_launch_mode
         bindsym v mode $vim_launch_mode
         bindsym e mode $email_launch_mode
         bindsym i mode $icloud_launch_mode
+
+        # exit mode: Enter or Escape
+        bindsym Return mode "default"
+        bindsym Escape mode "default"
+}
+# }}}
+
+# {{{ mode: alacritty_launch_mode
+set $alacritty_launch_mode Launch alacritty session: (x)ps | (a)md ubuntu | (p)i
+mode "$alacritty_launch_mode" {
+        bindsym x exec alacritty --title=XPS -e /usr/bin/zsh --login -c "ssh xps -t \"tmux attach || tmux new\""; mode "default"
+        bindsym a exec alacritty --title="AMD Ubuntu" -e /usr/bin/zsh --login -c "ssh amd-ubuntu -t \"tmux attach || tmux new\""; mode "default"
+        bindsym p exec alacritty --title="Pi" -e /usr/bin/zsh --login -c "ssh pi -t \"tmux attach || tmux new\""; mode "default"
 
         # exit mode: Enter or Escape
         bindsym Return mode "default"
