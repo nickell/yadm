@@ -3,18 +3,28 @@
 {% if yadm.class == "Arch" %}
 # install dracula gtk theme
 
+######################## Icons ########################
 tela="/tmp/Tela-icon-theme"
 if [ ! -d $tela ]
 then
     git clone git@github.com:vinceliuice/Tela-icon-theme.git $tela
     $tela/install.sh -a
 fi
+######################## /Icons ########################
 
+######################## Install vim plug ########################
+vim_plug="$HOME/.local/share/nvim/site/autoload/plug.vim"
+
+if [ ! -f "$vim_plug" ]
+then
+    curl -fLo ~/.local/share/nvim/site/autoload/plug.vim --create-dirs \
+        https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
+fi
+######################## /Install vim plug ########################
 {% endif %}
 
 prezto="$HOME/.zprezto"
 tpm="$HOME/.tmux/plugins/tpm"
-vim_plug="$HOME/.local/share/nvim/site/autoload/plug.vim"
 
 if [ ! -d $tpm ]
 then
@@ -24,10 +34,4 @@ fi
 if [ ! -d $prezto ]
 then
     git clone --recursive https://github.com/sorin-ionescu/prezto.git $prezto
-fi
-
-if [ ! -f "$vim_plug" ]
-then
-    curl -fLo ~/.local/share/nvim/site/autoload/plug.vim --create-dirs \
-        https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
 fi
