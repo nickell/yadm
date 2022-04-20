@@ -360,9 +360,9 @@ mode "$launch_app_mode" {
 # {{{ mode: alacritty_launch_mode
 set $alacritty_launch_mode Launch alacritty session: (x)ps | (a)md ubuntu | (p)i
 mode "$alacritty_launch_mode" {
-        bindsym x exec alacritty --title=XPS -e /usr/bin/zsh --login -c "ssh xps -t \"tmux attach || tmux new\""; mode "default"
-        bindsym a exec alacritty --title="AMD Ubuntu" -e /usr/bin/zsh --login -c "ssh amd-ubuntu -t \"tmux attach || tmux new\""; mode "default"
-        bindsym p exec alacritty --title="Pi" -e /usr/bin/zsh --login -c "ssh pi -t \"tmux attach || tmux new\""; mode "default"
+        bindsym x exec alacritty --title=XPS -e /usr/bin/zsh --login -c "ssh xps -t \"tmux attach || tmux new\""
+        bindsym a exec alacritty --title="AMD Ubuntu" -e /usr/bin/zsh --login -c "ssh amd-ubuntu -t \"tmux attach || tmux new\""
+        bindsym p exec alacritty --title="Pi" -e /usr/bin/zsh --login -c "ssh pi -t \"tmux attach || tmux new\""
 
         # exit mode: Enter or Escape
         bindsym Return mode "default"
