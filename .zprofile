@@ -4,8 +4,10 @@
 # Node 14.15.4
 # path+=$HOME/.nvm/versions/node/v14.15.4/bin
 # export NODE_VERSION=14.15.4
-path+=$HOME/.nvm/versions/node/v16.13.1/bin
-export NODE_VERSION=16.13.1
+# path+=$HOME/.nvm/versions/node/v16.13.1/bin
+# export NODE_VERSION=16.13.1
+path+=$HOME/.nvm/versions/node/v16.15.0/bin
+export NODE_VERSION=16.15.0
 
 # YVM
 # export YVM_DIR=/home/chad/.yvm

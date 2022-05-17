@@ -344,6 +344,7 @@ mode "$launch_app_mode" {
         bindsym a exec google-chrome-stable --app="https://app.asana.com/0/home/1201258476203538"; mode "default"
         bindsym o exec spotify; mode "default"
         bindsym s exec /usr/bin/slack; mode "default"
+        bindsym f exec /usr/bin/firefox -P Work; mode "default"
         bindsym 1 exec /usr/bin/1password; mode "default"
         bindsym l mode $alacritty_launch_mode
         bindsym t exec google-chrome-stable --app="https://trello.com/b/w4p1rq2O/house"; mode "default"

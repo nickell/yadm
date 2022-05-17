@@ -23,7 +23,9 @@
 # echo "$2" # auto
 # echo "$3" # /home/username/Pictures/Wallpapers/Nature/green-tunnel-1920x1080-wallpaper-861.jpg
 
+######### My Customizations #########
 cp $1 /usr/share/backgrounds/wall."${1##*.}"
+######### /My Customizations #########
 
 # Here you may apply some additional custom operations on the wallpaper before it is applied.
 # In the end put the path to the actual final wallpaper image file in the WP variable.
@@ -106,7 +108,7 @@ if [[ "$DESKTOP" == *"Enlightenment"* ]] || [[ "$DESKTOP" == *"Moksha"* ]]; then
     # Remove all Variety wallpapers, but the current one and the previous one
     #   as we are calling enlightenment_remote asynchronously, if the previous wallpaper hasn't been
     #   replaced yet then the wallpaper will get set back to the theme one causing ugly artifacts
-    LAST_WALLPAPER_FILE="/home/chad/.config/variety/.enlightenment_last_wallpaper.txt"
+    LAST_WALLPAPER_FILE="$HOME/.config/variety/.enlightenment_last_wallpaper.txt"
 
     if [ -e "$LAST_WALLPAPER_FILE" ]; then
         find "$OUTPUT_DIR" -name "variety_wallpaper*.*" | grep -v "$OFILE.edj" | grep -v "$(cat "$LAST_WALLPAPER_FILE")" | xargs rm
@@ -168,9 +170,17 @@ fi
 
 # Gnome 3, Unity
 gsettings set org.gnome.desktop.background picture-uri "file://$WP" 2> /dev/null
+gsettings set org.gnome.desktop.background picture-uri-dark "file://$WP" 2> /dev/null
 if [ "$(gsettings get org.gnome.desktop.background picture-options)" == "'none'" ]; then
     gsettings set org.gnome.desktop.background picture-options 'zoom'
 fi
+
+# GNOME Screensaver / Lock screen - thanks to George C. de Araujo for the patch
+gsettings set org.gnome.desktop.screensaver picture-uri "file://$WP" 2> /dev/null
+if [ "$(gsettings get org.gnome.desktop.screensaver picture-options)" == "'none'" ]; then
+    gsettings set org.gnome.desktop.screensaver picture-options 'zoom'
+fi
+
 
 # Deepin
 if [ "$(gsettings list-schemas | grep -c com.deepin.wrap.gnome.desktop.background)" -ge 1 ]; then
@@ -204,7 +214,7 @@ fi
 # For simple WMs, use either feh or nitrogen
 # Implementation note: this uses spaces around list items to enforce matching whole words.
 # This also means that an empty variable won't cause false positives, since it expands to "  "
-SIMPLE_WMS=("bspwm" "dwm" "herbstluftwm" "i3" "i3-with-shmlog" "jwm" "openbox" "qtile" "xmonad")
+SIMPLE_WMS=("bspwm" "dwm" "herbstluftwm" "i3" "i3-with-shmlog" "jwm" "LeftWM" "openbox" "qtile" "qtile-venv" "xmonad")
 if [[ " ${SIMPLE_WMS[*]} " = *" $XDG_CURRENT_DESKTOP "* || " ${SIMPLE_WMS[*]} " = *" $XDG_SESSION_DESKTOP "* ||
       " ${SIMPLE_WMS[*]} " = *" $DESKTOP_SESSION "* ]]; then
 	if command -v "feh" >/dev/null 2>&1; then
@@ -215,7 +225,20 @@ if [[ " ${SIMPLE_WMS[*]} " = *" $XDG_CURRENT_DESKTOP "* || " ${SIMPLE_WMS[*]} " 
 fi
 
 if [[ -n $SWAYSOCK ]]; then
-    swaymsg output "*" bg "$WP" fill 2> /dev/null
+    # If swaybg is available, use it as prevents system freeze.
+    # See https://github.com/swaywm/sway/issues/5606
+    if command -v "swaybg" >/dev/null 2>&1; then
+        # Grey background flicker is prevented by killing old swaybg process after new one.
+        # See https://github.com/swaywm/swaybg/issues/17#issuecomment-851680720
+        PID=`pidof swaybg`
+        swaybg -i "$WP" -m fill &
+        if [ ! -z "$PID" ]; then
+            sleep 1
+            kill $PID 2>/dev/null
+        fi
+    else
+        swaymsg output "*" bg "$WP" fill 2> /dev/null
+    fi
 fi
 
 # trinity
@@ -229,19 +252,16 @@ gsettings set org.mate.background picture-filename "$WP" 2> /dev/null
 
 # Cinnamon after 2.0
 gsettings set org.cinnamon.desktop.background picture-uri "file://$WP" 2> /dev/null
-if [ "$(gsettings get org.cinnamon.desktop.background picture-options)" == "'none'" ]; then
+if [ "$(gsettings get org.cinnamon.desktop.background picture-options 2>/dev/null)" == "'none'" ]; then
 	gsettings set org.cinnamon.desktop.background picture-options 'zoom'
 fi
-
-# GNOME Screensaver / Lock screen - thanks to George C. de Araujo for the patch
-gsettings set org.gnome.desktop.screensaver picture-uri "file://$WP" 2> /dev/null
 
 # Awesome Window Manager
 # Be sure to start variety when you start awesome, such as by adding it to ~/.xinitrc
 # NOTE: This config will change the wallpaper after your current awesome theme sets it.
 # As such, the theme's wallpaper will briefly appear before being replaced with Variety's wallpaper.
-if [[ "$DESKTOP_STARTUP_ID" == "awesome"* ]]; then
-	echo "local gears = require(\"gears\") gears.wallpaper.maximized(\"$1\", s, true)" | awesome-client
+if [[ "$XDG_SESSION_DESKTOP $DESKTOP_STARTUP_ID $DESKTOP_SESSION $XDG_CURRENT_DESKTOP" == *"awesome"* ]]; then
+	echo "local gears = require(\"gears\") gears.wallpaper.maximized(\"$1\", nil)" | awesome-client
 fi
 
 # =====================================================================================
