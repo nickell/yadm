@@ -17,6 +17,5 @@ export FZF_DEFAULT_OPTS='--bind alt-j:down,alt-k:up'
 export FZF_TMUX=1
 
 if [ -n "$DESKTOP_SESSION" ];then
-    eval $(gnome-keyring-daemon --start)
     export SSH_AUTH_SOCK
 fi
