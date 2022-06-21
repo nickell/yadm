@@ -216,7 +216,8 @@ client.background       #F8F8F2
 
 # {{{ Variables
 # set $browser google-chrome-stable
-set $browser firefox
+# set $browser firefox
+set $browser brave
 # }}}
 
 # {{{ Keybindings
@@ -430,19 +431,65 @@ mode "$chord_js_launch_mode" {
 # }}}
 
 # {{{ mode: email_launch_mode
-set $email_launch_mode (p)ersonal | (w)ork | (y)aguara | p(e)rsonal calendar | work ca(l)endar | (r)obin | (a)sana
+set $email_launch_mode p(e)rsonal | (w)ork | (r)obin | (p)roroofing
 mode "$email_launch_mode" {
-        bindsym p exec google-chrome-stable --app="https://mail.google.com/mail/u/0/#inbox"
-        bindsym y exec google-chrome-stable --app="https://mail.google.com/mail/u/1/#inbox"
-        bindsym w exec google-chrome-stable --app="https://mail.google.com/mail/u/2/#inbox"
-        bindsym r exec google-chrome-stable --app="https://mail.google.com/mail/u/3/#inbox"
-        bindsym e exec google-chrome-stable --app="https://calendar.google.com/calendar/u/0/r"
-        bindsym l exec google-chrome-stable --app="https://calendar.google.com/calendar/u/2/r"
+        bindsym e mode $personal_launch_mode
+        bindsym w mode $work_launch_mode
+        bindsym r mode $robin_launch_mode
+        bindsym p mode $proroofing_launch_mode
 
         # exit mode: Enter or Escape
         bindsym Return mode "default"
         bindsym Escape mode "default"
 }
+
+# {{{ mode: personal_launch_mode
+set $personal_launch_mode personal (e)mail | (c)alendar
+mode "$personal_launch_mode" {
+        bindsym e exec google-chrome-stable --app="https://mail.google.com/mail/u/0/#inbox"
+        bindsym c exec google-chrome-stable --app="https://calendar.google.com/calendar/u/0/r"
+
+        # exit mode: Enter or Escape
+        bindsym Return mode $email_launch_mode
+        bindsym Escape mode "default"
+}
+# }}}
+
+# {{{ mode: work_launch_mode
+set $work_launch_mode work (e)mail | (c)alendar
+mode "$work_launch_mode" {
+        bindsym e exec google-chrome-stable --app="https://mail.google.com/mail/u/2/#inbox"
+        bindsym c exec google-chrome-stable --app="https://calendar.google.com/calendar/u/2/r"
+
+        # exit mode: Enter or Escape
+        bindsym Return mode $email_launch_mode
+        bindsym Escape mode "default"
+}
+# }}}
+
+# {{{ mode: robin_launch_mode
+set $robin_launch_mode robin (e)mail | (c)alendar
+mode "$robin_launch_mode" {
+        bindsym e exec google-chrome-stable --app="https://mail.google.com/mail/u/3/#inbox"
+        bindsym c exec google-chrome-stable --app="https://calendar.google.com/calendar/u/3/r"
+
+        # exit mode: Enter or Escape
+        bindsym Return mode $email_launch_mode
+        bindsym Escape mode "default"
+}
+# }}}
+
+# {{{ mode: proroofing_launch_mode
+set $proroofing_launch_mode proroofing (e)mail | (c)alendar
+mode "$proroofing_launch_mode" {
+        bindsym e exec google-chrome-stable --app="https://mail.google.com/mail/u/4/#inbox"
+        bindsym c exec google-chrome-stable --app="https://calendar.google.com/calendar/u/4/r"
+
+        # exit mode: Enter or Escape
+        bindsym Return mode $email_launch_mode
+        bindsym Escape mode "default"
+}
+# }}}
 # }}}
 
 # {{{ mode: icloud_launch_mode
@@ -460,12 +507,13 @@ mode "$icloud_launch_mode" {
 # }}}
 
 # {{{ mode: shortcut_mode
-set $shortcut_mode Shortcut: (a)udio mode | (m)onitor mode | (k)ill mode | (s)hortcut mode | (n)/(p) variety
+set $shortcut_mode Shortcut: (a)udio mode | (b)luetooth mode | (m)onitor mode | (k)ill mode | (s)hortcut mode | (n)/(p) variety
 mode "$shortcut_mode" {
         bindsym k mode $kill_mode
         bindsym m mode $monitor_mode
         bindsym a mode $audio_mode
         bindsym s mode $seldom_shortcut_mode
+        bindsym b mode $bluetooth_mode
         bindsym n exec /usr/bin/variety --next
         bindsym p exec /usr/bin/variety --previous
 
@@ -483,6 +531,21 @@ mode "$audio_mode" {
 
         bindsym a exec pactl set-card-profile bluez_card.F8_4D_89_05_7F_48 a2dp_sink; mode "default"
         bindsym h exec pactl set-card-profile bluez_card.F8_4D_89_05_7F_48 handsfree_head_unit; mode "default"
+
+        # exit mode: Enter or Escape
+        bindsym Return mode "default"
+        bindsym Escape mode "default"
+}
+# }}}
+
+# {{{ mode: audio_mode
+set $bluetooth_mode Bluetooth: (o)n | (x)off
+mode "$bluetooth_mode" {
+        # bindsym a exec pactl set-card-profile bluez_card.94_DB_56_A3_2B_BF a2dp_sink; mode "default"
+        # bindsym h exec pactl set-card-profile bluez_card.94_DB_56_A3_2B_BF headset_head_unit; mode "default"
+
+        bindsym o exec rfkill unblock bluetooth; mode "default"
+        bindsym x exec rfkill block bluetooth; mode "default"
 
         # exit mode: Enter or Escape
         bindsym Return mode "default"
