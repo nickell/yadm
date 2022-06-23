@@ -539,13 +539,15 @@ mode "$audio_mode" {
 # }}}
 
 # {{{ mode: audio_mode
-set $bluetooth_mode Bluetooth: (o)n | (x)off
+set $bluetooth_mode Bluetooth: (o)n | (x)off | connect (s)ony | connect (a)irpods
 mode "$bluetooth_mode" {
         # bindsym a exec pactl set-card-profile bluez_card.94_DB_56_A3_2B_BF a2dp_sink; mode "default"
         # bindsym h exec pactl set-card-profile bluez_card.94_DB_56_A3_2B_BF headset_head_unit; mode "default"
 
         bindsym o exec rfkill unblock bluetooth; mode "default"
         bindsym x exec rfkill block bluetooth; mode "default"
+        bindsym s exec bluetoothctl -- connect 94:DB:56:A3:2B:BF; mode "default"
+        bindsym a exec bluetoothctl -- connect F8:4D:89:05:7F:48; mode "default"
 
         # exit mode: Enter or Escape
         bindsym Return mode "default"
@@ -639,7 +641,7 @@ exec --no-startup-id nm-applet
 exec --no-startup-id xfce4-power-manager
 exec --no-startup-id /usr/lib/xfce-polkit/xfce-polkit
 exec --no-startup-id /usr/bin/pamac-tray
-exec --no-startup-id /usr/bin/blueberry-tray
+# exec --no-startup-id /usr/bin/blueberry-tray
 exec --no-startup-id /usr/bin/picom -b
 # exec --no-startup-id /home/chad/.fehbg &
 exec --no-startup-id /usr/bin/alacritty --config-file /home/chad/.config/alacritty/tmux.yml --title="Scratchpad"
