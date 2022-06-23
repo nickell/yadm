@@ -17,6 +17,7 @@ general {
 
 # order += "arch_updates"
 order += "spotify"
+order += "bluetooth"
 order += "cpu_usage"
 order += "lm_sensors"
 order += "weather_owm"
@@ -29,6 +30,10 @@ order += "presentation_mode"
 #     format = " Updates: {pacman} - {aur} "
 #     hide_if_zero = true
 # }
+
+bluetooth {
+    format = "{format_device}"
+}
 
 battery_level {
     format = "{charging_character} {percent}%"
