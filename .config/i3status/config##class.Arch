@@ -16,6 +16,7 @@ general {
 }
 
 # order += "arch_updates"
+order += "scratchpad_list"
 order += "spotify"
 order += "bluetooth"
 order += "cpu_usage"
@@ -30,6 +31,11 @@ order += "presentation_mode"
 #     format = " Updates: {pacman} - {aur} "
 #     hide_if_zero = true
 # }
+#
+
+scratchpad_list {
+    format = '[\?not_zero ⌫ [\?color=scratchpad {scratchpad}]]'
+}
 
 bluetooth {
     format = "{format_device}"

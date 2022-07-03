@@ -235,7 +235,8 @@ bindsym $mod+h focus left
 bindsym $mod+j focus down
 bindsym $mod+k focus up
 bindsym $mod+l focus right
-bindsym $mod+minus [con_mark="scratchpad"] scratchpad show
+bindsym $mod+minus [con_mark="default-scratchpad"] scratchpad show
+# bindsym $mod+minus [con_mark="scratchpad"] scratchpad show
 bindsym $mod+o workspace Spotify
 bindsym $mod+q kill
 bindsym $mod+r mode "resize"
@@ -255,12 +256,12 @@ bindsym $mod+Shift+Right move workspace to output right
 bindsym $mod+Shift+Up move workspace to output up
 bindsym $mod+Shift+b exec alacritty -t "Sudo Ranger" -e bash -c "sudo -E ranger"
 bindsym $mod+Shift+e move container to workspace Email-Cal
-bindsym $mod+Shift+equal floating toggle; move scratchpad; scratchpad show
+bindsym $mod+Shift+equal floating toggle; mark "default-scratchpad"; move scratchpad; scratchpad show
 bindsym $mod+Shift+h move left
 bindsym $mod+Shift+j move down
 bindsym $mod+Shift+k move up
 bindsym $mod+Shift+l move right
-bindsym $mod+Shift+minus move scratchpad
+bindsym $mod+Shift+minus mark "default-scratchpad"; move scratchpad
 bindsym $mod+Shift+o move container to workspace Spotify
 bindsym $mod+Shift+q split toggle
 bindsym $mod+Shift+r restart
@@ -437,12 +438,12 @@ mode "$chord_js_launch_mode" {
 # }}}
 
 # {{{ mode: email_launch_mode
-set $email_launch_mode p(e)rsonal | (w)ork | (r)obin | (p)roroofing
+set $email_launch_mode (p)ersonal | (w)ork | (r)obin | proroo(f)ing
 mode "$email_launch_mode" {
-        bindsym e mode $personal_launch_mode
+        bindsym p mode $personal_launch_mode
         bindsym w mode $work_launch_mode
         bindsym r mode $robin_launch_mode
-        bindsym p mode $proroofing_launch_mode
+        bindsym f mode $proroofing_launch_mode
 
         # exit mode: Enter or Escape
         bindsym Return mode "default"
