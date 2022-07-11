@@ -286,7 +286,7 @@ bindsym XF86MonBrightnessUp exec --no-startup-id /home/chad/.bin/change-brightne
 # Dunst controls
 bindcode Control+49 exec --no-startup-id dunstctl history-pop
 bindsym Control+space exec --no-startup-id dunstctl close
-bindsym Control+Shift+space exec --no-startup-id dunstctl close-all
+# bindsym Control+Shift+space exec --no-startup-id dunstctl close-all
 bindsym Control+Shift+period exec --no-startup-id dunstctl context
 # }}}
 
@@ -347,9 +347,10 @@ mode "$change_container_layout_mode" {
 # }}}
 
 # {{{ mode: launch_app_mode
-set $launch_app_mode Launch app: (a)sana | sp(o)tify | (s)lack | (1)password | (v)im mode | (e)mail | (i)cloud launch mode | (t)rello | a(l)acritty mode
+set $launch_app_mode Launch app: (a)sana | a(c)culynx | sp(o)tify | (s)lack | (1)password | (v)im mode | (e)mail | (i)cloud launch mode | (t)rello | a(l)acritty mode
 mode "$launch_app_mode" {
         bindsym a exec google-chrome-stable --app="https://app.asana.com/0/home/1201258476203538"; mode "default"
+        bindsym c exec google-chrome-stable --app="https://my.acculynx.com/dashboard"; mode "default"
         bindsym o exec spotify; mode "default"
         bindsym s exec /usr/bin/slack; mode "default"
         bindsym f exec /usr/bin/firefox -P Work; mode "default"
