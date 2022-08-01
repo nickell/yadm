@@ -126,6 +126,7 @@ nnoremap <leader>gw :Gwrite<cr>
 nmap <silent> <leader>j <Plug>(coc-diagnostic-next)
 nmap <silent> <leader>k <Plug>(coc-diagnostic-prev)
 nnoremap <leader>n :NERDTreeFind<cr>
+nnoremap <leader>m :InstantMarkdownPreview<cr>
 nnoremap <leader>o za
 nnoremap <leader>p :Prettier<cr>
 nnoremap <leader>Q :q!<cr>
@@ -319,6 +320,12 @@ command! -nargs=0 Prettier :CocCommand prettier.formatFile
 " Coc-snippets
 imap <C-l> <Plug>(coc-snippets-expand-jump)
 vmap <C-j> <Plug>(coc-snippets-select)
+
+inoremap <silent><expr> <TAB>
+      \ coc#pum#visible() ? coc#pum#next(1):
+      \ CheckBackspace() ? "\<Tab>" :
+      \ coc#refresh()
+inoremap <expr><S-TAB> coc#pum#visible() ? coc#pum#prev(1) : "\<C-h>"
 " }}}
 
 " {{{ VRC

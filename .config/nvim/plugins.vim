@@ -1,6 +1,6 @@
 " Motions and keys
 Plug 'Lokaltog/vim-easymotion'
-Plug 'ervandew/supertab'
+" Plug 'ervandew/supertab'
 Plug 'christoomey/vim-sort-motion'
 Plug 'christoomey/vim-tmux-navigator'
 Plug 'vim-scripts/BufOnly.vim'
@@ -67,6 +67,7 @@ Plug 'elzr/vim-json'
 " Plug 'peitalin/vim-jsx-typescript' using MaxMEllon/vim-jsx-pretty instead
 " Plug 'jason0x43/vim-js-indent'
 
+Plug 'jkramer/vim-checkbox'
 Plug 'pantharshit00/vim-prisma'
 Plug 'lifepillar/pgsql.vim'
 Plug 'chr4/nginx.vim'
