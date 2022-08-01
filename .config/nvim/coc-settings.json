@@ -3,6 +3,7 @@
   "codeLens.enable": true,
   "css.lint.unknownAtRules": "ignore",
   "snippets.userSnippetsDirectory": "/home/chad/.config/nvim/ultisnips",
+  "suggest.noselect": true,
   "coc.preferences.formatOnSaveFiletypes": [
     "css",
     "markdown",

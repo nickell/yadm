@@ -304,6 +304,8 @@ let g:haskell_indent_before_where=-2
 let g:instant_markdown_autostart=0
 
 " {{{ COC
+set updatetime=300
+
 let g:coc_global_extensions = [
     \ 'coc-css',
     \ 'coc-eslint',
@@ -326,6 +328,11 @@ inoremap <silent><expr> <TAB>
       \ CheckBackspace() ? "\<Tab>" :
       \ coc#refresh()
 inoremap <expr><S-TAB> coc#pum#visible() ? coc#pum#prev(1) : "\<C-h>"
+
+function! CheckBackspace() abort
+  let col = col('.') - 1
+  return !col || getline('.')[col - 1]  =~# '\s'
+endfunction
 " }}}
 
 " {{{ VRC
