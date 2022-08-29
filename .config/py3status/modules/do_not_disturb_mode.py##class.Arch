@@ -6,7 +6,7 @@ Module that toggles dunst
 import subprocess
 
 class Py3status:
-    format = r"[\?color=state [\?if=state 🎧|👂]]"
+    format = r"[\?color=state [\?if=state |]]"
     thresholds = [(True, "bad"), (False, "good")]
 
     def post_config_hook(self):

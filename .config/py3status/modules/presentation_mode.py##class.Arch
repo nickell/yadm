@@ -6,7 +6,7 @@ Module that toggles xfce4-power-manager presentation mode
 import subprocess
 
 class Py3status:
-    format = r"[\?color=state [\?if=state ☕|😴]]"
+    format = r"[\?color=state [\?if=state |鈴]]"
     thresholds = [(True, "bad"), (False, "good")]
 
     def post_config_hook(self):
