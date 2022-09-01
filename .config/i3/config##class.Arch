@@ -8,7 +8,7 @@
 workspace_layout tabbed
 
 # Configure border style <normal|1pixel|pixel xx|none|pixel>
-default_border pixel 1
+default_border pixel 3
 default_floating_border pixel 3
 
 # Hide borders
@@ -205,7 +205,7 @@ bar {
 
 # {{{ Theme Colors
 # class                 border  bground text    indicator child_border
-client.focused          #6272A4 #6272A4 #F8F8F2 #6272A4   #6272A4
+client.focused          #fa9d1b #6272A4 #F8F8F2 #6272A4   #fa9d1b
 client.focused_inactive #44475A #44475A #F8F8F2 #44475A   #44475A
 client.unfocused        #282A36 #282A36 #BFBFBF #282A36   #282A36
 client.urgent           #44475A #FF5555 #F8F8F2 #FF5555   #FF5555

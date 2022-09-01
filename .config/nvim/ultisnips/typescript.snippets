@@ -1,6 +1,11 @@
 extends javascript
 
-snippet int "interface"
+snippet int "interface" b
 	interface ${1} {
 		${2}: ${3:any}
 	}
+endsnippet
+
+snippet it "Import type" b
+import type { $2 } from '$1'
+endsnippet
