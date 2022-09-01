@@ -70,6 +70,8 @@ nnoremap <cr> i<cr><Esc>==
 nnoremap gd :bd<cr>
 nnoremap gn :bn<cr>
 nnoremap Y y$
+nnoremap 0 ^
+nnoremap ^ 0
 map <C-n> :NERDTreeToggle<CR>
 noremap <M-o> :OpenSession<cr>
 nnoremap gp :bp<cr>
