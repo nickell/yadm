@@ -144,7 +144,7 @@ bindsym $mod+Shift+8 move container to workspace $ws8
 # {{{ Floating windows
 # Open specific applications in floating mode
 for_window [title="alsamixer"] floating enable border pixel 1
-for_window [class="Galculator"] floating enable border pixel 1
+for_window [class="Galculator"] floating enable border pixel 1 mark "scratchpad-galculator" move scratchpad
 for_window [class="GParted"] floating enable border normal
 for_window [title="i3_help"] floating enable sticky enable border normal
 for_window [class="Lightdm-settings"] floating enable
@@ -231,6 +231,7 @@ bindsym $mod+c exec $browser
 bindsym $mod+d exec --no-startup-id rofi -show drun
 bindsym $mod+e workspace Email-Cal
 bindsym $mod+f fullscreen toggle
+bindsym $mod+g [con_mark="scratchpad-galculator"] scratchpad show
 bindsym $mod+h focus left
 bindsym $mod+j focus down
 bindsym $mod+k focus up
@@ -653,6 +654,7 @@ mode "$wallpaper_mode" {
 exec --no-startup-id /usr/bin/variety
 exec --no-startup-id /usr/bin/dunst
 exec --no-startup-id nm-applet
+exec --no-startup-id /usr/bin/galculator
 # exec --no-startup-id pa-applet
 exec --no-startup-id xfce4-power-manager
 exec --no-startup-id /usr/lib/xfce-polkit/xfce-polkit
