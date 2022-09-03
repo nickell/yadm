@@ -322,8 +322,12 @@ let g:coc_global_extensions = [
 command! -nargs=0 Prettier :CocCommand prettier.formatFile
 
 " Coc-snippets
-imap <C-l> <Plug>(coc-snippets-expand-jump)
-vmap <C-j> <Plug>(coc-snippets-select)
+inoremap <silent><expr> <C-l>
+  \ coc#pum#visible() ? coc#_select_confirm() :
+  \ coc#expandableOrJumpable() ?
+  \ "\<C-r>=coc#rpc#request('doKeymap', ['snippets-expand-jump',''])\<CR>" :
+  \ <SID>check_back_space() ? "\<TAB>" :
+  \ coc#refresh()
 
 inoremap <silent><expr> <TAB>
       \ coc#pum#visible() ? coc#pum#next(1):

@@ -111,3 +111,28 @@ snippet fo "Fold" b
 // {{{ $1
 // }}}
 endsnippet
+
+snippet cf "const function" b
+const ${1} = (${2}) => {
+	${3}
+}
+endsnippet
+
+snippet caf "const async function" b
+const ${1} = async (${2}) => {
+	${3}
+}
+endsnippet
+
+snippet ecf "export const function" b
+export const ${1} = (${2}) => {
+	${3}
+}
+endsnippet
+
+snippet ecaf "export const async function" b
+export const ${1} = async (${2}) => {
+	${3}
+}
+endsnippet
+
