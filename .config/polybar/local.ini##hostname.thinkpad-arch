@@ -12,7 +12,7 @@ interface = wlp3s0
 ; Normal Module
 [module/network]
 type = internal/network
-interface = wlp7s0
+interface = wlp0s20f3
 
 ; Seconds to sleep between updates
 ; Default: 1
