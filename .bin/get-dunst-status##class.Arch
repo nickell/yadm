@@ -1,0 +1,10 @@
+#!/bin/bash
+
+status=$(dunstctl is-paused)
+
+if [ $status == 'false' ];
+then
+polybar-msg action "#do-not-disturb.hook.0"
+else
+polybar-msg action "#do-not-disturb.hook.1"
+fi

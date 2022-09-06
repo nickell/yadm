@@ -243,9 +243,55 @@ label-close-padding = 1
 
 ;; _-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_
 
-[module/system-bluetooth-bluetoothctl]
-type = custom/script
-exec = ~/.config/polybar/scripts/system-bluetooth-bluetoothctl.sh
-tail = true
-format-foreground = ${color.red}
-click-left = ~/.config/polybar/scripts/system-bluetooth-bluetoothctl.sh --toggle &
+; [module/system-bluetooth-bluetoothctl]
+; type = custom/script
+; exec = ~/.config/polybar/scripts/system-bluetooth-bluetoothctl.sh
+; tail = true
+; format-foreground = ${color.red}
+; click-left = ~/.config/polybar/scripts/system-bluetooth-bluetoothctl.sh --toggle &
+
+[module/caffeine]
+type = custom/ipc
+hook-0 = echo "%{F#61C766}﯈%{F-}"
+hook-1 = echo "%{F#EC7875}%{F-}"
+hook-2 =  ~/.bin/get-caffeine-status
+click-left = ~/.bin/caffeine
+initial = 3
+
+[module/do-not-disturb]
+type = custom/ipc
+hook-0 = echo "%{F#61C766}%{F-}"
+hook-1 = echo "%{F#EC7875}%{F-}"
+hook-2 =  ~/.bin/get-dunst-status
+click-left = ~/.bin/toggle-dunst
+initial = 3
+
+[module/clock]
+type = internal/date
+
+; Seconds to sleep between updates
+interval = 1.0
+
+; See "http://en.cppreference.com/w/cpp/io/manip/put_time" for details on how to format the date string
+; NOTE: if you want to use syntax tags here you need to use %%{...}
+date = %A, %d %B
+
+; Optional time format
+time = %I:%M %p
+
+; if `date-alt` or `time-alt` is defined, clicking
+; the module will toggle between formats
+date-alt = It's %A, %d %B %Y
+time-alt = at %k:%M:%S
+
+; Available tags:
+;   <label> (default)
+format = <label>
+format-prefix = ""
+format-prefix-foreground = ${color.red}
+
+; Available tokens:
+;   %date%
+;   %time%
+; Default: %date%
+label = %{T5}%time%%{T-}

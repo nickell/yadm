@@ -395,7 +395,7 @@ format-prefix-foreground = ${color.red}
 ;   %date%
 ;   %time%
 ; Default: %date%
-label = %date% %time%
+label = %date%
 
 ;; _-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_
 
@@ -536,6 +536,10 @@ ws-icon-7 = 7;7
 ws-icon-8 = 8;8
 ws-icon-9 = Slack;
 ws-icon-10 = Email-Cal;
+ws-icon-11 = Trello;僧
+ws-icon-12 = Zoom;犯
+ws-icon-13 = Spotify;
+ws-icon-14 = DB;
 ws-icon-default = 
 ; NOTE: You cannot skip icons, e.g. to get a ws-icon-6
 ; you must also define a ws-icon-5.
