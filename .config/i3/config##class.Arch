@@ -249,6 +249,7 @@ bindsym $mod+t workspace Trello
 bindsym $mod+x workspace DB
 bindsym $mod+p mode $print_mode
 bindsym $mod+u mode $launch_app_mode
+bindsym $mod+w [con_mark="scratchpad-galculator"] scratchpad show
 bindsym $mod+z workspace Zoom
 
 bindsym $mod+Ctrl+h focus parent; focus left
@@ -666,7 +667,7 @@ exec --no-startup-id /usr/bin/picom -b
 # exec --no-startup-id /home/chad/.fehbg &
 exec --no-startup-id /usr/bin/alacritty --config-file /home/chad/.config/alacritty/tmux.yml --title="Scratchpad"
 exec --no-startup-id alacritty --title="Ranger" -e /usr/bin/zsh --login -c /usr/bin/ranger
-exec_always --no-startup-id ~/.config/polybar/launch.sh --forest
+exec_always --no-startup-id ~/.config/polybar/launch.sh
 # }}}
 
 include ~/.config/i3/`hostname`.conf

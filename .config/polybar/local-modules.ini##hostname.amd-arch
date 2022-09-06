@@ -1,0 +1,3 @@
+modules-left = i3 sep cpu temperature memory filesystem
+modules-center = date
+modules-right = network sep system-bluetooth-bluetoothctl volume
