@@ -1,0 +1,6 @@
+# vim: set fdm=marker fmr={{{,}}} fdl=0 ft=i3config:
+
+# i3 config file (v4)
+# Please see http://i3wm.org/docs/userguide.html for a complete reference!
+
+# for_window [class="Alacritty" title="Ranger"] resize set 90ppt 90ppt, move absolute position center
