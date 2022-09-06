@@ -164,40 +164,40 @@ for_window [class="(?i)virtualbox"] floating enable border normal
 for_window [class="Xfburn"] floating enable
 for_window [class="Xfce4-power-manager-settings"] floating enable
 for_window [class="Alacritty" title="Scratchpad"] mark "scratchpad" move scratchpad
-for_window [class="Alacritty" title="Ranger"] border pixel 1 mark "ranger" move scratchpad
+for_window [class="Alacritty" title="Ranger"] border pixel 1, mark "ranger", move scratchpad
 # }}}
 # }}}
 
 # {{{ Bar Config
 # Start i3bar to display a workspace bar (plus the system information i3status if available)
-bar {
-	i3bar_command i3bar
-	status_command py3status
-	position bottom
-    font pango:Weather Icons $barFontSize, SF Pro Display $barFontSize
-    font xft:Weather Icons $barFontSize, SF Pro Display $barFontSize
+#bar {
+#	i3bar_command i3bar
+#	status_command py3status
+#	position bottom
+#    font pango:Weather Icons $barFontSize, SF Pro Display $barFontSize
+#    font xft:Weather Icons $barFontSize, SF Pro Display $barFontSize
 
-## please set your primary output first. Example: 'xrandr --output eDP1 --primary'
-#	tray_output primary
-#	tray_output eDP1
+### please set your primary output first. Example: 'xrandr --output eDP1 --primary'
+##	tray_output primary
+##	tray_output eDP1
 
-	bindsym button4 nop
-	bindsym button5 nop
-#   font xft:URWGothic-Book 11
-	strip_workspace_numbers yes
+#	bindsym button4 nop
+#	bindsym button5 nop
+##   font xft:URWGothic-Book 11
+#	strip_workspace_numbers yes
 
-    colors {
-        background #282A36
-        statusline #F8F8F2
-        separator  #44475A
+#    colors {
+#        background #282A36
+#        statusline #F8F8F2
+#        separator  #44475A
 
-        focused_workspace  #44475A #44475A #F8F8F2
-        active_workspace   #282A36 #44475A #F8F8F2
-        inactive_workspace #282A36 #282A36 #BFBFBF
-        urgent_workspace   #FF5555 #FF5555 #F8F8F2
-        binding_mode       #FF5555 #FF5555 #F8F8F2
-    }
-}
+#        focused_workspace  #44475A #44475A #F8F8F2
+#        active_workspace   #282A36 #44475A #F8F8F2
+#        inactive_workspace #282A36 #282A36 #BFBFBF
+#        urgent_workspace   #FF5555 #FF5555 #F8F8F2
+#        binding_mode       #FF5555 #FF5555 #F8F8F2
+#    }
+#}
 
 # hide/unhide i3status bar
 # bindsym $mod+m bar mode toggle
@@ -228,7 +228,9 @@ bindsym $mod+a focus parent
 bindsym $mod+b [con_mark="ranger"] scratchpad show
 bindsym $mod+bracketright mode $shortcut_mode
 bindsym $mod+c exec $browser
-bindsym $mod+d exec --no-startup-id rofi -show drun
+# bindsym $mod+d exec --no-startup-id rofi -show drun
+# bindsym $mod+d exec --no-startup-id rofi -no-config -no-lazy-grab -show drun -modi drun -theme ~/.config/polybar/forest/scripts/rofi/launcher.rasi
+bindsym $mod+d exec --no-startup-id ~/.config/rofi/launchers/type-2/launcher.sh
 bindsym $mod+e workspace Email-Cal
 bindsym $mod+f fullscreen toggle
 bindsym $mod+g [con_mark="scratchpad-galculator"] scratchpad show
@@ -653,7 +655,7 @@ mode "$wallpaper_mode" {
 # exec --no-startup-id $HOME/.dotfiles/arch/bin/launch-polybar.sh
 exec --no-startup-id /usr/bin/variety
 exec --no-startup-id /usr/bin/dunst
-exec --no-startup-id nm-applet
+# exec --no-startup-id nm-applet
 exec --no-startup-id /usr/bin/galculator
 # exec --no-startup-id pa-applet
 exec --no-startup-id xfce4-power-manager
@@ -664,4 +666,7 @@ exec --no-startup-id /usr/bin/picom -b
 # exec --no-startup-id /home/chad/.fehbg &
 exec --no-startup-id /usr/bin/alacritty --config-file /home/chad/.config/alacritty/tmux.yml --title="Scratchpad"
 exec --no-startup-id alacritty --title="Ranger" -e /usr/bin/zsh --login -c /usr/bin/ranger
+exec_always --no-startup-id ~/.config/polybar/launch.sh --forest
 # }}}
+
+include ~/.config/i3/`hostname`.conf
