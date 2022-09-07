@@ -287,7 +287,7 @@ time-alt = at %k:%M:%S
 ; Available tags:
 ;   <label> (default)
 format = <label>
-format-prefix = ""
+format-prefix = " "
 format-prefix-foreground = ${color.red}
 
 ; Available tokens:

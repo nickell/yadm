@@ -444,7 +444,7 @@ format-unmounted-prefix-foreground = ${color.red}
 ;   %free%
 ;   %used%
 ; Default: %mountpoint% %percentage_free%%
-label-mounted = " %free:0:3% GB"
+label-mounted = " %free%"
 
 ; Available tokens:
 ;   %mountpoint%
@@ -645,7 +645,7 @@ format-prefix-foreground = ${color.blue}
 ;   %gb_swap_free%
 ;   %gb_swap_used%
 
-label = " %gb_free:0:4% GB"
+label = " %gb_free%"
 
 ; Only applies if <ramp-used> is used
 ;;ramp-used-0 = ${memory.used0}
