@@ -75,6 +75,8 @@ noremap <M-o> :OpenSession<cr>
 nnoremap gp :bp<cr>
 nmap gsib gsi{
 nmap QQ :q<cr>
+nmap QA :qa<cr>
+nmap QW :tabclose<cr>
 
 nmap s <Plug>(easymotion-s)
 

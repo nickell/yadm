@@ -4,7 +4,7 @@
 export TERMCMD='alacritty'
 
 # Used in git aliases for code reviews
-export REVIEW_BASE='master'
+export REVIEW_BASE='main'
 
 # Make escape work immediately
 export KEYTIMEOUT=1
