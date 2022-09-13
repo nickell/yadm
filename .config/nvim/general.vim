@@ -469,7 +469,7 @@ let g:lightline = {
   \              [ 'filetype' ] ]
   \ },
   \ 'component_function': {
-  \   'gitbranch': 'fugitive#head'
+  \   'gitbranch': 'FugitiveHead'
   \ },
   \ }
 " }}}
