@@ -16,6 +16,8 @@ export PAGER="less -S"
 export FZF_DEFAULT_OPTS='--bind alt-j:down,alt-k:up'
 export FZF_TMUX=1
 
+export GOPATH="$HOME/go"
+
 if [ -n "$DESKTOP_SESSION" ];then
     export SSH_AUTH_SOCK
 fi
