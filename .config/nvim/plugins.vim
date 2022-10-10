@@ -51,6 +51,12 @@ Plug 'tpope/vim-endwise'
 " Comment shortcut gcc
 Plug 'tpope/vim-commentary'
 Plug 'suy/vim-context-commentstring' " contexts for jsx regions
+
+" JSON mappings
+" aj provides a text object for the outermost JSON object, array, string, number, or keyword.
+" gqaj 'pretty prints' (wraps/indents/sorts keys/otherwise cleans up) the JSON construct under the cursor.
+" gwaj takes the JSON object on the clipboard and extends it into the JSON object under the cursor.
+Plug 'tpope/vim-jdaddy'
 " }}}
 
 " Status and tab line
@@ -63,7 +69,7 @@ Plug 'ap/vim-buftabline'
 Plug 'MaxMEllon/vim-jsx-pretty'
 Plug 'pangloss/vim-javascript'
 Plug 'leafgarland/typescript-vim'
-Plug 'elzr/vim-json'
+" Plug 'elzr/vim-json'
 " Plug 'peitalin/vim-jsx-typescript' using MaxMEllon/vim-jsx-pretty instead
 " Plug 'jason0x43/vim-js-indent'
 

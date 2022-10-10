@@ -447,6 +447,7 @@ let g:NERDTreeMapJumpPrevSibling = ''
 let g:NERDTreeMinimalUI = 1
 let g:NERDTreeQuitOnOpen = 1
 let g:NERDTreeShowHidden = 1
+let g:NERDTreeMinimalMenu=1
 " }}}
 
 " Supertab
