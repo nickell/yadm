@@ -11,7 +11,7 @@
     "typescript",
     "typescriptreact"
   ],
-  "tsserver.npm": "/home/chad/.nvm/versions/node/v16.13.1/bin/npm",
+  "tsserver.npm": "/home/chad/.nvm/versions/node/v16.17.0/bin/npm",
   "typescript.implementationsCodeLens.enable": false,
   "javascript.referencesCodeLens.enable": false,
   "javascript.implementationsCodeLens.enable": false,

@@ -248,6 +248,9 @@ augroup mygroup
     autocmd BufEnter *.{js,jsx,ts,tsx} :syntax sync fromstart
     autocmd BufLeave *.{js,jsx,ts,tsx} :syntax sync clear
 
+    " Set test files to automatically fold
+    autocmd BufNewFile,BufRead *test.{js,jsx,ts,tsx} setlocal foldlevel=1
+
     " On save, clear whitespace at end of lines
     autocmd BufWritePre *.{js,jsx,ts,tsx,mjs} :%s/\s\+$//e 
 
@@ -295,6 +298,9 @@ augroup END
 " }}}
 
 " {{{ Plugin Config
+" vim-test
+let test#strategy = 'vimux'
+
 " vim-terraform
 let g:terraform_fmt_on_save=1
 

@@ -122,4 +122,6 @@ Plug 'neoclide/coc.nvim', {'branch': 'release'}
 Plug 'vim-scripts/dbext.vim'
 Plug 'honza/vim-snippets'
 Plug 'alx741/vim-hindent'
+" Plug 'vim-test/vim-test'
+" Plug 'preservim/vimux'
 " Plug 'bagrat/vim-buffet'
