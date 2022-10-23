@@ -249,7 +249,7 @@ augroup mygroup
     autocmd BufLeave *.{js,jsx,ts,tsx} :syntax sync clear
 
     " Set test files to automatically fold
-    autocmd BufNewFile,BufRead *test.{js,jsx,ts,tsx} setlocal foldlevel=1
+    autocmd BufRead *test.{js,jsx,ts,tsx} setlocal foldlevel=1
 
     " On save, clear whitespace at end of lines
     autocmd BufWritePre *.{js,jsx,ts,tsx,mjs} :%s/\s\+$//e 
