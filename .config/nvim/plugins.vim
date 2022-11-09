@@ -11,8 +11,8 @@ Plug 'airblade/vim-gitgutter'
 Plug 'tpope/vim-fugitive'
 
 " Files
-Plug 'junegunn/fzf', {'dir': '~/.fzf', 'do': './install --all'}
-Plug 'junegunn/fzf.vim'
+" Plug 'junegunn/fzf', {'dir': '~/.fzf', 'do': './install --all'}
+" Plug 'junegunn/fzf.vim'
 
 " Search
 Plug 'bronson/vim-visual-star-search'
@@ -96,7 +96,8 @@ Plug 'Xuyuanp/nerdtree-git-plugin', {'on': 'NERDTreeToggle'}
 " Colorschemes
 Plug 'Yggdroot/indentLine'
 Plug 'gerw/vim-HiLinkTrace'
-Plug 'ryanoasis/vim-devicons'
+" Plug 'ryanoasis/vim-devicons'
+Plug 'nvim-tree/nvim-web-devicons'
 Plug 'jparise/vim-graphql'
 Plug 'morhetz/gruvbox'
 Plug 'dracula/vim', { 'as': 'dracula' }
@@ -122,6 +123,13 @@ Plug 'neoclide/coc.nvim', {'branch': 'release'}
 Plug 'vim-scripts/dbext.vim'
 Plug 'honza/vim-snippets'
 Plug 'alx741/vim-hindent'
+
+Plug 'nvim-lua/plenary.nvim'
+Plug 'nvim-telescope/telescope.nvim', { 'branch': '0.1.x' }
+Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
+Plug 'nvim-telescope/telescope-file-browser.nvim'
+
+Plug 'nvim-telescope/telescope-fzf-native.nvim', { 'do': 'cmake -S. -Bbuild -DCMAKE_BUILD_TYPE=Release && cmake --build build --config Release && cmake --install build --prefix build' }
 " Plug 'vim-test/vim-test'
 " Plug 'preservim/vimux'
 " Plug 'bagrat/vim-buffet'

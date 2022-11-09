@@ -70,7 +70,7 @@ nnoremap <cr> i<cr><Esc>==
 nnoremap gd :bd<cr>
 nnoremap gn :bn<cr>
 nnoremap Y y$
-map <C-n> :NERDTreeToggle<CR>
+map <C-n> <cmd>Telescope file_browser initial_mode=normal<cr>
 noremap <M-o> :OpenSession<cr>
 nnoremap gp :bp<cr>
 nmap gsib gsi{
@@ -109,14 +109,23 @@ nmap <leader>9 <Plug>BufTabLine.Go(9)
 nmap <leader>0 <Plug>BufTabLine.Go(10)
 
 nnoremap <leader><cr> :noh<cr>
-nnoremap <leader>a :Rg 
+" nnoremap <leader>a :Rg 
 nnoremap <leader>bo :Bonly<cr>
 nnoremap <leader>ctw :ClearTrailingWhitespace<cr>:noh<cr>
 nnoremap <leader>cr :CocRestart<cr>
 " Run command in current buffer's directory
 nnoremap <leader>e :!cd %:p:h;
 nnoremap <leader>E :!%:p<cr>
-nnoremap <leader>f :Files<cr>
+" nnoremap <leader>f :Files<cr>
+
+nnoremap <leader>f <cmd>Telescope find_files<cr>
+nnoremap <leader>a <cmd>Telescope live_grep<cr>
+" nnoremap <leader>rw <cmd>Telescope live_grep default_text=Milestone<cr>
+nnoremap <leader>rw :execute 'Telescope live_grep default_text=' . expand('<cword>')<cr>
+" nnoremap <leader>rw <cmd>Telescope grep_string<cr>
+" nnoremap <leader>fb <cmd>Telescope buffers<cr>
+" nnoremap <leader>fh <cmd>Telescope help_tags<cr>
+
 nnoremap <leader>gd :Gdiff<cr>
 nnoremap <leader>ggh :diffget //2<cr>
 nnoremap <leader>ggl :diffget //3<cr>
@@ -127,14 +136,14 @@ nnoremap <leader>gs :Git<cr>
 nnoremap <leader>gw :Gwrite<cr>
 nmap <silent> <leader>j <Plug>(coc-diagnostic-next)
 nmap <silent> <leader>k <Plug>(coc-diagnostic-prev)
-nnoremap <leader>n :NERDTreeFind<cr>
+nnoremap <leader>n <cmd>Telescope file_browser path=%:p:h initial_mode=normal<cr>
 nnoremap <leader>m :InstantMarkdownPreview<cr>
 nnoremap <leader>o za
 nnoremap <leader>p :Prettier<cr>
 nnoremap <leader>Q :q!<cr>
 " nnoremap <leader>rc in specific configs
 nnoremap <leader>rs <esc>:syntax sync fromstart<cr>
-nnoremap <leader>rw :Rg <c-r><c-w><cr>
+" nnoremap <leader>rw :Rg <c-r><c-w><cr>
 " {{{ <leader>t --- typescript namespaced mappings
 nmap <silent> <leader>td <Plug>(coc-definition)
 nmap <silent> <leader>tt <Plug>(coc-type-definition)
@@ -261,10 +270,6 @@ augroup mygroup
     autocmd FileType typescript,typescriptreact let b:coc_root_patterns = ['tsconfig.json']
     " }}}
 
-    " NERDTree stuff
-    autocmd bufenter * if @% == '__doc__' | nnoremap <silent> <buffer> q :bd<cr> | endif
-    autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif
-
     " Automatically update diff on save of either file
     autocmd BufWritePost * if &diff == 1 | diffupdate | endif
 
@@ -273,11 +278,6 @@ augroup mygroup
 
     " Add format shortcut for haskell
     autocmd BufNewFile,BufRead *.hs nnoremap <buffer> <leader>p :Hindent<cr>
-
-    " fzf hide statusline
-    autocmd! FileType fzf
-    autocmd  FileType fzf set laststatus=0 noshowmode noruler
-        \| autocmd BufLeave <buffer> set laststatus=2 showmode ruler
 
     " Tmux window naming
     autocmd VimLeave * call system("tmux setw automatic-rename")
@@ -298,6 +298,126 @@ augroup END
 " }}}
 
 " {{{ Plugin Config
+lua << EOF
+local action_state = require "telescope.actions.state"
+local actions = require "telescope.actions"
+
+local function multiopen(prompt_bufnr, method)
+    local edit_file_cmd_map = {
+        vertical = "vsplit",
+        horizontal = "split",
+        tab = "tabedit",
+        default = "edit",
+    }
+    local edit_buf_cmd_map = {
+        vertical = "vert sbuffer",
+        horizontal = "sbuffer",
+        tab = "tab sbuffer",
+        default = "buffer",
+    }
+    local picker = action_state.get_current_picker(prompt_bufnr)
+    local multi_selection = picker:get_multi_selection()
+
+    if #multi_selection > 1 then
+        require("telescope.pickers").on_close_prompt(prompt_bufnr)
+        pcall(vim.api.nvim_set_current_win, picker.original_win_id)
+
+        for i, entry in ipairs(multi_selection) do
+            local filename, row, col
+
+            if entry.path or entry.filename then
+                filename = entry.path or entry.filename
+
+                row = entry.row or entry.lnum
+                col = vim.F.if_nil(entry.col, 1)
+            elseif not entry.bufnr then
+                local value = entry.value
+                if not value then
+                    return
+                end
+
+                if type(value) == "table" then
+                    value = entry.display
+                end
+
+                local sections = vim.split(value, ":")
+
+                filename = sections[1]
+                row = tonumber(sections[2])
+                col = tonumber(sections[3])
+            end
+
+            local entry_bufnr = entry.bufnr
+
+            if entry_bufnr then
+                if not vim.api.nvim_buf_get_option(entry_bufnr, "buflisted") then
+                    vim.api.nvim_buf_set_option(entry_bufnr, "buflisted", true)
+                end
+                local command = i == 1 and "buffer" or edit_buf_cmd_map[method]
+                pcall(vim.cmd, string.format("%s %s", command, vim.api.nvim_buf_get_name(entry_bufnr)))
+            else
+                local command = i == 1 and "edit" or edit_file_cmd_map[method]
+                if vim.api.nvim_buf_get_name(0) ~= filename or command ~= "edit" then
+                    filename = require("plenary.path"):new(vim.fn.fnameescape(filename)):normalize(vim.loop.cwd())
+                    pcall(vim.cmd, string.format("%s %s", command, filename))
+                end
+            end
+
+            if row and col then
+                pcall(vim.api.nvim_win_set_cursor, 0, { row, col })
+            end
+        end
+    else
+        actions["select_" .. method](prompt_bufnr)
+    end
+end
+
+local function multiopen_selection(prompt_bufnr, method)
+  multiopen(prompt_bufnr, "default")
+end
+
+require('telescope').setup{
+  defaults = {
+    mappings = {
+      i = {
+        -- ["<CR>"] = multiopen_selection,
+        ["<C-h>"] = "which_key",
+        ["<C-a>"] = "select_all"
+      }
+    }
+  },
+  pickers = {
+    find_files = {
+      theme = "dropdown",
+      mappings = {
+        i = {
+          ["<CR>"] = multiopen_selection
+        },
+      },
+    },
+    live_grep = {
+      theme = "dropdown",
+      mappings = {
+        i = {
+          ["<CR>"] = multiopen_selection
+        },
+      },
+    },
+  },
+  extensions = {
+    fzf = {
+      fuzzy = true,                    -- false will only do exact matching
+      override_generic_sorter = true,  -- override the generic sorter
+      override_file_sorter = true,     -- override the file sorter
+      case_mode = "smart_case",        -- or "ignore_case" or "respect_case"
+    }
+  }
+}
+
+require('telescope').load_extension "fzf"
+require("telescope").load_extension "file_browser"
+EOF
+
 " vim-test
 let test#strategy = 'vimux'
 
@@ -402,38 +522,6 @@ let g:buftabline_numbers = 2
 let g:closetag_filenames = '*.html,*.xhtml,*.phtml,*.js,*.jsx,*.tsx'
 let g:closetag_xhtml_filenames = '*.xhtml,*.jsx,*.js'
 
-" {{{ FZF
-" CTRL-A CTRL-Q to select all and build quickfix list
-function! s:build_quickfix_list(lines)
-  call setqflist(map(copy(a:lines), '{ "filename": v:val }'))
-  copen
-  cc
-endfunction
-
-let g:fzf_action = {
-  \ 'ctrl-q': function('s:build_quickfix_list'),
-  \ 'ctrl-t': 'tab split',
-  \ 'ctrl-x': 'split',
-  \ 'ctrl-v': 'vsplit' }
-
-let $FZF_DEFAULT_COMMAND="rg -g '!.git' --files --hidden --follow --ignore-file ~/.rgignore"
-let $FZF_DEFAULT_OPTS = '--bind ctrl-a:select-all'
-
-command! -bang -nargs=* Rg
-  \ call fzf#vim#grep(
-  \   'rg --hidden --ignore-file ~/.rgignore --column --line-number --no-heading --color=always --smart-case '.shellescape(<q-args>), 1,
-  \   <bang>0 ? fzf#vim#with_preview('up:60%')
-  \           : fzf#vim#with_preview('right:50%:hidden', '?'),
-  \   <bang>0)
-
-command! -bang -nargs=* Rgm
-  \ call fzf#vim#grep(
-  \   'rg --hidden --ignore-file ~/.rgignore --column --line-number --no-heading --color=always --smart-case --max-count=1 '.shellescape(<q-args>), 1,
-  \   <bang>0 ? fzf#vim#with_preview('up:60%')
-  \           : fzf#vim#with_preview('right:50%:hidden', '?'),
-  \   <bang>0)
-" }}}
-
 " Vim-Session
 " let g:session_directory = g:configDir.'/session'
 " let g:session_autoload = "no"
@@ -442,19 +530,6 @@ command! -bang -nargs=* Rgm
 " let g:session_lock_enabled = 0
 " let g:session_default_to_last = 0
 " let g:session_default_name = fnamemodify(getcwd(), ':t')
-
-" vim-devicons
-let g:webdevicons_enable_nerdtree = 1
-
-" {{{ NERDTree
-let g:NERDTreeAutoDeleteBuffer = 1
-let g:NERDTreeMapJumpNextSibling = ''
-let g:NERDTreeMapJumpPrevSibling = ''
-let g:NERDTreeMinimalUI = 1
-let g:NERDTreeQuitOnOpen = 1
-let g:NERDTreeShowHidden = 1
-let g:NERDTreeMinimalMenu=1
-" }}}
 
 " Supertab
 let g:SuperTabDefaultCompletionType = "<c-n>"
