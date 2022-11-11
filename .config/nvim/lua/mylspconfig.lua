@@ -26,7 +26,7 @@ local on_attach = function(client, bufnr)
     })
   end
 
-  keymaps.lsp({ noremap = true, silent = true, buffer = bufnr }, lsp_formatting)
+  keymaps.lsp(bufnr, lsp_formatting)
 end
 
 require('mason').setup()
@@ -85,9 +85,6 @@ cmp.setup {
 }
 
 require('mason-lspconfig').setup_handlers {
-  -- The first entry (without a key) will be the default handler
-  -- and will be called for each installed server that doesn't have
-  -- a dedicated handler.
   function(server_name)
     lspconfig[server_name].setup {
       on_attach = on_attach,
@@ -98,10 +95,8 @@ require('mason-lspconfig').setup_handlers {
     lspconfig.tsserver.setup {
       capabilities = capabilities,
       on_attach = function(client, bufnr)
-        local bufopts = { noremap = true, silent = true, buffer = bufnr }
         on_attach(client, bufnr)
-
-        keymaps.tsserver(bufopts)
+        keymaps.tsserver(bufnr)
       end,
     }
   end,

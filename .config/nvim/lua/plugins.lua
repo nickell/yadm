@@ -71,16 +71,15 @@ return require('packer').startup(function(use)
 
   use {
     'numToStr/Comment.nvim',
-    config = function()
-      require('Comment').setup()
-    end,
+    config = function() require('Comment').setup() end,
   }
 
   use 'numToStr/Navigator.nvim'
 
+  use 'tpope/vim-fugitive'
+  use 'tpope/vim-sensible'
+
   -- Automatically set up your configuration after cloning packer.nvim
   -- Put this at the end after all plugins
-  if packer_bootstrap then
-    require('packer').sync()
-  end
+  if packer_bootstrap then require('packer').sync() end
 end)
