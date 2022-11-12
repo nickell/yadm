@@ -1,3 +1,6 @@
+-- vim: foldmethod=marker
+
+-- {{{ requires and functions
 local tel_builtins = require 'telescope.builtin'
 local tel_ext = require('telescope').extensions
 
@@ -19,7 +22,7 @@ local function file_browser_current_path()
   tel_ext.file_browser.file_browser {
     initial_mode = 'normal',
     path = vim.fn.expand '%:p:h',
-    default_selection_index = 2,
+    select_buffer = true,
   }
 end
 local function add_missing_imports()
@@ -28,6 +31,7 @@ end
 local function organize_imports()
   vim.lsp.buf.code_action { context = { only = { 'source.organizeImports' } }, apply = true }
 end
+-- }}}
 
 vim.g.mapleader = ' '
 
@@ -58,7 +62,6 @@ nmap('QQ', ':quit<CR>')
 
 M.lsp = function(bufnr, lsp_formatting)
   local _opts = { noremap = true, silent = true, buffer = bufnr }
-  nmap('<C-k>', vim.lsp.buf.signature_help, _opts)
   nmap('<Leader>D', vim.lsp.buf.type_definition, _opts)
   nmap('<Leader>ca', vim.lsp.buf.code_action, _opts)
   nmap('<Leader>d', vim.lsp.buf.definition, _opts)

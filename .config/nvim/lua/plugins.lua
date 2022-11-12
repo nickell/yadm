@@ -44,6 +44,7 @@ return require('packer').startup(function(use)
     'hrsh7th/cmp-nvim-lsp', -- LSP source for nvim-cmp
     'saadparwaiz1/cmp_luasnip', -- Snippets source for nvim-cmp
     'L3MON4D3/LuaSnip', -- Snippets plugin
+    'rafamadriz/friendly-snippets',
   }
 
   use 'jose-elias-alvarez/null-ls.nvim'

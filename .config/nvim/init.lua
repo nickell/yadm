@@ -3,8 +3,7 @@ require 'keymaps'
 require 'options'
 
 require 'treesitter'
-require 'mylspconfig'
-require 'nullls'
+require 'lsp'
 require 'mytelescope'
 require 'git'
 
