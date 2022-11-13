@@ -12,3 +12,11 @@ o.tabstop = 2
 o.shiftwidth = 2
 o.softtabstop = 2
 o.expandtab = true
+
+o.undofile = true
+o.history = 100
+o.undolevels = 100
+
+o.foldmethod = 'expr'
+-- o.foldexpr = 'nvim_treesitter#foldexpr()'
+-- o.foldenable = false

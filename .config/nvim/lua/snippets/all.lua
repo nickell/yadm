@@ -1,15 +1,13 @@
-local function fn(args) return args[1][1] end
-
 return {
   s({
     trig = 'fo',
     name = 'Fold',
   }, {
-    i(1, '--'),
+    t '--',
     t { ' {{{', '' },
-    i(2),
+    i(1),
     t { '', '' },
-    f(fn, { 1 }),
+    t '--',
     t { ' }}}' },
   }, {
     line_to_cursor = '',

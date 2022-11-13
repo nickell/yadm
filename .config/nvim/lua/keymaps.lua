@@ -1,4 +1,4 @@
--- vim: foldmethod=marker
+-- vim: foldmethod=marker: foldlevel=0:
 
 -- {{{ requires and functions
 local tel_builtins = require 'telescope.builtin'
@@ -8,12 +8,17 @@ local M = {}
 
 local opts = { noremap = true, silent = true }
 
-local function nmap(key, command, options)
+local function map(mode, key, command, options)
   options = options or opts
-  vim.keymap.set('n', key, command, options)
+  vim.keymap.set(mode, key, command, options)
 end
 
+local function nmap(key, command, options) map('n', key, command, options) end
+
+local function vmap(key, command, options) map('v', key, command, options) end
+
 M.nmap = nmap
+M.vmap = vmap
 M.opts = opts
 
 local initial_normal_opts = { initial_mode = 'normal', default_selection_index = 2 }
@@ -59,6 +64,43 @@ nmap('<Leader>x', ':bd<CR>')
 nmap('<S-Tab>', ':bp<CR>')
 nmap('<Tab>', ':bn<CR>')
 nmap('QQ', ':quit<CR>')
+
+M.cmp = function(cmp, ls)
+  return cmp.mapping.preset.insert {
+    ['<C-d>'] = cmp.mapping.scroll_docs(-4),
+    ['<C-f>'] = cmp.mapping.scroll_docs(4),
+    ['<C-Space>'] = cmp.mapping.complete(),
+    -- ['<CR>'] = cmp.mapping.confirm {
+    --   behavior = cmp.ConfirmBehavior.Replace,
+    --   select = true,
+    -- },
+    ['<C-l>'] = cmp.mapping(function(fallback)
+      if ls.expand_or_jumpable() then
+        ls.expand_or_jump()
+      else
+        fallback()
+      end
+    end, { 'i', 's' }),
+    ['<Tab>'] = cmp.mapping(function(fallback)
+      if cmp.visible() then
+        cmp.select_next_item()
+      elseif ls.expand_or_jumpable() then
+        ls.expand_or_jump()
+      else
+        fallback()
+      end
+    end, { 'i', 's' }),
+    ['<S-Tab>'] = cmp.mapping(function(fallback)
+      if cmp.visible() then
+        cmp.select_prev_item()
+      elseif ls.jumpable(-1) then
+        ls.jump(-1)
+      else
+        fallback()
+      end
+    end, { 'i', 's' }),
+  }
+end
 
 M.lsp = function(bufnr, lsp_formatting)
   local _opts = { noremap = true, silent = true, buffer = bufnr }
