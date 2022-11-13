@@ -23,11 +23,10 @@ end
 local lspFormattingAugroup = vim.api.nvim_create_augroup('LspFormatting', {})
 
 local on_attach = function(client, bufnr)
-  print(vim.bo.modeline)
-  if vim.bo.modeline then vim.cmd [[
+  vim.cmd [[
     set foldexpr=nvim_treesitter#foldexpr()
     set foldlevel=9999
-  ]] end
+  ]]
 
   if client.supports_method 'textDocument/formatting' then
     vim.api.nvim_clear_autocmds { group = lspFormattingAugroup, buffer = bufnr }
