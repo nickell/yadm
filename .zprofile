@@ -7,8 +7,10 @@
 # path+=$HOME/.nvm/versions/node/v16.13.1/bin
 # export NODE_VERSION=16.13.1
 # path=($HOME/.nvm/versions/node/v16.15.0/bin $path)
-path=($HOME/.nvm/versions/node/v16.17.0/bin $path)
-export NODE_VERSION=16.17.0
+# path=($HOME/.nvm/versions/node/v16.17.0/bin $path)
+# export NODE_VERSION=16.17.0
+path=($HOME/.nvm/versions/node/v16.18.1/bin $path)
+export NODE_VERSION=16.18.1
 
 # YVM
 # export YVM_DIR=/home/chad/.yvm

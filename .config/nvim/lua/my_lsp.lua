@@ -3,17 +3,10 @@
 local keymaps = require 'keymaps'
 local lspconfig = require 'lspconfig'
 local capabilities = require('cmp_nvim_lsp').default_capabilities()
+local lspformat = require 'lsp-format'
 local mason_lspconfig = require 'mason-lspconfig'
 local ls = require 'luasnip'
 local cmp = require 'cmp'
-
-require('luasnip.loaders.from_lua').load { paths = '~/.config/nvim/lua/snippets' }
-require('luasnip.loaders.from_vscode').lazy_load()
-
-ls.setup { history = false, updateevents = 'TextChanged,TextChangedI' }
-
-ls.filetype_extend('typescript', { 'javascript' })
-ls.filetype_extend('typescriptreact', { 'typescript', 'javascript' })
 
 local lsp_formatting = function(bufnr, isAsync)
   vim.lsp.buf.format {
@@ -34,6 +27,8 @@ local on_attach = function(client, bufnr)
       callback = function() lsp_formatting(bufnr, false) end,
     })
   end
+
+  lspformat.on_attach(client)
 
   keymaps.lsp(bufnr, lsp_formatting)
 end
@@ -91,7 +86,7 @@ mason_lspconfig.setup_handlers {
             version = 'LuaJIT',
           },
           diagnostics = {
-            globals = { 'vim', 's', 't', 'i', 'f' },
+            globals = { 'vim', 's', 't', 'i', 'f', 'fmt', 'fmta', 'rep', 'conds', 'sn', 'd', 'c' },
           },
         },
       },

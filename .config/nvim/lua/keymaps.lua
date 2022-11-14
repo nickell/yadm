@@ -30,17 +30,22 @@ local function file_browser_current_path()
     select_buffer = true,
   }
 end
+
 local function add_missing_imports()
   vim.lsp.buf.code_action { context = { only = { 'source.addMissingImports' } }, apply = true }
 end
+
 local function organize_imports()
   vim.lsp.buf.code_action { context = { only = { 'source.organizeImports' } }, apply = true }
 end
+
 -- }}}
 
 vim.g.mapleader = ' '
 
 nmap('-', 'dd')
+nmap('<A-j>', ':m .+1<CR>')
+nmap('<A-k>', ':m .-2<CR>')
 nmap('<C-h>', '<CMD>NavigatorLeft<CR>')
 nmap('<C-j>', '<CMD>NavigatorDown<CR>')
 nmap('<C-k>', '<CMD>NavigatorUp<CR>')
@@ -58,6 +63,7 @@ nmap('<Leader>e', vim.diagnostic.open_float)
 nmap('<Leader>f', tel_builtins.find_files)
 nmap('<Leader>gb', function() tel_builtins.git_branches(initial_normal_opts) end)
 nmap('<Leader>gc', function() tel_builtins.git_commits(initial_normal_opts) end)
+nmap('<Leader>gs', ':Git<CR>')
 nmap('<Leader>j', vim.diagnostic.goto_next)
 nmap('<Leader>k', vim.diagnostic.goto_prev)
 nmap('<Leader>n', file_browser_current_path)
@@ -66,8 +72,26 @@ nmap('<Leader>rw', function() tel_builtins.live_grep { default_text = vim.fn.exp
 nmap('<Leader>w', ':write<CR>')
 nmap('<Leader>x', ':bd<CR>')
 nmap('QQ', ':quit<CR>')
+nmap('X', ':bd<CR>')
+nmap('gd', ':bd<CR>')
 nmap('gn', ':bn<CR>')
 nmap('gp', ':bp<CR>')
+
+vmap('<', '<gv')
+vmap('<A-j>', ":m '>+1<CR>gv=gv")
+vmap('<A-k>', ":m '<-2<CR>gv=gv")
+vmap('>', '>gv')
+
+-- inoremap <A-j> <Esc>:m .+1<CR>==gi
+-- inoremap <A-k> <Esc>:m .-2<CR>==gi
+
+M.luasnip = function(ls)
+  vim.keymap.set('i', '<C-l>', function()
+    if ls.choice_active() then ls.change_choice(1) end
+  end)
+
+  vim.keymap.set('n', '<leader><leader>s', '<cmd>source ~/.config/nvim/lua/my_luasnip.lua<CR>')
+end
 
 M.cmp = function(cmp, ls)
   -- {{{ has_words_before

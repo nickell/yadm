@@ -6,6 +6,7 @@ require 'my_treesitter'
 require 'my_lsp'
 require 'my_telescope'
 require 'my_git'
+require 'my_luasnip'
 
--- Git abbreviation
-vim.cmd.cnoreabbrev { '<buffer>', 'G', 'Git' }
+-- Useful for debugging
+-- print(vim.inspect(variable))

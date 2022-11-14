@@ -1,4 +1,4 @@
--- vim: foldmethod=marker
+-- vim: foldmethod=marker: foldlevel=0:
 
 -- {{{ functions
 local ensure_packer = function()
@@ -55,7 +55,19 @@ return require('packer').startup(function(use)
       config = function()
         local null_ls = require 'null-ls'
 
+        -- local augroup = vim.api.nvim_create_augroup('LspFormatting', {})
+
         null_ls.setup {
+          -- on_attach = function(client, bufnr)
+          --   if client.supports_method 'textDocument/formatting' then
+          --     vim.api.nvim_clear_autocmds { group = augroup, buffer = bufnr }
+          --     vim.api.nvim_create_autocmd('BufWritePre', {
+          --       group = augroup,
+          --       buffer = bufnr,
+          --       callback = function() vim.lsp.buf.format { bufnr = bufnr } end,
+          --     })
+          --   end
+          -- end,
           sources = {
             null_ls.builtins.formatting.stylua,
             null_ls.builtins.formatting.prettierd,
@@ -68,7 +80,7 @@ return require('packer').startup(function(use)
     'hrsh7th/cmp-nvim-lsp',
     'saadparwaiz1/cmp_luasnip',
     'L3MON4D3/LuaSnip',
-    'rafamadriz/friendly-snippets',
+    -- 'rafamadriz/friendly-snippets',
   }
 
   use {
@@ -122,6 +134,11 @@ return require('packer').startup(function(use)
   use 'nvim-treesitter/nvim-treesitter-textobjects'
 
   use { 'sindrets/diffview.nvim', requires = 'nvim-lua/plenary.nvim' }
+
+  use {
+    'lukas-reineke/lsp-format.nvim',
+    config = function() require('lsp-format').setup() end,
+  }
 
   if packer_bootstrap then require('packer').sync() end
 end)
