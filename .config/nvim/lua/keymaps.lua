@@ -50,10 +50,14 @@ nmap('<CR>', 'i<CR><ESC>')
 nmap('<Leader><CR>', ':noh<CR>')
 nmap('<Leader>a', tel_builtins.live_grep)
 nmap('<Leader>bo', ':%bd|e#|bd#<CR>')
+nmap('<Leader>dc', ':DiffviewClose<CR>')
+nmap('<Leader>df', ':DiffviewFileHistory %<CR>')
+nmap('<Leader>dl', ':DiffviewFileHistory<CR>')
+nmap('<Leader>do', ':DiffviewOpen<CR>')
 nmap('<Leader>e', vim.diagnostic.open_float)
 nmap('<Leader>f', tel_builtins.find_files)
-nmap('<Leader>gc', function() tel_builtins.git_commits(initial_normal_opts) end)
 nmap('<Leader>gb', function() tel_builtins.git_branches(initial_normal_opts) end)
+nmap('<Leader>gc', function() tel_builtins.git_commits(initial_normal_opts) end)
 nmap('<Leader>j', vim.diagnostic.goto_next)
 nmap('<Leader>k', vim.diagnostic.goto_prev)
 nmap('<Leader>n', file_browser_current_path)
@@ -61,20 +65,27 @@ nmap('<Leader>q', vim.diagnostic.setloclist)
 nmap('<Leader>rw', function() tel_builtins.live_grep { default_text = vim.fn.expand '<cword>' } end)
 nmap('<Leader>w', ':write<CR>')
 nmap('<Leader>x', ':bd<CR>')
-nmap('<S-Tab>', ':bp<CR>')
-nmap('<Tab>', ':bn<CR>')
 nmap('QQ', ':quit<CR>')
+nmap('gn', ':bn<CR>')
+nmap('gp', ':bp<CR>')
 
 M.cmp = function(cmp, ls)
+  -- {{{ has_words_before
+  local has_words_before = function()
+    local line, col = unpack(vim.api.nvim_win_get_cursor(0))
+    return col ~= 0 and vim.api.nvim_buf_get_lines(0, line - 1, line, true)[1]:sub(col, col):match '%s' == nil
+  end
+  -- }}}
+
   return cmp.mapping.preset.insert {
     ['<C-d>'] = cmp.mapping.scroll_docs(-4),
     ['<C-f>'] = cmp.mapping.scroll_docs(4),
     ['<C-Space>'] = cmp.mapping.complete(),
-    -- ['<CR>'] = cmp.mapping.confirm {
-    --   behavior = cmp.ConfirmBehavior.Replace,
-    --   select = true,
-    -- },
-    ['<C-l>'] = cmp.mapping(function(fallback)
+    ['<CR>'] = cmp.mapping.confirm {
+      behavior = cmp.ConfirmBehavior.Replace,
+      select = false,
+    },
+    ['<C-k>'] = cmp.mapping(function(fallback)
       if ls.expand_or_jumpable() then
         ls.expand_or_jump()
       else
@@ -86,10 +97,13 @@ M.cmp = function(cmp, ls)
         cmp.select_next_item()
       elseif ls.expand_or_jumpable() then
         ls.expand_or_jump()
+      elseif has_words_before() then
+        cmp.complete()
       else
         fallback()
       end
     end, { 'i', 's' }),
+
     ['<S-Tab>'] = cmp.mapping(function(fallback)
       if cmp.visible() then
         cmp.select_prev_item()

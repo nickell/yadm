@@ -10,7 +10,10 @@ local cmp = require 'cmp'
 require('luasnip.loaders.from_lua').load { paths = '~/.config/nvim/lua/snippets' }
 require('luasnip.loaders.from_vscode').lazy_load()
 
-ls.setup { history = false }
+ls.setup { history = false, updateevents = 'TextChanged,TextChangedI' }
+
+ls.filetype_extend('typescript', { 'javascript' })
+ls.filetype_extend('typescriptreact', { 'typescript', 'javascript' })
 
 local lsp_formatting = function(bufnr, isAsync)
   vim.lsp.buf.format {
@@ -23,11 +26,6 @@ end
 local lspFormattingAugroup = vim.api.nvim_create_augroup('LspFormatting', {})
 
 local on_attach = function(client, bufnr)
-  vim.cmd [[
-    set foldexpr=nvim_treesitter#foldexpr()
-    set foldlevel=9999
-  ]]
-
   if client.supports_method 'textDocument/formatting' then
     vim.api.nvim_clear_autocmds { group = lspFormattingAugroup, buffer = bufnr }
     vim.api.nvim_create_autocmd('BufWritePre', {
@@ -89,6 +87,9 @@ mason_lspconfig.setup_handlers {
       on_attach = on_attach,
       settings = {
         Lua = {
+          runtime = {
+            version = 'LuaJIT',
+          },
           diagnostics = {
             globals = { 'vim', 's', 't', 'i', 'f' },
           },

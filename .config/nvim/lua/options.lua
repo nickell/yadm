@@ -18,8 +18,8 @@ o.history = 100
 o.undolevels = 100
 
 o.foldmethod = 'expr'
--- o.foldexpr = 'nvim_treesitter#foldexpr()'
--- o.foldenable = false
+o.foldexpr = 'nvim_treesitter#foldexpr()'
+o.foldlevel = 9999
 
 o.undodir = vim.fn.expand '~/.config/nvim/undo/'
 o.backupdir = vim.fn.expand '~/.config/nvim/backup/'
