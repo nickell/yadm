@@ -1,5 +1,3 @@
--- vim: foldmethod=marker
-
 local keymaps = require 'keymaps'
 local lspconfig = require 'lspconfig'
 local capabilities = require('cmp_nvim_lsp').default_capabilities()
@@ -86,7 +84,7 @@ mason_lspconfig.setup_handlers {
             version = 'LuaJIT',
           },
           diagnostics = {
-            globals = { 'vim', 's', 't', 'i', 'f', 'fmt', 'fmta', 'rep', 'conds', 'sn', 'd', 'c' },
+            globals = { 'vim', 's', 't', 'i', 'f', 'fmt', 'fmta', 'rep', 'conds', 'sn', 'd', 'c', 'extras' },
           },
         },
       },

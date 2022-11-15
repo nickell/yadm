@@ -1,7 +1,5 @@
 local ls = require 'luasnip'
-local keymaps = require 'keymaps'
-
-keymaps.luasnip(ls)
+-- local keymaps = require 'keymaps'
 
 ls.setup { history = false, updateevents = 'TextChanged,TextChangedI' }
 

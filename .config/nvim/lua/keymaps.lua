@@ -39,6 +39,10 @@ local function organize_imports()
   vim.lsp.buf.code_action { context = { only = { 'source.organizeImports' } }, apply = true }
 end
 
+--  {{{ Unused but saving
+-- inoremap <A-j> <Esc>:m .+1<CR>==gi
+-- inoremap <A-k> <Esc>:m .-2<CR>==gi
+--  }}}
 -- }}}
 
 vim.g.mapleader = ' '
@@ -71,6 +75,7 @@ nmap('<Leader>q', vim.diagnostic.setloclist)
 nmap('<Leader>rw', function() tel_builtins.live_grep { default_text = vim.fn.expand '<cword>' } end)
 nmap('<Leader>w', ':write<CR>')
 nmap('<Leader>x', ':bd<CR>')
+nmap('<leader><leader>s', '<cmd>source ~/.config/nvim/lua/my_luasnip.lua<CR>')
 nmap('QQ', ':quit<CR>')
 nmap('X', ':bd<CR>')
 nmap('gd', ':bd<CR>')
@@ -82,61 +87,53 @@ vmap('<A-j>', ":m '>+1<CR>gv=gv")
 vmap('<A-k>', ":m '<-2<CR>gv=gv")
 vmap('>', '>gv')
 
--- inoremap <A-j> <Esc>:m .+1<CR>==gi
--- inoremap <A-k> <Esc>:m .-2<CR>==gi
-
-M.luasnip = function(ls)
-  vim.keymap.set('i', '<C-l>', function()
-    if ls.choice_active() then ls.change_choice(1) end
-  end)
-
-  vim.keymap.set('n', '<leader><leader>s', '<cmd>source ~/.config/nvim/lua/my_luasnip.lua<CR>')
-end
-
 M.cmp = function(cmp, ls)
-  -- {{{ has_words_before
+  -- {{{ functions
   local has_words_before = function()
     local line, col = unpack(vim.api.nvim_win_get_cursor(0))
     return col ~= 0 and vim.api.nvim_buf_get_lines(0, line - 1, line, true)[1]:sub(col, col):match '%s' == nil
   end
+
+  local expand_or_jump = function(fallback)
+    if ls.expand_or_jumpable() then
+      ls.expand_or_jump()
+    else
+      fallback()
+    end
+  end
+
+  local cycle_completion = function(fallback)
+    if cmp.visible() then
+      cmp.select_next_item()
+    elseif has_words_before() then
+      cmp.complete()
+    else
+      fallback()
+    end
+  end
+
+  local cycle_completion_back = function(fallback)
+    if cmp.visible() then
+      cmp.select_prev_item()
+    else
+      fallback()
+    end
+  end
+
+  local luasnip_change_choice = function()
+    if ls.choice_active() then ls.change_choice(1) end
+  end
   -- }}}
 
   return cmp.mapping.preset.insert {
+    ['<C-Space>'] = cmp.mapping.complete(),
     ['<C-d>'] = cmp.mapping.scroll_docs(-4),
     ['<C-f>'] = cmp.mapping.scroll_docs(4),
-    ['<C-Space>'] = cmp.mapping.complete(),
-    ['<CR>'] = cmp.mapping.confirm {
-      behavior = cmp.ConfirmBehavior.Replace,
-      select = false,
-    },
-    ['<C-k>'] = cmp.mapping(function(fallback)
-      if ls.expand_or_jumpable() then
-        ls.expand_or_jump()
-      else
-        fallback()
-      end
-    end, { 'i', 's' }),
-    ['<Tab>'] = cmp.mapping(function(fallback)
-      if cmp.visible() then
-        cmp.select_next_item()
-      elseif ls.expand_or_jumpable() then
-        ls.expand_or_jump()
-      elseif has_words_before() then
-        cmp.complete()
-      else
-        fallback()
-      end
-    end, { 'i', 's' }),
-
-    ['<S-Tab>'] = cmp.mapping(function(fallback)
-      if cmp.visible() then
-        cmp.select_prev_item()
-      elseif ls.jumpable(-1) then
-        ls.jump(-1)
-      else
-        fallback()
-      end
-    end, { 'i', 's' }),
+    ['<C-k>'] = cmp.mapping(expand_or_jump, { 'i', 's' }),
+    ['<CR>'] = cmp.mapping.confirm { behavior = cmp.ConfirmBehavior.Replace, select = false },
+    ['<S-Tab>'] = cmp.mapping(cycle_completion_back, { 'i', 's' }),
+    ['<Tab>'] = cmp.mapping(cycle_completion, { 'i', 's' }),
+    ['<C-l'] = cmp.mapping(luasnip_change_choice, { 'i', 's' }),
   }
 end
 
@@ -163,9 +160,10 @@ M.git = function(params)
   local _opts = { expr = true, buffer = params.bufnr }
   local gs = package.loaded.gitsigns
   nmap('<leader>gb', function() gs.blame_line { full = true } end, {})
-  nmap(']c', params.next_hunk, _opts)
   nmap('[c', params.prev_hunk, _opts)
+  nmap(']c', params.next_hunk, _opts)
 
+  --  {{{ unused
   -- Actions
   -- map({ 'n', 'v' }, '<leader>hs', ':Gitsigns stage_hunk<CR>')
   -- map({ 'n', 'v' }, '<leader>hr', ':Gitsigns reset_hunk<CR>')
@@ -181,6 +179,7 @@ M.git = function(params)
 
   -- Text object
   -- map({ 'o', 'x' }, 'ih', ':<C-U>Gitsigns select_hunk<CR>')
+  --  }}}
 end
 
 return M
