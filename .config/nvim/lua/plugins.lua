@@ -89,7 +89,6 @@ return require('packer').startup(function(use)
       branch = '0.1.x',
       requires = { { 'nvim-lua/plenary.nvim' } },
     },
-    'nvim-telescope/telescope-file-browser.nvim',
     {
       'nvim-telescope/telescope-fzf-native.nvim',
       run = 'cmake -S. -Bbuild -DCMAKE_BUILD_TYPE=Release && cmake --build build --config Release && cmake --install build --prefix build',
@@ -139,6 +138,8 @@ return require('packer').startup(function(use)
     'lukas-reineke/lsp-format.nvim',
     config = function() require('lsp-format').setup() end,
   }
+
+  use 'kevinhwang91/rnvimr'
 
   if packer_bootstrap then require('packer').sync() end
 end)

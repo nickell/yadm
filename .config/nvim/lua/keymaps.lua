@@ -23,14 +23,6 @@ M.opts = opts
 
 local initial_normal_opts = { initial_mode = 'normal', default_selection_index = 2 }
 
-local function file_browser_current_path()
-  tel_ext.file_browser.file_browser {
-    initial_mode = 'normal',
-    path = vim.fn.expand '%:p:h',
-    select_buffer = true,
-  }
-end
-
 local function add_missing_imports()
   vim.lsp.buf.code_action { context = { only = { 'source.addMissingImports' } }, apply = true }
 end
@@ -50,11 +42,11 @@ vim.g.mapleader = ' '
 nmap('-', 'dd')
 nmap('<A-j>', ':m .+1<CR>')
 nmap('<A-k>', ':m .-2<CR>')
+nmap('<A-o>', ':RnvimrToggle<CR>')
 nmap('<C-h>', '<CMD>NavigatorLeft<CR>')
 nmap('<C-j>', '<CMD>NavigatorDown<CR>')
 nmap('<C-k>', '<CMD>NavigatorUp<CR>')
 nmap('<C-l>', '<CMD>NavigatorRight<CR>')
-nmap('<C-n>', function() tel_ext.file_browser.file_browser(initial_normal_opts) end)
 nmap('<CR>', 'i<CR><ESC>')
 nmap('<Leader><CR>', ':noh<CR>')
 nmap('<Leader>a', tel_builtins.live_grep)
@@ -70,7 +62,6 @@ nmap('<Leader>gc', function() tel_builtins.git_commits(initial_normal_opts) end)
 nmap('<Leader>gs', ':Git<CR>')
 nmap('<Leader>j', vim.diagnostic.goto_next)
 nmap('<Leader>k', vim.diagnostic.goto_prev)
-nmap('<Leader>n', file_browser_current_path)
 nmap('<Leader>q', vim.diagnostic.setloclist)
 nmap('<Leader>rw', function() tel_builtins.live_grep { default_text = vim.fn.expand '<cword>' } end)
 nmap('<Leader>w', ':write<CR>')
@@ -81,6 +72,19 @@ nmap('X', ':bd<CR>')
 nmap('gd', ':bd<CR>')
 nmap('gn', ':bn<CR>')
 nmap('gp', ':bp<CR>')
+
+map('t', '<M-o>', '<C-\\><C-n>:RnvimrToggle<CR>')
+map('t', '<M-i>', '<C-\\><C-n>:RnvimrResize<CR>')
+
+vim.cmd [[
+" nnoremap <silent> <M-o> :RnvimrToggle<CR>
+" tnoremap <silent> <M-i> <C-\><C-n>:RnvimrResize<CR>
+" tnoremap <silent> <M-o> <C-\><C-n>:RnvimrToggle<CR>
+let g:rnvimr_enable_picker = 1
+let g:rnvimr_enable_bw = 1
+" let g:rnvimr_enable_ex = 1
+" g:rnvimr_vanilla
+  ]]
 
 vmap('<', '<gv')
 vmap('<A-j>', ":m '>+1<CR>gv=gv")

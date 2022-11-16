@@ -107,9 +107,6 @@ require('telescope').setup {
     },
   },
   extensions = {
-    file_browser = {
-      hidden = true,
-    },
     fzf = {
       fuzzy = true, -- false will only do exact matching
       override_generic_sorter = true, -- override the generic sorter
@@ -120,4 +117,3 @@ require('telescope').setup {
 }
 
 telescope.load_extension 'fzf'
-telescope.load_extension 'file_browser'
