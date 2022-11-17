@@ -11,7 +11,7 @@ tmux has-session -t $session 2>/dev/null
 
 if [ $? != 0 ]; then
   tmux new-session -d -s $session;
-  tmux send-keys -t $session.0 cd SPACE $dir ENTER nvim ENTER;
+  tmux send-keys -t $session.0 cd SPACE $dir ENTER nvim SPACE -c SPACE 'RnvimrToggle' ENTER;
 fi
 
 # Attach to created session
