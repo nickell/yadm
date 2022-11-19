@@ -687,7 +687,7 @@ require('packer').startup(function(use)
     { 'numToStr/Comment.nvim', config = function() require('Comment').setup() end },
   }
 
-  use { 'tpope/vim-fugitive', 'tpope/vim-sensible' }
+  use { 'tpope/vim-fugitive', 'tpope/vim-sensible', 'tpope/vim-abolish' }
 
   use 'nvim-treesitter/nvim-treesitter-textobjects'
 
