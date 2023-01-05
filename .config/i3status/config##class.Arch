@@ -7,6 +7,7 @@
 # If the above line is not correctly displayed, fix your editor first!
 
 general {
+        markup = "pango"
         colors = true
         output_format = "i3bar"
         interval = 5
@@ -16,7 +17,7 @@ general {
 }
 
 # order += "arch_updates"
-order += "scratchpad_list"
+# order += "scratchpad_list"
 order += "spotify"
 order += "bluetooth"
 order += "cpu_usage"
@@ -48,7 +49,7 @@ battery_level {
 
 weather_owm {
     api_key = env(OWM_API_KEY)
-    format = '{icon} {temperature}[ {rain}]'
+    format = '<span color="#FBC02D">{icon}</span> {temperature}[ {rain}]'
     format_temperature = '[\?color=all {current:.0f}°{unit}]'
     location = (env(LAT),env(LONG))
 }
@@ -61,7 +62,7 @@ spotify {
 
 clock {
     format = " {Local} "
-    format_time = "%a, %b %e %l:%M %P"
+    format_time = "<span color='orange'></span> %b %e %l:%M %P"
 }
 
 lm_sensors {
@@ -73,7 +74,7 @@ lm_sensors {
 }
 
 cpu_usage {
-        format = " cpu  %usage "
+        format = " <span color='yellow'></span>  %usage "
 }
 
 tztime local {

@@ -171,38 +171,38 @@ for_window [class="Alacritty" title="Ranger"] border pixel 1, mark "ranger", mov
 # }}}
 
 # {{{ Bar Config
-# Start i3bar to display a workspace bar (plus the system information i3status if available)
-#bar {
-#	i3bar_command i3bar
-#	status_command py3status
-#	position bottom
-#    font pango:Weather Icons $barFontSize, SF Pro Display $barFontSize
-#    font xft:Weather Icons $barFontSize, SF Pro Display $barFontSize
+ # Start i3bar to display a workspace bar (plus the system information i3status if available)
+bar {
+	i3bar_command i3bar
+	status_command py3status
+	position bottom
+    font pango:Weather Icons $barFontSize, SF Pro Display $barFontSize
+    font xft:Weather Icons $barFontSize, SF Pro Display $barFontSize
 
-### please set your primary output first. Example: 'xrandr --output eDP1 --primary'
-##	tray_output primary
-##	tray_output eDP1
+## please set your primary output first. Example: 'xrandr --output eDP1 --primary'
+#	tray_output primary
+#	tray_output eDP1
 
-#	bindsym button4 nop
-#	bindsym button5 nop
-##   font xft:URWGothic-Book 11
-#	strip_workspace_numbers yes
+	bindsym button4 nop
+	bindsym button5 nop
+#   font xft:URWGothic-Book 11
+	strip_workspace_numbers yes
 
-#    colors {
-#        background #282A36
-#        statusline #F8F8F2
-#        separator  #44475A
+    colors {
+        background #282A36
+        statusline #F8F8F2
+        separator  #44475A
 
-#        focused_workspace  #44475A #44475A #F8F8F2
-#        active_workspace   #282A36 #44475A #F8F8F2
-#        inactive_workspace #282A36 #282A36 #BFBFBF
-#        urgent_workspace   #FF5555 #FF5555 #F8F8F2
-#        binding_mode       #FF5555 #FF5555 #F8F8F2
-#    }
-#}
+        focused_workspace  #44475A #44475A #F8F8F2
+        active_workspace   #282A36 #44475A #F8F8F2
+        inactive_workspace #282A36 #282A36 #BFBFBF
+        urgent_workspace   #FF5555 #FF5555 #F8F8F2
+        binding_mode       #FF5555 #FF5555 #F8F8F2
+    }
+}
 
-# hide/unhide i3status bar
-# bindsym $mod+m bar mode toggle
+ # hide/unhide i3status bar
+ # bindsym $mod+m bar mode toggle
 # }}}
 
 # {{{ Theme Colors
@@ -233,7 +233,7 @@ bindsym $mod+c exec $browser
 # bindsym $mod+d exec --no-startup-id rofi -show drun
 # bindsym $mod+d exec --no-startup-id rofi -no-config -no-lazy-grab -show drun -modi drun -theme ~/.config/polybar/forest/scripts/rofi/launcher.rasi
 bindsym $mod+d exec --no-startup-id ~/.config/rofi/launchers/type-2/launcher.sh
-bindsym $mod+e workspace Email-Cal
+bindsym $mod+e workspace 
 bindsym $mod+f fullscreen toggle
 bindsym $mod+g [con_mark="scratchpad-galculator"] scratchpad show
 bindsym $mod+h focus left
@@ -242,17 +242,17 @@ bindsym $mod+k focus up
 bindsym $mod+l focus right
 bindsym $mod+minus [con_mark="default-scratchpad"] scratchpad show
 # bindsym $mod+minus [con_mark="scratchpad"] scratchpad show
-bindsym $mod+o workspace Spotify
+bindsym $mod+o workspace 
 bindsym $mod+q kill
 bindsym $mod+r mode "resize"
-bindsym $mod+s workspace Slack
+bindsym $mod+s workspace 
 bindsym $mod+space focus mode_toggle
-bindsym $mod+t workspace Trello
-bindsym $mod+x workspace DB
+bindsym $mod+t workspace 僧
+bindsym $mod+x workspace 
 bindsym $mod+p mode $print_mode
 bindsym $mod+u mode $launch_app_mode
 bindsym $mod+w [con_mark="scratchpad-galculator"] scratchpad show
-bindsym $mod+z workspace Zoom
+bindsym $mod+z workspace 犯
 
 bindsym $mod+Ctrl+h focus parent; focus left
 bindsym $mod+Ctrl+l focus parent; focus right
@@ -262,21 +262,21 @@ bindsym $mod+Shift+Left move workspace to output left
 bindsym $mod+Shift+Right move workspace to output right
 bindsym $mod+Shift+Up move workspace to output up
 bindsym $mod+Shift+b exec alacritty -t "Sudo Ranger" -e bash -c "sudo -E ranger"
-bindsym $mod+Shift+e move container to workspace Email-Cal
+bindsym $mod+Shift+e move container to workspace 
 bindsym $mod+Shift+equal floating toggle; mark "default-scratchpad"; move scratchpad; scratchpad show
 bindsym $mod+Shift+h move left
 bindsym $mod+Shift+j move down
 bindsym $mod+Shift+k move up
 bindsym $mod+Shift+l move right
 bindsym $mod+Shift+minus mark "default-scratchpad"; move scratchpad
-bindsym $mod+Shift+o move container to workspace Spotify
+bindsym $mod+Shift+o move container to workspace 
 bindsym $mod+Shift+q split toggle
 bindsym $mod+Shift+r restart
-bindsym $mod+Shift+s move container to workspace Slack
+bindsym $mod+Shift+s move container to workspace 
 bindsym $mod+Shift+space floating toggle
-bindsym $mod+Shift+t move container to workspace Trello
-bindsym $mod+Shift+x move container to workspace DB
-bindsym $mod+Shift+z move container to workspace Zoom
+bindsym $mod+Shift+t move container to workspace 僧
+bindsym $mod+Shift+x move container to workspace 
+bindsym $mod+Shift+z move container to workspace 犯
 
 # Media player controls
 bindsym XF86AudioNext exec playerctl next
@@ -669,7 +669,7 @@ exec --no-startup-id /usr/bin/picom -b
 # exec --no-startup-id /home/chad/.fehbg &
 exec --no-startup-id /usr/bin/alacritty --config-file /home/chad/.config/alacritty/tmux.yml --title="Scratchpad"
 exec --no-startup-id alacritty --title="Ranger" -e /usr/bin/zsh --login -c /usr/bin/ranger
-exec_always --no-startup-id ~/.config/polybar/launch.sh
+# exec_always --no-startup-id ~/.config/polybar/launch.sh
 # }}}
 
 include ~/.config/i3/`hostname`.conf
