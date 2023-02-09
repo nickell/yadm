@@ -125,6 +125,15 @@ let g:rnvimr_enable_picker = 1
 let g:rnvimr_enable_bw = 1
 " let g:rnvimr_enable_ex = 1
 " g:rnvimr_vanilla
+
+xnoremap <expr> <Plug>(DBExe)     DBExe()
+nnoremap <expr> <Plug>(DBExe)     DBExe()
+nnoremap <expr> <Plug>(DBExeLine) DBExe() . '_'
+
+xmap <leader>db  <Plug>(DBExe)
+nmap <leader>db  <Plug>(DBExe)
+omap <leader>db  <Plug>(DBExe)
+nmap <leader>dbb <Plug>(DBExeLine)
   ]]
 
 vmap('<', '<gv')
@@ -752,11 +761,13 @@ require('packer').startup(function(use)
         },
         file_history_panel = {
           log_options = { -- See ':h diffview-config-log_options'
-            single_file = {
-              diff_merges = 'combined',
-            },
-            multi_file = {
-              diff_merges = 'first-parent',
+            git = {
+              single_file = {
+                diff_merges = 'combined',
+              },
+              multi_file = {
+                diff_merges = 'first-parent',
+              },
             },
           },
           win_config = { -- See ':h diffview-config-win_config'
@@ -918,6 +929,36 @@ require('packer').startup(function(use)
       }
     end,
     --  }}}
+  }
+
+  use {
+    'tpope/vim-dadbod',
+    config = function()
+      vim.cmd [[
+func! DBExe(...)
+	if !a:0
+		let &operatorfunc = matchstr(expand('<sfile>'), '[^. ]*$')
+		return 'g@'
+	endif
+	let sel_save = &selection
+	let &selection = "inclusive"
+	let reg_save = @@
+
+	if a:1 == 'char'	" Invoked from Visual mode, use gv command.
+		silent exe 'normal! gvy'
+	elseif a:1 == 'line'
+		silent exe "normal! '[V']y"
+	else
+		silent exe 'normal! `[v`]y'
+	endif
+
+	execute "DB " . @@
+
+	let &selection = sel_save
+	let @@ = reg_save
+endfunc
+    ]]
+    end,
   }
 
   if packer_bootstrap then require('packer').sync() end
