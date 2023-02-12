@@ -18,15 +18,18 @@ general {
 
 # order += "arch_updates"
 # order += "scratchpad_list"
-order += "spotify"
-order += "bluetooth"
-order += "cpu_usage"
-order += "lm_sensors"
+# order += "spotify"
+# order += "bluetooth"
+order += "sysdata"
 order += "weather_owm"
 order += "battery_level"
 order += "clock"
 order += "do_not_disturb_mode"
 order += "presentation_mode"
+
+sysdata {
+  format = "[\?color=cpu_temp {cpu_used_percent:.0f}% {cpu_temp:.0f}°C] \| [\?color=mem_used_percent {mem_used:.0f} {mem_total_unit:.0f} {mem_used_percent:.0f}%]"
+}
 
 # arch_updates {
 #     format = " Updates: {pacman} - {aur} "
@@ -34,49 +37,49 @@ order += "presentation_mode"
 # }
 #
 
-scratchpad_list {
-    format = '[\?not_zero ⌫ [\?color=scratchpad {scratchpad}]]'
-}
-
-bluetooth {
-    format = "{format_device}"
-}
-
+# scratchpad_list {
+#     format = '[\?not_zero ⌫ [\?color=scratchpad {scratchpad}]]'
+# }
+#
+# bluetooth {
+#     format = "{format_device}"
+# }
+#
 battery_level {
     format = "{charging_character} {percent}%"
     hide_when_full = true
 }
-
+#
 weather_owm {
     api_key = env(OWM_API_KEY)
     format = '<span color="#FBC02D">{icon}</span> {temperature}[ {rain}]'
     format_temperature = '[\?color=all {current:.0f}°{unit}]'
     location = (env(LAT),env(LONG))
 }
-
-spotify {
-    button_play_pause = 1
-    format_down = ''
-    format_stopped = ''
-}
-
+#
+# spotify {
+#     button_play_pause = 1
+#     format_down = ''
+#     format_stopped = ''
+# }
+#
 clock {
     format = " {Local} "
-    format_time = "<span color='orange'></span> %b %e %l:%M %P"
+    format_time = "<span color='orange'></span> %b %e %l:%M %P"
 }
+#
+# lm_sensors {
+#     format_chip = '{format_sensor}'
+#     format_sensor = ' 💻'
+#     format_sensor += ' [\?color=auto.input {input:00.0f}°C] '
+#     chips = [env(PY3STATUS_CHIP)]
+#     sensors = [env(PY3STATUS_SENSOR)]
+# }
 
-lm_sensors {
-    format_chip = '{format_sensor}'
-    format_sensor = ' 💻'
-    format_sensor += ' [\?color=auto.input {input:00.0f}°C] '
-    chips = [env(PY3STATUS_CHIP)]
-    sensors = [env(PY3STATUS_SENSOR)]
-}
-
-cpu_usage {
-        format = " <span color='yellow'></span>  %usage "
-}
-
-tztime local {
-        format = " %a, %b %e %l:%M %P "
-}
+# cpu_usage {
+#         format = " <span color='yellow'></span>  %usage "
+# }
+#
+# tztime local {
+#         format = " %a, %b %e %l:%M %P "
+# }
