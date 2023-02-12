@@ -35,6 +35,7 @@
 # The default is to simply set WP=$1.
 WP=$1
 
+cp $3 /usr/share/wallpapers/wallpaper.jpg
 
 # Enlightenment
 # Needs Modules/System/DBus Extension loaded to work

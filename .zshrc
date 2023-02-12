@@ -23,6 +23,8 @@ if [ -n "$RANGER_LEVEL" ]; then export PS1="[R] $PS1"; fi
 # {{{ FZF direnv nvm rvm
 # {{{ FZF
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+[ -f /usr/share/fzf/completion.zsh ] && source /usr/share/fzf/completion.zsh
+[ -f /usr/share/fzf/key-bindings.zsh ] && source /usr/share/fzf/key-bindings.zsh
 
 # Make ctrl-s work for reverse-i-search/i-search, from here: https://stackoverflow.com/a/25391867/870835
 [[ $- == *i* ]] && stty -ixon
@@ -36,7 +38,7 @@ fi
 
 # [[ -s "$HOME/.rvm/scripts/rvm" ]] && source "$HOME/.rvm/scripts/rvm" # Load RVM into a shell session *as a function*
 #
-eval "$(rbenv init - zsh)"
+# eval "$(rbenv init - zsh)"
 
 # source /usr/share/nvm/init-nvm.sh
 # }}}
