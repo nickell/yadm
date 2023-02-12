@@ -610,13 +610,13 @@ mode "$monitor_mode" {
         bindsym a exec xrandr --auto, mode "default"
 
         # Scripted setups
-        bindsym h exec /bin/bash /home/chad/.screenlayout/high.sh, mode "default"
-        bindsym m exec /bin/bash /home/chad/.screenlayout/medium.sh, mode "default"
-        bindsym n exec /bin/bash /home/chad/.screenlayout/low-medium.sh, mode "default"
-        bindsym l exec /bin/bash /home/chad/.screenlayout/low.sh, mode "default"
-        bindsym x exec /bin/bash /home/chad/.screenlayout/extra-low.sh, mode "default"
-        bindsym c exec /bin/bash /home/chad/.screenlayout/Closed\ Docked.sh, mode "default"
-        bindsym o exec /bin/bash /home/chad/.screenlayout/Open\ Docked.sh, mode "default"
+        bindsym h exec /bin/bash /home/chad/.screenlayout/high.sh; exec $HOME/.fehbg &, mode "default"
+        bindsym m exec /bin/bash /home/chad/.screenlayout/medium.sh; exec $HOME/.fehbg &, mode "default"
+        bindsym n exec /bin/bash /home/chad/.screenlayout/low-medium.sh; exec $HOME/.fehbg &, mode "default"
+        bindsym l exec /bin/bash /home/chad/.screenlayout/low.sh; exec $HOME/.fehbg &, mode "default"
+        bindsym x exec /bin/bash /home/chad/.screenlayout/extra-low.sh; exec $HOME/.fehbg &, mode "default"
+        bindsym c exec /bin/bash /home/chad/.screenlayout/Closed\ Docked.sh; exec $HOME/.fehbg &, mode "default"
+        bindsym o exec /bin/bash /home/chad/.screenlayout/Open\ Docked.sh; exec $HOME/.fehbg &, mode "default"
 
         # exit monitor mode: Enter or Escape
         bindsym Return mode "default"
