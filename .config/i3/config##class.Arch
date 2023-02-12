@@ -167,6 +167,7 @@ for_window [class="Xfburn"] floating enable
 for_window [class="Xfce4-power-manager-settings"] floating enable
 for_window [class="Alacritty" title="Scratchpad"] mark "scratchpad" move scratchpad
 for_window [class="Alacritty" title="Ranger"] border pixel 1, mark "ranger", move scratchpad
+for_window [class="Variety"] floating enable
 # }}}
 # }}}
 
