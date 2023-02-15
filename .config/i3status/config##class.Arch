@@ -65,7 +65,7 @@ weather_owm {
 #
 clock {
     format = " {Local} "
-    format_time = "<span color='orange'></span> %b %e %l:%M %P"
+    format_time = "<span color='orange'> </span> %b %e %l:%M %P"
 }
 #
 # lm_sensors {

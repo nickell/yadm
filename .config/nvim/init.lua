@@ -585,6 +585,9 @@ require('packer').startup(function(use)
 
         require('telescope').setup {
           defaults = {
+            preview = {
+              filesize_limit = 1,
+            },
             theme = 'dropdown',
             mappings = {
               i = {
