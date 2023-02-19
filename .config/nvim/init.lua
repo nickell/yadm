@@ -401,12 +401,13 @@ require('packer').startup(function(use)
         mason_lspconfig.setup {
           ensure_installed = {
             'cssls',
+            'denols',
             'dockerls',
             'eslint',
             'html',
             'jsonls',
             'pyright',
-            'sumneko_lua',
+            'lua_ls',
             'tailwindcss',
             'tsserver',
             'vimls',
@@ -431,8 +432,8 @@ require('packer').startup(function(use)
               end,
             }
           end,
-          ['sumneko_lua'] = function()
-            lspconfig.sumneko_lua.setup {
+          ['lua_ls'] = function()
+            lspconfig.lua_ls.setup {
               on_attach = on_attach,
               settings = {
                 Lua = {
