@@ -165,8 +165,8 @@ for_window [class="Timeset-gui"] floating enable border normal
 for_window [class="(?i)virtualbox"] floating enable border normal
 for_window [class="Xfburn"] floating enable
 for_window [class="Xfce4-power-manager-settings"] floating enable
-for_window [class="Alacritty" title="Scratchpad"] mark "scratchpad" move scratchpad
-for_window [class="Alacritty" title="Ranger"] border pixel 1, mark "ranger", move scratchpad
+for_window [class="kitty" title="Scratchpad"] mark "scratchpad" move scratchpad
+for_window [class="kitty" title="Ranger"] border pixel 1, mark "ranger", move scratchpad
 for_window [class="Variety"] floating enable
 for_window [class="lightdm-gtk-greeter-settings"] floating enable
 # }}}
@@ -226,7 +226,8 @@ set $browser google-chrome-stable
 
 # {{{ Keybindings
 bindsym $mod+9 exec --no-startup-id /usr/bin/xtrlock
-bindsym $mod+Return exec WINIT_X11_SCALE_FACTOR=1.66 alacritty --config-file /home/chad/.config/alacritty/tmux.yml
+# bindsym $mod+Return exec WINIT_X11_SCALE_FACTOR=1.66 alacritty --config-file /home/chad/.config/alacritty/tmux.yml
+bindsym $mod+Return exec kitty --title=kitty tmux
 bindsym $mod+Tab workspace back_and_forth
 bindsym $mod+a focus parent
 bindsym $mod+b [con_mark="ranger"] scratchpad show
@@ -263,7 +264,8 @@ bindsym $mod+Shift+Down move workspace to output down
 bindsym $mod+Shift+Left move workspace to output left
 bindsym $mod+Shift+Right move workspace to output right
 bindsym $mod+Shift+Up move workspace to output up
-bindsym $mod+Shift+b exec WINIT_X11_SCALE_FACTOR=1.66 alacritty -t "Sudo Ranger" -e bash -c "sudo -E ranger"
+# bindsym $mod+Shift+b exec WINIT_X11_SCALE_FACTOR=1.66 alacritty -t "Sudo Ranger" -e bash -c "sudo -E ranger"
+bindsym $mod+Shift+b exec kitty --title="Sudo Ranger" -e bash -c "sudo -E ranger"
 bindsym $mod+Shift+e move container to workspace 
 bindsym $mod+Shift+equal floating toggle; mark "default-scratchpad"; move scratchpad; scratchpad show
 bindsym $mod+Shift+h move left
@@ -385,64 +387,6 @@ mode "$alacritty_launch_mode" {
         bindsym x exec WINIT_X11_SCALE_FACTOR=1.66 alacritty --title=XPS -e /usr/bin/zsh --login -c "ssh xps -t \"tmux attach || tmux new\""
         bindsym a exec WINIT_X11_SCALE_FACTOR=1.66 alacritty --title="AMD Ubuntu" -e /usr/bin/zsh --login -c "ssh amd-ubuntu -t \"tmux attach || tmux new\""
         bindsym p exec WINIT_X11_SCALE_FACTOR=1.66 alacritty --title="Pi" -e /usr/bin/zsh --login -c "ssh pi -t \"tmux attach || tmux new\""
-
-        # exit mode: Enter or Escape
-        bindsym Return mode "default"
-        bindsym Escape mode "default"
-}
-# }}}
-
-# {{{ mode: vim_launch_mode
-set $vim_launch_mode Launch vim project: (c)hord internal | (d)otfiles | cara(w)ay | (y)adm
-mode "$vim_launch_mode" {
-        bindsym c mode $chord_internal_launch_mode
-        bindsym d exec WINIT_X11_SCALE_FACTOR=1.66 alacritty --title="Dotfiles" -e /usr/bin/zsh --login -c "start-nvim-inside-tmux /home/chad/.dotfiles"; mode "default"
-        bindsym y exec WINIT_X11_SCALE_FACTOR=1.66 alacritty --title="YADM" -e /usr/bin/zsh --login -c "start-nvim-inside-tmux /home/chad/src/yadm"; mode "default"
-        bindsym w exec WINIT_X11_SCALE_FACTOR=1.66 alacritty --title="Caraway" -e /usr/bin/zsh --login -c "start-nvim-inside-tmux /home/chad/src/Caraway/chord-caraway"; mode "default"
-
-        # exit mode: Enter or Escape
-        bindsym Return mode "default"
-        bindsym Escape mode "default"
-}
-
-set $chord_internal_launch_mode Launch chord internal project: (a)utonomy | (c)hord-ui | chord-(j)s | (p)erformance | provisioning (t)ools
-mode "$chord_internal_launch_mode" {
-        bindsym a mode $chord_autonomy_launch_mode
-        bindsym c exec WINIT_X11_SCALE_FACTOR=1.66 alacritty --title="Chord UI" -e /usr/bin/zsh --login -c "start-nvim-inside-tmux /home/chad/src/chord-ui"
-        bindsym j mode $chord_js_launch_mode
-        bindsym p mode $chord_performance_launch_mode
-        bindsym t exec WINIT_X11_SCALE_FACTOR=1.66 alacritty --title="Provisioning Tools" -e /usr/bin/zsh --login -c "start-nvim-inside-tmux /home/chad/src/provisioning-tools"
-
-        # exit mode: Enter or Escape
-        bindsym Return mode "default"
-        bindsym Escape mode "default"
-}
-
-set $chord_performance_launch_mode Launch chord performance project: (s)tarter | (t)heme
-mode "$chord_performance_launch_mode" {
-        bindsym s exec WINIT_X11_SCALE_FACTOR=1.66 alacritty --title="Gatsby Starter Performance" -e /usr/bin/zsh --login -c "start-nvim-inside-tmux /home/chad/src/chord-ui/packages/gatsby-starter-performance"
-        bindsym t exec WINIT_X11_SCALE_FACTOR=1.66 alacritty --title="Gatsby Theme Performance" -e /usr/bin/zsh --login -c "start-nvim-inside-tmux /home/chad/src/chord-ui/packages/gatsby-theme-performance"
-
-        # exit mode: Enter or Escape
-        bindsym Return mode "default"
-        bindsym Escape mode "default"
-}
-
-set $chord_autonomy_launch_mode Launch chord autonomy project: (s)tarter | (t)heme
-mode "$chord_autonomy_launch_mode" {
-        bindsym s exec WINIT_X11_SCALE_FACTOR=1.66 alacritty --title="Gatsby Starter Autonomy" -e /usr/bin/zsh --login -c "start-nvim-inside-tmux /home/chad/src/chord-ui/packages/gatsby-starter-autonomy"
-        bindsym t exec WINIT_X11_SCALE_FACTOR=1.66 alacritty --title="Gatsby Theme Autonomy" -e /usr/bin/zsh --login -c "start-nvim-inside-tmux /home/chad/src/chord-ui/packages/gatsby-theme-autonomy"
-
-        # exit mode: Enter or Escape
-        bindsym Return mode "default"
-        bindsym Escape mode "default"
-}
-
-set $chord_js_launch_mode Launch chord js project: (a)nalytics | (c)ore | (p)erformance
-mode "$chord_js_launch_mode" {
-        bindsym a exec WINIT_X11_SCALE_FACTOR=1.66 alacritty --title="Chord JS Analytics" -e /usr/bin/zsh --login -c "start-nvim-inside-tmux /home/chad/src/chord-js/packages/chord-js-analytics"
-        bindsym c exec WINIT_X11_SCALE_FACTOR=1.66 alacritty --title="Chord JS Core" -e /usr/bin/zsh --login -c "start-nvim-inside-tmux /home/chad/src/chord-js/packages/chord-js-core"
-        bindsym p exec WINIT_X11_SCALE_FACTOR=1.66 alacritty --title="Chord JS Performance" -e /usr/bin/zsh --login -c "start-nvim-inside-tmux /home/chad/src/chord-js/packages/chord-js-performance"
 
         # exit mode: Enter or Escape
         bindsym Return mode "default"
@@ -597,7 +541,8 @@ mode "$kill_mode" {
 set $seldom_shortcut_mode Seldom Used Shortcuts: restart (d)unst | (r)anger
 mode "$seldom_shortcut_mode" {
         bindsym d exec "killall dunst; exec notify-send 'restart dunst'"; mode "default"
-        bindsym r exec --no-startup-id WINIT_X11_SCALE_FACTOR=1.66 alacritty --title="Ranger" -e /usr/bin/zsh --login -c /usr/bin/ranger; mode "default"
+        # bindsym r exec --no-startup-id WINIT_X11_SCALE_FACTOR=1.66 alacritty --title="Ranger" -e /usr/bin/zsh --login -c /usr/bin/ranger; mode "default"
+        bindsym r exec --no-startup-id kitty --title="Ranger" ranger; mode "default"
 
         # exit mode: Enter or Escape
         bindsym Return mode "default"
@@ -660,7 +605,6 @@ mode "$wallpaper_mode" {
 
 # {{{ Autostart programs
 # exec --no-startup-id $HOME/.dotfiles/arch/bin/launch-polybar.sh
-exec --no-startup-id /usr/bin/variety
 exec --no-startup-id /usr/bin/dunst
 # exec --no-startup-id nm-applet
 exec --no-startup-id /usr/bin/galculator
@@ -671,8 +615,10 @@ exec --no-startup-id /usr/bin/pamac-tray
 # exec --no-startup-id /usr/bin/blueberry-tray
 exec --no-startup-id /usr/bin/picom -b
 # exec --no-startup-id /home/chad/.fehbg &
-exec --no-startup-id WINIT_X11_SCALE_FACTOR=1.66 alacritty --config-file /home/chad/.config/alacritty/tmux.yml --title="Scratchpad"
-exec --no-startup-id WINIT_X11_SCALE_FACTOR=1.66 alacritty --title="Ranger" -e /usr/bin/zsh --login -c /usr/bin/ranger
+# exec --no-startup-id WINIT_X11_SCALE_FACTOR=1.66 alacritty --config-file /home/chad/.config/alacritty/tmux.yml --title="Scratchpad"
+exec --no-startup-id kitty --title="Scratchpad" tmux
+# exec --no-startup-id WINIT_X11_SCALE_FACTOR=1.66 alacritty --title="Ranger" -e /usr/bin/zsh --login -c /usr/bin/ranger
+exec --no-startup-id kitty --title="Ranger" ranger
 # exec_always --no-startup-id ~/.config/polybar/launch.sh
 # }}}
 
