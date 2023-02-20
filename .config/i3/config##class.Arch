@@ -169,6 +169,7 @@ for_window [class="kitty" title="Scratchpad"] mark "scratchpad" move scratchpad
 for_window [class="kitty" title="Ranger"] border pixel 1, mark "ranger", move scratchpad
 for_window [class="Variety"] floating enable
 for_window [class="lightdm-gtk-greeter-settings"] floating enable
+for_window [class="font-manager"] floating enable
 # }}}
 # }}}
 

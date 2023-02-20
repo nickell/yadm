@@ -424,12 +424,25 @@ require('packer').startup(function(use)
             }
           end,
           ['tsserver'] = function()
+            local nvim_lsp = require 'lspconfig'
+
             lspconfig.tsserver.setup {
               capabilities = capabilities,
+              single_file_support = false,
+              root_dir = nvim_lsp.util.root_pattern 'package.json',
               on_attach = function(client, bufnr)
                 on_attach(client, bufnr)
                 Keymaps.tsserver(bufnr)
               end,
+            }
+          end,
+          ['denols'] = function()
+            local nvim_lsp = require 'lspconfig'
+
+            lspconfig.denols.setup {
+              capabilities = capabilities,
+              root_dir = nvim_lsp.util.root_pattern('deno.json', 'deno.jsonc'),
+              on_attach = on_attach,
             }
           end,
           ['lua_ls'] = function()
