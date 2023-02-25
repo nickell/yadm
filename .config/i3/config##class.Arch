@@ -288,13 +288,15 @@ bindsym XF86AudioNext exec playerctl next
 bindsym XF86AudioPlay exec playerctl play-pause
 bindsym XF86AudioPrev exec playerctl previous
 # bindsym XF86AudioRaiseVolume exec --no-startup-id /home/chad/.bin/change-volume-and-notify +2dB
-bindsym XF86AudioRaiseVolume exec --no-startup-id pamixer -i 5 && dunstify -a "changeVolume" -u low -r "991049" -t 1000 "󰕾: $(pamixer --get-volume-human)"
+# bindsym XF86AudioRaiseVolume exec --no-startup-id pamixer -i 5 && dunstify -a "changeVolume" -u low -r "991049" -t 1000 "󰕾: $(pamixer --get-volume-human)"
 # bindsym XF86AudioLowerVolume exec --no-startup-id /home/chad/.bin/change-volume-and-notify -2dB
-bindsym XF86AudioLowerVolume exec --no-startup-id pamixer -d 5 && dunstify -a "changeVolume" -u low -r "991049" -t 1000 "󰖀: $(pamixer --get-volume-human)"
-bindsym XF86AudioMute exec --no-startup-id pamixer -t && dunstify -a "changeVolume" -u low -r "991049" -t 1000 "󰕾: $(pamixer --get-volume-human)"
+# bindsym XF86AudioLowerVolume exec --no-startup-id pamixer -d 5 && dunstify -a "changeVolume" -u low -r "991049" -t 1000 "󰖀: $(pamixer --get-volume-human)"
+# bindsym XF86AudioMute exec --no-startup-id pamixer -t && dunstify -a "changeVolume" -u low -r "991049" -t 1000 "󰕾: $(pamixer --get-volume-human)"
 bindsym XF86Favorites exec playerctl play-pause
 
 # Brightness controls
+# bindsym XF86MonBrightnessDown exec --no-startup-id /home/chad/.bin/change-brightness-and-notify 10%-
+# bindsym XF86MonBrightnessUp exec --no-startup-id /home/chad/.bin/change-brightness-and-notify +10%
 bindsym XF86MonBrightnessDown exec --no-startup-id /home/chad/.bin/change-brightness-and-notify 10%-
 bindsym XF86MonBrightnessUp exec --no-startup-id /home/chad/.bin/change-brightness-and-notify +10%
 
@@ -606,23 +608,17 @@ mode "$wallpaper_mode" {
 # }}}
 
 # {{{ Autostart programs
-# exec --no-startup-id $HOME/.dotfiles/arch/bin/launch-polybar.sh
-# exec --no-startup-id /usr/bin/variety
 exec --no-startup-id /usr/bin/dunst
-# exec --no-startup-id nm-applet
+exec --no-startup-id /usr/bin/nm-applet
 exec --no-startup-id /usr/bin/galculator
-# exec --no-startup-id pa-applet
-exec --no-startup-id xfce4-power-manager
+exec --no-startup-id /usr/bin/pa-applet
+exec --no-startup-id /usr/bin/xfce4-power-manager
 exec --no-startup-id /usr/lib/xfce-polkit/xfce-polkit
 exec --no-startup-id /usr/bin/pamac-tray
 # exec --no-startup-id /usr/bin/blueberry-tray
 exec --no-startup-id /usr/bin/picom -b
-# exec --no-startup-id /home/chad/.fehbg &
-# exec --no-startup-id WINIT_X11_SCALE_FACTOR=1.66 alacritty --config-file /home/chad/.config/alacritty/tmux.yml --title="Scratchpad"
 exec --no-startup-id kitty --title="Scratchpad" tmux
-# exec --no-startup-id WINIT_X11_SCALE_FACTOR=1.66 alacritty --title="Ranger" -e /usr/bin/zsh --login -c /usr/bin/ranger
 exec --no-startup-id kitty --title="Ranger" ranger
-# exec_always --no-startup-id ~/.config/polybar/launch.sh
 # }}}
 
 include ~/.config/i3/`hostname`.conf
