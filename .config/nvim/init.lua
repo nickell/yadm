@@ -366,6 +366,7 @@ require('packer').startup(function(use)
     { 'williamboman/mason.nvim', config = function() require('mason').setup() end },
     {
       'williamboman/mason-lspconfig.nvim',
+      requires = { 'williamboman/mason.nvim' },
       --  {{{ lspconfig setup
       config = function()
         local lspconfig = require 'lspconfig'
@@ -433,6 +434,10 @@ require('packer').startup(function(use)
               on_attach = function(client, bufnr)
                 on_attach(client, bufnr)
                 Keymaps.tsserver(bufnr)
+                require('nvim-lsp-ts-utils').setup {
+                  filter_out_diagnostics_by_code = { 80001 },
+                }
+                require('nvim-lsp-ts-utils').setup_client(client)
               end,
             }
           end,

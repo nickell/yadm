@@ -244,8 +244,8 @@ bindsym $mod+h focus left
 bindsym $mod+j focus down
 bindsym $mod+k focus up
 bindsym $mod+l focus right
-bindsym $mod+minus [con_mark="default-scratchpad"] scratchpad show
-# bindsym $mod+minus [con_mark="scratchpad"] scratchpad show
+# bindsym $mod+minus [con_mark="default-scratchpad"] scratchpad show
+bindsym $mod+minus [con_mark="scratchpad"] scratchpad show
 bindsym $mod+o workspace 
 bindsym $mod+q kill
 bindsym $mod+r mode "resize"
@@ -255,7 +255,7 @@ bindsym $mod+t workspace 僧
 bindsym $mod+x workspace 
 bindsym $mod+p mode $print_mode
 bindsym $mod+u mode $launch_app_mode
-bindsym $mod+w [con_mark="scratchpad-galculator"] scratchpad show
+# bindsym $mod+w [con_mark="scratchpad-galculator"] scratchpad show
 bindsym $mod+z workspace 犯
 
 bindsym $mod+Ctrl+h focus parent; focus left
@@ -612,7 +612,6 @@ exec --no-startup-id /usr/bin/dunst
 exec --no-startup-id /usr/bin/nm-applet
 exec --no-startup-id /usr/bin/galculator
 exec --no-startup-id /usr/bin/pa-applet
-exec --no-startup-id /usr/bin/xfce4-power-manager
 exec --no-startup-id /usr/lib/xfce-polkit/xfce-polkit
 exec --no-startup-id /usr/bin/pamac-tray
 # exec --no-startup-id /usr/bin/blueberry-tray
