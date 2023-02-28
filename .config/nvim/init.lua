@@ -363,7 +363,8 @@ require('packer').startup(function(use)
   }
 
   use {
-    { 'williamboman/mason.nvim', config = function() require('mason').setup() end },
+    'neovim/nvim-lspconfig',
+    { 'williamboman/mason.nvim', requires = 'neovim/nvim-lspconfig', config = function() require('mason').setup() end },
     {
       'williamboman/mason-lspconfig.nvim',
       requires = { 'williamboman/mason.nvim' },
@@ -434,10 +435,6 @@ require('packer').startup(function(use)
               on_attach = function(client, bufnr)
                 on_attach(client, bufnr)
                 Keymaps.tsserver(bufnr)
-                require('nvim-lsp-ts-utils').setup {
-                  filter_out_diagnostics_by_code = { 80001 },
-                }
-                require('nvim-lsp-ts-utils').setup_client(client)
               end,
             }
           end,
@@ -469,7 +466,6 @@ require('packer').startup(function(use)
       end,
       --  }}}
     },
-    'neovim/nvim-lspconfig',
     {
       'jose-elias-alvarez/null-ls.nvim',
       --  {{{ null-ls config
