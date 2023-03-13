@@ -271,6 +271,7 @@ require('packer').startup(function(use)
 
   use {
     'nvim-treesitter/nvim-treesitter',
+    requires = 'williamboman/mason-lspconfig.nvim',
     run = function()
       local treesitter_update = require('nvim-treesitter.install').update { with_sync = true }
       treesitter_update()
@@ -367,7 +368,7 @@ require('packer').startup(function(use)
     { 'williamboman/mason.nvim', requires = 'neovim/nvim-lspconfig', config = function() require('mason').setup() end },
     {
       'williamboman/mason-lspconfig.nvim',
-      requires = { 'williamboman/mason.nvim' },
+      requires = 'williamboman/mason.nvim',
       --  {{{ lspconfig setup
       config = function()
         local lspconfig = require 'lspconfig'
