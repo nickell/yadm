@@ -1,5 +1,3 @@
--- vim: foldmethod=marker: foldlevel=0:
-
 -- Useful for debugging
 -- print(vim.inspect(variable))
 
@@ -30,9 +28,14 @@ o.sessionoptions = 'blank,buffers,curdir,folds'
 o.undofile = true
 o.undolevels = 100
 
-o.foldexpr = 'nvim_treesitter#foldexpr()'
-o.foldlevel = 9999
-o.foldmethod = 'expr'
+o.foldcolumn = '1' -- '0' is not bad
+o.foldlevel = 99 -- Using ufo provider need a large value, feel free to decrease the value
+o.foldlevelstart = 99
+o.foldenable = true
+
+-- o.foldlevel = 5
+-- o.foldmethod = 'expr'
+-- o.foldexpr = 'nvim_treesitter#foldexpr()'
 
 o.backupdir = vim.fn.expand '~/.config/nvim/backup/'
 o.directory = vim.fn.expand '~/.config/nvim/swap/'
@@ -108,6 +111,10 @@ nmap('<Leader>s', function() require('luasnip.loaders').edit_snippet_files() end
 nmap('<Leader>w', ':write<CR>')
 nmap('<Leader>x', ':bd<CR>')
 nmap('<leader><leader>s', '<cmd>source ~/.config/nvim/lua/my_luasnip.lua<CR>')
+nmap('L', 'zoj')
+nmap('H', 'zc')
+nmap('zL', 'L')
+nmap('zH', 'H')
 nmap('QQ', ':quit<CR>')
 nmap('X', ':bd<CR>')
 nmap('gd', ':bd<CR>')
@@ -234,7 +241,6 @@ Keymaps.git = function(params)
   -- map({ 'o', 'x' }, 'ih', ':<C-U>Gitsigns select_hunk<CR>')
   --  }}}
 end
-
 --  }}}
 
 -- {{{ packer
@@ -271,11 +277,8 @@ require('packer').startup(function(use)
 
   use {
     'nvim-treesitter/nvim-treesitter',
-    requires = 'williamboman/mason-lspconfig.nvim',
-    run = function()
-      local treesitter_update = require('nvim-treesitter.install').update { with_sync = true }
-      treesitter_update()
-    end,
+    requires = 'neovim/nvim-lspconfig',
+    run = ':TSUpdate',
     --  {{{ treesitter config
     config = function()
       require('nvim-treesitter.configs').setup {
@@ -364,13 +367,39 @@ require('packer').startup(function(use)
   }
 
   use {
-    'neovim/nvim-lspconfig',
-    { 'williamboman/mason.nvim', requires = 'neovim/nvim-lspconfig', config = function() require('mason').setup() end },
+    'kevinhwang91/promise-async',
     {
-      'williamboman/mason-lspconfig.nvim',
-      requires = 'williamboman/mason.nvim',
-      --  {{{ lspconfig setup
+      'kevinhwang91/nvim-ufo',
+      requires = { 'nvim-treesitter/nvim-treesitter', 'kevinhwang91/promise-async' },
       config = function()
+        require('ufo').setup {
+          provider_selector = function() return { 'treesitter', 'indent' } end,
+        }
+
+        vim.keymap.set('n', 'zR', require('ufo').openAllFolds)
+        vim.keymap.set('n', 'zM', require('ufo').closeAllFolds)
+      end,
+    },
+  }
+
+  use {
+    'williamboman/mason.nvim',
+    'williamboman/mason-lspconfig.nvim',
+    'hrsh7th/cmp-nvim-lsp',
+    'lukas-reineke/lsp-format.nvim',
+    {
+      'neovim/nvim-lspconfig',
+      requires = {
+        'williamboman/mason.nvim',
+        'williamboman/mason-lspconfig.nvim',
+        'hrsh7th/cmp-nvim-lsp',
+        'lukas-reineke/lsp-format.nvim',
+      },
+      --  {{{ config
+      config = function()
+        require('mason').setup()
+        require('lsp-format').setup()
+
         local lspconfig = require 'lspconfig'
         local mason_lspconfig = require 'mason-lspconfig'
         local capabilities = require('cmp_nvim_lsp').default_capabilities()
@@ -483,7 +512,6 @@ require('packer').startup(function(use)
       end,
       --  }}}
     },
-    'hrsh7th/cmp-nvim-lsp',
     'saadparwaiz1/cmp_luasnip',
     {
       'L3MON4D3/LuaSnip',
@@ -732,7 +760,8 @@ require('packer').startup(function(use)
         git_cmd = { 'git' }, -- The git executable followed by default args.
         use_icons = true, -- Requires nvim-web-devicons
         watch_index = true, -- Update views and index buffers when the git index changes.
-        icons = { -- Only applies when use_icons is true.
+        icons = {
+          -- Only applies when use_icons is true.
           folder_closed = '',
           folder_open = '',
         },
@@ -768,18 +797,21 @@ require('packer').startup(function(use)
         },
         file_panel = {
           listing_style = 'tree', -- One of 'list' or 'tree'
-          tree_options = { -- Only applies when listing_style is 'tree'
+          tree_options = {
+            -- Only applies when listing_style is 'tree'
             flatten_dirs = true, -- Flatten dirs that only contain one single dir
             folder_statuses = 'only_folded', -- One of 'never', 'only_folded' or 'always'.
           },
-          win_config = { -- See ':h diffview-config-win_config'
+          win_config = {
+            -- See ':h diffview-config-win_config'
             position = 'left',
             width = 35,
             win_opts = {},
           },
         },
         file_history_panel = {
-          log_options = { -- See ':h diffview-config-log_options'
+          log_options = {
+            -- See ':h diffview-config-log_options'
             git = {
               single_file = {
                 diff_merges = 'combined',
@@ -789,7 +821,8 @@ require('packer').startup(function(use)
               },
             },
           },
-          win_config = { -- See ':h diffview-config-win_config'
+          win_config = {
+            -- See ':h diffview-config-win_config'
             position = 'bottom',
             height = 16,
             win_opts = {},
@@ -800,7 +833,8 @@ require('packer').startup(function(use)
             win_opts = {},
           },
         },
-        default_args = { -- Default args prepended to the arg-list for the listed commands
+        default_args = {
+          -- Default args prepended to the arg-list for the listed commands
           DiffviewOpen = {},
           DiffviewFileHistory = {},
         },
@@ -904,8 +938,6 @@ require('packer').startup(function(use)
     end,
     --  }}}
   }
-
-  use { 'lukas-reineke/lsp-format.nvim', config = function() require('lsp-format').setup() end }
 
   use 'kevinhwang91/rnvimr'
 
