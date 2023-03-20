@@ -28,9 +28,9 @@ o.sessionoptions = 'blank,buffers,curdir,folds'
 o.undofile = true
 o.undolevels = 100
 
-o.foldcolumn = '1' -- '0' is not bad
-o.foldlevel = 99 -- Using ufo provider need a large value, feel free to decrease the value
-o.foldlevelstart = 99
+o.foldcolumn = '1'
+o.foldlevel = 99
+o.foldlevelstart = 5
 o.foldenable = true
 
 -- o.foldlevel = 5
@@ -111,7 +111,7 @@ nmap('<Leader>s', function() require('luasnip.loaders').edit_snippet_files() end
 nmap('<Leader>w', ':write<CR>')
 nmap('<Leader>x', ':bd<CR>')
 nmap('<leader><leader>s', '<cmd>source ~/.config/nvim/lua/my_luasnip.lua<CR>')
-nmap('L', 'zoj')
+nmap('L', 'zo')
 nmap('H', 'zc')
 nmap('zL', 'L')
 nmap('zH', 'H')
