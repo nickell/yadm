@@ -30,7 +30,7 @@ o.undolevels = 100
 
 o.foldcolumn = '1'
 o.foldlevel = 99
-o.foldlevelstart = 5
+o.foldlevelstart = 99
 o.foldenable = true
 
 -- o.foldlevel = 5
@@ -201,7 +201,7 @@ end
 Keymaps.lsp = function(bufnr, lsp_formatting)
   local _opts = { noremap = true, silent = true, buffer = bufnr }
   nmap('<Leader>D', vim.lsp.buf.type_definition, _opts)
-  nmap('<Leader>ca', vim.lsp.buf.code_action, _opts)
+  nmap('<Leader>lca', vim.lsp.buf.code_action, _opts)
   nmap('<Leader>td', vim.lsp.buf.definition, _opts)
   nmap('<Leader>lr', vim.lsp.buf.references, _opts)
   nmap('<Leader>p', function() lsp_formatting(_opts.bufnr, true) end, _opts)
