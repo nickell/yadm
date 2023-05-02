@@ -146,7 +146,7 @@ bindsym $mod+Shift+8 move container to workspace $ws8
 # {{{ Floating windows
 # Open specific applications in floating mode
 for_window [title="alsamixer"] floating enable border pixel 1
-for_window [class="Galculator"] floating enable border pixel 1 mark "scratchpad-galculator" move scratchpad
+for_window [class="Galculator"] floating enable border pixel 1 mark "galculator" move scratchpad
 for_window [class="GParted"] floating enable border normal
 for_window [title="i3_help"] floating enable sticky enable border normal
 for_window [class="Lightdm-settings"] floating enable
@@ -165,7 +165,7 @@ for_window [class="Timeset-gui"] floating enable border normal
 for_window [class="(?i)virtualbox"] floating enable border normal
 for_window [class="Xfburn"] floating enable
 for_window [class="Xfce4-power-manager-settings"] floating enable
-for_window [class="kitty" title="Scratchpad"] mark "scratchpad" move scratchpad
+for_window [class="kitty" title="Scratchpad"] mark "kitty" move scratchpad
 for_window [class="kitty" title="Ranger"] border pixel 1, mark "ranger", move scratchpad
 for_window [class="Variety"] floating enable
 for_window [class="lightdm-gtk-greeter-settings"] floating enable
@@ -239,13 +239,14 @@ bindsym $mod+c exec $browser
 bindsym $mod+d exec --no-startup-id ~/.config/rofi/launchers/type-2/launcher.sh
 bindsym $mod+e workspace 
 bindsym $mod+f fullscreen toggle
-bindsym $mod+g [con_mark="scratchpad-galculator"] scratchpad show
+bindsym $mod+g [con_mark="galculator"] scratchpad show
 bindsym $mod+h focus left
 bindsym $mod+j focus down
 bindsym $mod+k focus up
 bindsym $mod+l focus right
+bindsym $mod+m exec --no-startup-id /usr/bin/rofimoji
 # bindsym $mod+minus [con_mark="default-scratchpad"] scratchpad show
-bindsym $mod+minus [con_mark="scratchpad"] scratchpad show
+bindsym $mod+minus [con_mark="kitty"] scratchpad show
 bindsym $mod+o workspace 
 bindsym $mod+q kill
 bindsym $mod+r mode "resize"
