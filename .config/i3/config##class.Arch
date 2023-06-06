@@ -369,7 +369,7 @@ set $launch_app_mode Launch app: (a)sana | a(c)culynx | sp(o)tify | (s)lack | (1
 mode "$launch_app_mode" {
         bindsym a exec google-chrome-stable --app="https://app.asana.com/0/home/1201258476203538"; mode "default"
         bindsym c exec google-chrome-stable --app="https://my.acculynx.com/dashboard"; mode "default"
-        bindsym n exec google-chrome-stable --app="https://linear.app/get-robin/"; mode "default"
+        bindsym n exec google-chrome-stable --app="https://linear.app/get-robin/team/RBN/cycle/active"; mode "default"
         bindsym o exec spotify; mode "default"
         bindsym s exec /usr/bin/slack; mode "default"
         bindsym f exec /usr/bin/firefox -P Work; mode "default"
