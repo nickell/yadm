@@ -267,6 +267,8 @@ vim.cmd [[
 -- }}}
 
 require('packer').startup(function(use)
+  use 'tpope/vim-unimpaired'
+
   use 'wbthomason/packer.nvim'
 
   use 'nvim-lua/plenary.nvim'
@@ -386,24 +388,24 @@ require('packer').startup(function(use)
     'williamboman/mason.nvim',
     'williamboman/mason-lspconfig.nvim',
     'hrsh7th/cmp-nvim-lsp',
-    'lukas-reineke/lsp-format.nvim',
+    -- 'lukas-reineke/lsp-format.nvim',
     {
       'neovim/nvim-lspconfig',
       requires = {
         'williamboman/mason.nvim',
         'williamboman/mason-lspconfig.nvim',
         'hrsh7th/cmp-nvim-lsp',
-        'lukas-reineke/lsp-format.nvim',
+        -- 'lukas-reineke/lsp-format.nvim',
       },
       --  {{{ config
       config = function()
         require('mason').setup()
-        require('lsp-format').setup()
+        -- require('lsp-format').setup()
 
         local lspconfig = require 'lspconfig'
         local mason_lspconfig = require 'mason-lspconfig'
         local capabilities = require('cmp_nvim_lsp').default_capabilities()
-        local lspformat = require 'lsp-format'
+        -- local lspformat = require 'lsp-format'
 
         local lsp_formatting = function(bufnr, isAsync)
           vim.lsp.buf.format {
@@ -425,7 +427,7 @@ require('packer').startup(function(use)
             })
           end
 
-          lspformat.on_attach(client)
+          -- lspformat.on_attach(client)
 
           Keymaps.lsp(bufnr, lsp_formatting)
         end

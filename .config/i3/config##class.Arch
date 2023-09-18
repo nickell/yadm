@@ -429,9 +429,9 @@ mode "$personal_launch_mode" {
 # {{{ mode: robin_launch_mode
 set $robin_launch_mode robin (e)mail | (c)alendar | (d)rive
 mode "$robin_launch_mode" {
-        bindsym e exec google-chrome-stable --app="https://mail.google.com/mail/u/?authuser=chad@getrobin.co"
-        bindsym c exec google-chrome-stable --app="https://calendar.google.com/calendar/u/?authuser=chad@getrobin.co"
-        bindsym d exec google-chrome-stable --app="https://drive.google.com/drive/u/?authuser=chad@getrobin.co"
+        bindsym e exec google-chrome-stable --app="https://mail.google.com/mail/u/?authuser=chad@usepara.com"
+        bindsym c exec google-chrome-stable --app="https://calendar.google.com/calendar/u/?authuser=chad@usepara.com"
+        bindsym d exec google-chrome-stable --app="https://drive.google.com/drive/u/?authuser=chad@usepara.com"
 
         # exit mode: Enter or Escape
         bindsym Return mode $email_launch_mode
