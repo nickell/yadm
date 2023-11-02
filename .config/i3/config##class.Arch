@@ -555,7 +555,7 @@ mode "$seldom_shortcut_mode" {
 # }}}
 
 # {{{ mode: monitor_mode
-set $monitor_mode Monitor: (a)uto (h)igh (m)ed (n)low/med (l)ow (x)tra low | (c)losed docked | (o)pen docked
+set $monitor_mode Monitor: (a)uto (h)igh (m)ed (n)low/med (l)ow (x)tra low | (c)losed docked | (o)pen docked | (d)ual
 mode "$monitor_mode" {
         # Auto detect monitors
         bindsym a exec xrandr --auto, mode "default"
@@ -568,6 +568,7 @@ mode "$monitor_mode" {
         bindsym x exec /bin/bash /home/chad/.screenlayout/extra-low.sh; exec $HOME/.fehbg &, mode "default"
         bindsym c exec /bin/bash /home/chad/.screenlayout/Closed\ Docked.sh; exec $HOME/.fehbg &, mode "default"
         bindsym o exec /bin/bash /home/chad/.screenlayout/Open\ Docked.sh; exec $HOME/.fehbg &, mode "default"
+        bindsym d exec /bin/bash /home/chad/.screenlayout/dual.sh; exec $HOME/.fehbg &, mode "default"
 
         # exit monitor mode: Enter or Escape
         bindsym Return mode "default"
