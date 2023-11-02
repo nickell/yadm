@@ -102,7 +102,7 @@ nmap('<Leader>f', tel_builtins.find_files)
 nmap('<Leader>gb', function() tel_builtins.git_branches(initial_normal_opts) end)
 nmap('<Leader>gc', function() tel_builtins.git_commits(initial_normal_opts) end)
 nmap('<Leader>gs', ':Git<CR>')
-nmap('<Leader>h', '<Plug>RestNvim', { silent = true })
+-- nmap('<Leader>h', '<Plug>RestNvim', { silent = true })
 nmap('<Leader>j', vim.diagnostic.goto_next)
 nmap('<Leader>k', vim.diagnostic.goto_prev)
 nmap('<Leader>q', vim.diagnostic.setloclist)
@@ -949,13 +949,15 @@ require('packer').startup(function(use)
     requires = { 'nvim-lua/plenary.nvim' },
     --  {{{ rest.nvim config
     config = function()
-      require('rest-nvim').setup {
+      local rest = require 'rest-nvim'
+
+      rest.setup {
         -- Open request results in a horizontal split
         result_split_horizontal = false,
         -- Keep the http file buffer above|left when split horizontal|vertical
         result_split_in_place = true,
         -- Skip SSL verification, useful for unknown certificates
-        skip_ssl_verification = false,
+        skip_ssl_verification = true,
         -- Encode URL before making request
         encode_url = true,
         -- Highlight request on run
@@ -981,6 +983,8 @@ require('packer').startup(function(use)
         custom_dynamic_variables = {},
         yank_dry_run = true,
       }
+
+      vim.keymap.set('n', '<leader>h', rest.run)
     end,
     --  }}}
   }

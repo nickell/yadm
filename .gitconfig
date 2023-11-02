@@ -28,7 +28,7 @@
 [commit]
   template = ~/.config/git/git_commit_msg
 [alias]
-  branch-prune = "!git fetch -p && for b in $(git for-each-ref --format='%(if:equals=[gone])%(upstream:track)%(then)%(refname:short)%(end)' refs/heads); do git branch -d $b; done"
+  branch-prune = "!git fetch -p && for b in $(git for-each-ref --format='%(if:equals=[gone])%(upstream:track)%(then)%(refname:short)%(end)' refs/heads); do git branch -D $b; done"
   b = branch --verbose
   ba = branch --all --verbose
   bd = branch -D

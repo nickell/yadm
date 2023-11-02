@@ -367,20 +367,18 @@ mode "$change_container_layout_mode" {
 # }}}
 
 # {{{ mode: launch_app_mode
-set $launch_app_mode Launch app: (a)sana | a(c)culynx | sp(o)tify | (s)lack | (1)password | (v)im mode | (e)mail | (i)cloud launch mode | (t)rello | a(l)acritty mode
+set $launch_app_mode Launch app: sp(o)tify | (s)lack | (1)password | (v)im mode | (e)mail | (i)cloud launch mode | (t)rello | a(l)acritty mode | (x)db launch mode
 mode "$launch_app_mode" {
-        bindsym a exec google-chrome-stable --app="https://app.asana.com/0/home/1201258476203538"; mode "default"
-        bindsym c exec google-chrome-stable --app="https://my.acculynx.com/dashboard"; mode "default"
         bindsym n exec google-chrome-stable --app="https://linear.app/get-robin/view/c58cfa9a-3d94-4368-8262-fa41f71d4ea5"; mode "default"
         bindsym o exec spotify; mode "default"
         bindsym s exec /usr/bin/slack; mode "default"
-        bindsym f exec /usr/bin/firefox -P Work; mode "default"
         bindsym 1 exec /usr/bin/1password; mode "default"
         bindsym l mode $alacritty_launch_mode
         bindsym t exec google-chrome-stable --app="https://trello.com/b/WRMeLooU/kanban"; mode "default"
         bindsym v mode $vim_launch_mode
         bindsym e mode $email_launch_mode
         bindsym i mode $icloud_launch_mode
+        bindsym x mode $db_launch_mode
 
         # exit mode: Enter or Escape
         bindsym Return mode "default"
@@ -451,6 +449,19 @@ mode "$proroofing_launch_mode" {
         bindsym Escape mode "default"
 }
 # }}}
+# }}}
+
+# {{{ mode: db_launch_mode
+set $db_launch_mode (p)rod | (s)tage | (d)ev
+mode "$db_launch_mode" {
+        bindsym p exec GTK_THEME=breeze dbeaver -data prod
+        bindsym s exec GTK_THEME=breeze dbeaver -data stage
+        bindsym d exec GTK_THEME=breeze dbeaver -data dev
+
+        # exit mode: Enter or Escape
+        bindsym Return mode "default"
+        bindsym Escape mode "default"
+}
 # }}}
 
 # {{{ mode: icloud_launch_mode
