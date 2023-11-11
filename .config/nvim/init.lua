@@ -93,14 +93,17 @@ nmap('<A-l>', ':Telescope<CR>')
 nmap('<A-;>', ':Telescope resume<CR>')
 nmap('<CR>', 'i<CR><ESC>')
 nmap('<Leader><CR>', ':noh<CR>')
-nmap('<Leader>a', tel_builtins.live_grep)
+-- nmap('<Leader>a', tel_builtins.live_grep)
+nmap('<leader>fg', ":lua require('telescope').extensions.live_grep_args.live_grep_args()<CR>")
 nmap('<Leader>bo', ':%bd|e#|bd#<CR>')
 nmap('<Leader>dc', ':DiffviewClose<CR>')
 nmap('<Leader>df', ':DiffviewFileHistory %<CR>')
 nmap('<Leader>dl', ':DiffviewFileHistory<CR>')
 nmap('<Leader>do', ':DiffviewOpen<CR>')
 nmap('<Leader>e', vim.diagnostic.open_float)
-nmap('<Leader>f', tel_builtins.find_files)
+nmap('<Leader>ff', tel_builtins.find_files)
+-- nmap('<A-p>', tel_builtins.find_files)
+nmap('<Leader>fs', function() tel_builtins.lsp_document_symbols { ignore_symbols = 'property' } end)
 nmap('<Leader>gb', function() tel_builtins.git_branches(initial_normal_opts) end)
 nmap('<Leader>gc', function() tel_builtins.git_commits(initial_normal_opts) end)
 nmap('<Leader>gs', ':Git<CR>')
@@ -108,7 +111,7 @@ nmap('<Leader>gs', ':Git<CR>')
 nmap('<Leader>j', vim.diagnostic.goto_next)
 nmap('<Leader>k', vim.diagnostic.goto_prev)
 nmap('<Leader>q', vim.diagnostic.setloclist)
-nmap('<Leader>rw', function() tel_builtins.live_grep { default_text = vim.fn.expand '<cword>' } end)
+nmap('<Leader>fw', function() tel_builtins.live_grep { default_text = vim.fn.expand '<cword>' } end)
 nmap('<Leader>s', function() require('luasnip.loaders').edit_snippet_files() end)
 nmap('<Leader>w', ':write<CR>')
 nmap('<Leader>x', ':bd<CR>')
@@ -263,7 +266,7 @@ local packer_bootstrap = ensure_packer()
 vim.cmd [[
   augroup packer_user_config
     autocmd!
-    autocmd BufWritePost plugins.lua source <afile> | PackerCompile
+    autocmd BufWritePost init.lua source <afile> | PackerCompile
   augroup end
 ]]
 -- }}}
@@ -377,7 +380,7 @@ require('packer').startup(function(use)
       requires = { 'nvim-treesitter/nvim-treesitter', 'kevinhwang91/promise-async' },
       config = function()
         require('ufo').setup {
-          provider_selector = function() return { 'treesitter', 'indent' } end,
+          provider_selector = function() return { 'lsp', 'indent' } end,
         }
 
         vim.keymap.set('n', 'zR', require('ufo').openAllFolds)
@@ -558,12 +561,19 @@ require('packer').startup(function(use)
     {
       'nvim-telescope/telescope.nvim',
       branch = '0.1.x',
-      requires = { { 'nvim-lua/plenary.nvim' } },
+      requires = {
+        { 'nvim-lua/plenary.nvim' },
+        { 'nvim-telescope/telescope-live-grep-args.nvim' },
+        { 'aaronhallaert/advanced-git-search.nvim' },
+        { 'tpope/vim-fugitive' },
+        { 'tpope/vim-rhubarb' },
+      },
       --  {{{ telescope setup
       config = function()
         local telescope = require 'telescope'
         local action_state = require 'telescope.actions.state'
         local actions = require 'telescope.actions'
+        local lga_actions = require 'telescope-live-grep-args.actions'
 
         local function multiopen(prompt_bufnr, method)
           local edit_file_cmd_map = {
@@ -674,6 +684,15 @@ require('packer').startup(function(use)
             },
           },
           extensions = {
+            live_grep_args = {
+              auto_quoting = true,
+              mappings = { -- extend mappings
+                i = {
+                  ['<C-k>'] = lga_actions.quote_prompt(),
+                  ['<C-i>'] = lga_actions.quote_prompt { postfix = ' --iglob **/' },
+                },
+              },
+            },
             fzf = {
               fuzzy = true, -- false will only do exact matching
               override_generic_sorter = true, -- override the generic sorter
@@ -684,6 +703,8 @@ require('packer').startup(function(use)
         }
 
         telescope.load_extension 'fzf'
+        telescope.load_extension 'live_grep_args'
+        telescope.load_extension 'advanced_git_search'
       end,
       --  }}}
     },
@@ -748,7 +769,7 @@ require('packer').startup(function(use)
     { 'numToStr/Comment.nvim', config = function() require('Comment').setup() end },
   }
 
-  use { 'tpope/vim-fugitive', 'tpope/vim-sensible', 'tpope/vim-abolish' }
+  use { 'tpope/vim-fugitive', 'tpope/vim-sensible', 'tpope/vim-abolish', 'tpope/vim-rhubarb' }
 
   use 'nvim-treesitter/nvim-treesitter-textobjects'
 
