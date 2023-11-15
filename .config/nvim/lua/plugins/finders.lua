@@ -16,19 +16,19 @@ return {
     { '<leader>fg', function() require('telescope').extensions.live_grep_args.live_grep_args() end },
     {
       '<leader>fs',
-      function() require('telescope.builtins').lsp_document_symbols { ignore_symbols = 'property' } end,
+      function() require('telescope.builtin').lsp_document_symbols { ignore_symbols = 'property' } end,
     },
     {
       '<leader>gb',
-      function() require('telescope.builtins').git_branches { initial_mode = 'normal', default_selection_index = 2 } end,
+      function() require('telescope.builtin').git_branches { initial_mode = 'normal', default_selection_index = 2 } end,
     },
     {
       '<leader>gc',
-      function() require('telescope.builtins').git_commits { initial_mode = 'normal', default_selection_index = 2 } end,
+      function() require('telescope.builtin').git_commits { initial_mode = 'normal', default_selection_index = 2 } end,
     },
     {
       '<leader>fw',
-      function() require('telescope.builtins').live_grep { default_text = vim.fn.expand '<cword>' } end,
+      function() require('telescope.builtin').live_grep { default_text = vim.fn.expand '<cword>' } end,
     },
   },
   config = function()
