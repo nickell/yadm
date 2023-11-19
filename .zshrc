@@ -9,6 +9,9 @@ unsetopt beep
 setopt NO_NOMATCH
 # }}}
 
+export EDITOR=/usr/bin/nvim
+export VISUAL=/usr/bin/nvim
+
 # {{{ Prezto
 # Source Prezto and remove an alias from it
 [ -f $HOME/.zprezto/init.zsh ] && source $HOME/.zprezto/init.zsh
@@ -44,6 +47,12 @@ fi
 source $HOME/.aliases.zsh
 source $HOME/.functions.zsh
 # }}}
+
+#  {{{ Path
+path+=$HOME/.bin
+path+=$HOME/.local/bin
+export PATH
+#  }}}
 
 # Support local modifications
 [ -f $HOME/.zshrc.local ] && source $HOME/.zshrc.local
