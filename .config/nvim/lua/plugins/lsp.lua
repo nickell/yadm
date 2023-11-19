@@ -27,82 +27,110 @@ local function tsserver_keymaps(bufnr)
 end
 
 return {
-  'williamboman/mason.nvim',
-  dependencies = {
-    'williamboman/mason-lspconfig',
-    'neovim/nvim-lspconfig',
-    'hrsh7th/cmp-nvim-lsp',
-  },
-  config = function()
-    require('mason').setup()
-    local lspconfig = require 'lspconfig'
-    local mason_lspconfig = require 'mason-lspconfig'
-    local capabilities = require('cmp_nvim_lsp').default_capabilities()
+  {
+    'williamboman/mason.nvim',
+    dependencies = {
+      'williamboman/mason-lspconfig',
+      'neovim/nvim-lspconfig',
+      'hrsh7th/cmp-nvim-lsp',
+      'kevinhwang91/nvim-ufo',
+    },
+    config = function()
+      require('mason').setup()
+      local lspconfig = require 'lspconfig'
+      local mason_lspconfig = require 'mason-lspconfig'
+      local capabilities = require('cmp_nvim_lsp').default_capabilities()
 
-    local on_attach = function(_, bufnr) lsp_keymaps(bufnr) end
+      capabilities.textDocument.foldingRange = {
+        dynamicRegistration = false,
+        lineFoldingOnly = true,
+      }
 
-    mason_lspconfig.setup {
-      ensure_installed = {
-        'cssls',
-        'denols',
-        'dockerls',
-        'eslint',
-        'html',
-        'jsonls',
-        'pyright',
-        'lua_ls',
-        'tailwindcss',
-        'tsserver',
-        'vimls',
-        'yamlls',
-      },
-      automatic_installation = true,
-    }
+      local on_attach = function(_, bufnr) lsp_keymaps(bufnr) end
 
-    mason_lspconfig.setup_handlers {
-      function(server_name)
-        lspconfig[server_name].setup {
-          on_attach = on_attach,
-          capabilities = capabilities,
-        }
-      end,
-      ['tsserver'] = function()
-        local nvim_lsp = require 'lspconfig'
+      mason_lspconfig.setup {
+        ensure_installed = {
+          'cssls',
+          'denols',
+          'dockerls',
+          'eslint',
+          'html',
+          'jsonls',
+          'pyright',
+          'lua_ls',
+          'tailwindcss',
+          'tsserver',
+          'vimls',
+          'yamlls',
+        },
+        automatic_installation = true,
+      }
 
-        lspconfig.tsserver.setup {
-          capabilities = capabilities,
-          single_file_support = false,
-          root_dir = nvim_lsp.util.root_pattern 'package.json',
-          on_attach = function(client, bufnr)
-            on_attach(client, bufnr)
-            tsserver_keymaps(bufnr)
-          end,
-        }
-      end,
-      ['denols'] = function()
-        local nvim_lsp = require 'lspconfig'
+      mason_lspconfig.setup_handlers {
+        function(server_name)
+          lspconfig[server_name].setup {
+            on_attach = on_attach,
+            capabilities = capabilities,
+          }
+        end,
+        ['tsserver'] = function()
+          local nvim_lsp = require 'lspconfig'
 
-        lspconfig.denols.setup {
-          capabilities = capabilities,
-          root_dir = nvim_lsp.util.root_pattern('deno.json', 'deno.jsonc'),
-          on_attach = on_attach,
-        }
-      end,
-      ['lua_ls'] = function()
-        lspconfig.lua_ls.setup {
-          on_attach = on_attach,
-          settings = {
-            Lua = {
-              runtime = {
-                version = 'LuaJIT',
-              },
-              diagnostics = {
-                globals = { 'vim', 's', 't', 'i', 'f', 'fmt', 'fmta', 'rep', 'conds', 'sn', 'd', 'c', 'extras' },
+          lspconfig.tsserver.setup {
+            capabilities = capabilities,
+            single_file_support = false,
+            root_dir = nvim_lsp.util.root_pattern 'package.json',
+            on_attach = function(client, bufnr)
+              on_attach(client, bufnr)
+              tsserver_keymaps(bufnr)
+            end,
+          }
+        end,
+        ['denols'] = function()
+          local nvim_lsp = require 'lspconfig'
+
+          lspconfig.denols.setup {
+            capabilities = capabilities,
+            root_dir = nvim_lsp.util.root_pattern('deno.json', 'deno.jsonc'),
+            on_attach = on_attach,
+          }
+        end,
+        ['lua_ls'] = function()
+          lspconfig.lua_ls.setup {
+            on_attach = on_attach,
+            settings = {
+              Lua = {
+                runtime = {
+                  version = 'LuaJIT',
+                },
+                diagnostics = {
+                  globals = { 'vim', 's', 't', 'i', 'f', 'fmt', 'fmta', 'rep', 'conds', 'sn', 'd', 'c', 'extras' },
+                },
               },
             },
-          },
-        }
-      end,
-    }
-  end,
+          }
+        end,
+      }
+
+      require('ufo').setup()
+    end,
+  },
+  {
+    'kevinhwang91/nvim-ufo',
+    lazy = true,
+    dependencies = { 'kevinhwang91/promise-async' },
+    keys = {
+      {
+        'zR',
+        function() require('ufo').openAllFolds() end,
+        desc = 'Open all folds',
+      },
+      {
+        'zM',
+        function() require('ufo').closeAllFolds() end,
+        desc = 'Close all folds',
+      },
+    },
+    config = false,
+  },
 }
