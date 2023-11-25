@@ -14,6 +14,7 @@ return {
       require 'nvim-treesitter.query_predicates'
     end,
     dependencies = {
+      { 'stevearc/aerial.nvim' },
       {
         'nvim-treesitter/nvim-treesitter-textobjects',
         config = function()
