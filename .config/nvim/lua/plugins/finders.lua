@@ -13,7 +13,8 @@ return {
     { '<leader>ff', function() require('telescope.builtin').find_files() end },
     { '<A-l>', function() require('telescope.builtin').builtin() end },
     { '<A-;>', function() require('telescope.builtin').resume() end },
-    { '<leader>fg', function() require('telescope').extensions.live_grep_args.live_grep_args() end },
+    -- { '<leader>fg', function() require('telescope').extensions.live_grep_args.live_grep_args() end },
+    { '<leader>fg', function() require('telescope.builtin').live_grep() end },
     {
       '<leader>fs',
       function() require('telescope.builtin').lsp_document_symbols { ignore_symbols = 'property' } end,
@@ -134,13 +135,15 @@ return {
           },
         },
         live_grep = {
-          theme = 'dropdown',
           mappings = {
             i = {
               ['<CR>'] = multiopen_selection,
+              ['<c-f>'] = actions.to_fuzzy_refine,
+              ['<c-space>'] = actions.to_fuzzy_refine,
             },
             n = {
               ['<CR>'] = multiopen_selection,
+              ['f'] = actions.to_fuzzy_refine,
             },
           },
         },
