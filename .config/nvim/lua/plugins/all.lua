@@ -29,4 +29,5 @@ return {
   'tpope/vim-abolish',
   { 'nvim-treesitter/nvim-treesitter-textobjects', dependencies = 'nvim-treesitter/nvim-treesitter' },
   'kevinhwang91/rnvimr',
+  'rmagatti/auto-session',
 }
