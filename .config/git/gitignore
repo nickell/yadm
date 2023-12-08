@@ -8,3 +8,4 @@ Session.vim
 node_modules
 .vim/coc-settings.json
 .vim
+.git

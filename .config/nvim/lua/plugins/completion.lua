@@ -35,7 +35,7 @@ local function keymaps(cmp, ls)
   end
 
   return cmp.mapping.preset.insert {
-    ['<C-Space>'] = cmp.mapping.complete(),
+    -- ['<C-Space>'] = cmp.mapping.complete(),
     ['<C-d>'] = cmp.mapping.scroll_docs(-4),
     ['<C-f>'] = cmp.mapping.scroll_docs(4),
     ['<C-k>'] = cmp.mapping(expand_or_jump, { 'i', 's' }),

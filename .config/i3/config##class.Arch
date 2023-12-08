@@ -305,7 +305,7 @@ bindsym XF86MonBrightnessUp exec --no-startup-id /home/chad/.bin/change-brightne
 
 # Dunst controls
 bindcode Control+49 exec --no-startup-id dunstctl history-pop
-bindsym Control+space exec --no-startup-id dunstctl close
+bindsym Control+Shift+space exec --no-startup-id dunstctl close
 # bindsym Control+Shift+space exec --no-startup-id dunstctl close-all
 bindsym Control+Shift+period exec --no-startup-id dunstctl context
 # }}}
