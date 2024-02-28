@@ -167,6 +167,7 @@ for_window [class="Xfburn"] floating enable
 for_window [class="Xfce4-power-manager-settings"] floating enable
 for_window [class="kitty" title="Scratchpad"] mark "kitty" move scratchpad
 for_window [class="kitty" title="Ranger"] border pixel 1, mark "ranger", move scratchpad
+for_window [class="obsidian"] border pixel 1, mark "obsidian", move scratchpad
 for_window [class="Variety"] floating enable
 for_window [class="lightdm-gtk-greeter-settings"] floating enable
 for_window [class="font-manager"] floating enable
@@ -232,6 +233,7 @@ bindsym $mod+Return exec kitty --title=kitty tmux
 bindsym $mod+Tab workspace back_and_forth
 bindsym $mod+a focus parent
 bindsym $mod+b [con_mark="ranger"] scratchpad show
+bindsym $mod+o [con_mark="obsidian"] scratchpad show
 bindsym $mod+bracketright mode $shortcut_mode
 bindsym $mod+c exec $browser
 # bindsym $mod+d exec --no-startup-id rofi -show drun
@@ -247,7 +249,7 @@ bindsym $mod+l focus right
 bindsym $mod+m exec --no-startup-id /usr/bin/rofimoji
 # bindsym $mod+minus [con_mark="default-scratchpad"] scratchpad show
 bindsym $mod+minus [con_mark="kitty"] scratchpad show
-bindsym $mod+o workspace 
+# bindsym $mod+o workspace 
 bindsym $mod+q kill
 bindsym $mod+r mode "resize"
 bindsym $mod+s workspace 
@@ -542,11 +544,12 @@ mode "$kill_mode" {
 # }}}
 
 # {{{ mode: seldom_shortcut_mode
-set $seldom_shortcut_mode Seldom Used Shortcuts: restart (d)unst | (r)anger
+set $seldom_shortcut_mode Seldom Used Shortcuts: restart (d)unst | (r)anger | (o)bsidian
 mode "$seldom_shortcut_mode" {
         bindsym d exec "killall dunst; exec notify-send 'restart dunst'"; mode "default"
         # bindsym r exec --no-startup-id WINIT_X11_SCALE_FACTOR=1.66 alacritty --title="Ranger" -e /usr/bin/zsh --login -c /usr/bin/ranger; mode "default"
         bindsym r exec --no-startup-id kitty --title="Ranger" ranger; mode "default"
+        bindsym o exec --no-startup-id /usr/bin/obsidian; mode "default"
 
         # exit mode: Enter or Escape
         bindsym Return mode "default"
@@ -619,6 +622,7 @@ exec --no-startup-id /usr/bin/pamac-tray
 exec --no-startup-id /usr/bin/picom -b
 exec --no-startup-id kitty --title="Scratchpad" tmux
 exec --no-startup-id kitty --title="Ranger" ranger
+exec --no-startup-id /usr/bin/obsidian
 # }}}
 
 include ~/.config/i3/`hostname`.conf
