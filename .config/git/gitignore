@@ -9,3 +9,5 @@ node_modules
 .vim/coc-settings.json
 .vim
 .git
+.env-testing-scale
+.projections.json

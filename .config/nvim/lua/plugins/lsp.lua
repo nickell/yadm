@@ -12,8 +12,8 @@ local function lsp_keymaps(bufnr)
   nmap('<Leader>D', vim.lsp.buf.type_definition, _opts)
   nmap('<Leader>lca', vim.lsp.buf.code_action, _opts)
   nmap('<Leader>td', vim.lsp.buf.definition, _opts)
-  nmap('<Leader>lr', vim.lsp.buf.references, _opts)
-  nmap('<Leader>rn', vim.lsp.buf.rename, _opts)
+  nmap('<Leader>le', vim.lsp.buf.references, _opts)
+  nmap('<Leader>lr', vim.lsp.buf.rename, _opts)
   nmap('K', vim.lsp.buf.hover, _opts)
   nmap('gD', vim.lsp.buf.declaration, _opts)
   nmap('gi', vim.lsp.buf.implementation, _opts)
@@ -22,8 +22,8 @@ end
 local function tsserver_keymaps(bufnr)
   local _opts = { noremap = true, silent = true, buffer = bufnr }
   local function code_action(action) vim.lsp.buf.code_action { context = { only = { action } }, apply = true } end
-  nmap('<Leader>ti', function() code_action 'source.addMissingImports' end, _opts)
-  nmap('<Leader>to', function() code_action 'source.organizeImports' end, _opts)
+  -- nmap('<Leader>ti', function() code_action 'source.addMissingImports' end, _opts)
+  nmap('<Leader>tto', function() code_action 'source.organizeImports' end, _opts)
 end
 
 return {

@@ -2,6 +2,8 @@
 
 # Used in ranger
 export TERMCMD='alacritty'
+export EDITOR=/usr/bin/nvim
+export VISUAL=/usr/bin/nvim
 
 # Used in git aliases for code reviews
 export REVIEW_BASE='main'

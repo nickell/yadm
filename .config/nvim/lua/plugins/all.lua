@@ -37,6 +37,20 @@ return {
   { 'numToStr/Comment.nvim', config = true },
   'tpope/vim-sensible',
   'tpope/vim-abolish',
+  {
+    'tpope/vim-projectionist',
+    init = function()
+      vim.cmd [[
+    let g:projectionist_heuristics = {
+          \ "package.json": {
+          \   "app/*.tsx": {"type": "source","alternate": "app/{}.test.tsx"},
+          \   "app/*.test.tsx": {"type": "test","alternate": "app/{}.tsx"},
+          \   "app/*.ts": {"type": "source","alternate": "app/{}.test.ts"},
+          \   "app/*.test.ts": {"type": "test","alternate": "app/{}.ts"}
+          \ }}
+    ]]
+    end,
+  },
   { 'nvim-treesitter/nvim-treesitter-textobjects', dependencies = 'nvim-treesitter/nvim-treesitter' },
   'kevinhwang91/rnvimr',
   'rmagatti/auto-session',
