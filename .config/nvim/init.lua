@@ -70,7 +70,6 @@ local function vmap(key, command, options) map('v', key, command, options) end
 nmap('-', 'dd')
 nmap('<A-j>', ':m .+1<CR>')
 nmap('<A-k>', ':m .-2<CR>')
-nmap('<A-o>', ':RnvimrToggle<CR>')
 nmap('<C-h>', '<CMD>NavigatorLeft<CR>')
 nmap('<C-j>', '<CMD>NavigatorDown<CR>')
 nmap('<C-k>', '<CMD>NavigatorUp<CR>')
@@ -105,22 +104,6 @@ nmap('X', ':bd<CR>')
 nmap('gd', '<Plug>Kwbd')
 nmap('gn', ':bn<CR>')
 nmap('gp', ':bp<CR>')
-
-map('t', '<M-o>', '<C-\\><C-n>:RnvimrToggle<CR>')
-map('t', '<M-i>', '<C-\\><C-n>:RnvimrResize<CR>')
-
-vim.cmd [[
-let g:rnvimr_enable_picker = 1
-let g:rnvimr_enable_bw = 1
-let g:rnvimr_layout = {
-           \ 'relative': 'editor',
-           \ 'width': &columns,
-           \ 'height': &lines - 2,
-           \ 'col': 0,
-           \ 'row': 0,
-           \ 'style': 'minimal'
-           \ }
-  ]]
 
 vmap('<', '<gv')
 vmap('<A-j>', ":m '>+1<CR>gv=gv")
