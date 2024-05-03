@@ -16,7 +16,10 @@ if not vim.loop.fs_stat(lazypath) then
 end
 vim.opt.rtp:prepend(lazypath)
 
-require('lazy').setup 'plugins'
+require('lazy').setup('plugins', { change_detection = {
+  enabled = true,
+  notify = false,
+} })
 
 local o = vim.opt
 
@@ -85,9 +88,13 @@ nmap('<Leader>j', vim.diagnostic.goto_next)
 nmap('<Leader>k', vim.diagnostic.goto_prev)
 nmap('<Leader>q', vim.diagnostic.setloclist)
 -- nmap('<Leader>s', function() require('luasnip.loaders').edit_snippet_files() end)
+nmap('<leader>sv', '<C-w>v', { desc = 'Split window vertically' }) -- split window vertically
+nmap('<leader>sh', '<C-w>s', { desc = 'Split window horizontally' }) -- split window horizontally
+nmap('<leader>se', '<C-w>=', { desc = 'Make splits equal size' }) -- make split windows equal width & height
+nmap('<leader>sx', '<cmd>close<CR>', { desc = 'Close current split' }) -- close current split window
 nmap('<Leader>w', ':write<CR>')
 nmap('<Leader>x', ':bd<CR>')
-nmap('<leader><leader>s', '<cmd>source ~/.config/nvim/lua/my_luasnip.lua<CR>')
+-- nmap('<leader><leader>s', '<cmd>source ~/.config/nvim/lua/my_luasnip.lua<CR>')
 nmap('L', 'zo')
 nmap('H', 'zc')
 nmap('zL', 'L')
