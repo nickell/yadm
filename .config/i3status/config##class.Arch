@@ -24,8 +24,8 @@ order += "sysdata"
 order += "weather_owm"
 order += "battery_level"
 order += "clock"
-order += "do_not_disturb_mode"
-order += "presentation_mode"
+# order += "do_not_disturb_mode"
+# order += "presentation_mode"
 
 sysdata {
   format = "[\?color=cpu_temp {cpu_used_percent:.0f}% {cpu_temp:.0f}°C] \| [\?color=mem_used_percent {mem_used:.0f} {mem_total_unit:.0f} {mem_used_percent:.0f}%]"

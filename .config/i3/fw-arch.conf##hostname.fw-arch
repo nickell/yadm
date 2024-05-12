@@ -1,0 +1,5 @@
+# vim: set fdm=marker fmr={{{,}}} fdl=0 ft=i3config:
+
+exec --no-startup-id /usr/bin/xfce4-power-manager
+exec --no-startup-id /usr/bin/variety
+exec --no-startup-id /usr/bin/xrdb -merge /home/chad/.Xresources

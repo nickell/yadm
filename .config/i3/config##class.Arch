@@ -32,7 +32,7 @@ for_window [class=".*"] border pixel 3
 #############################
 
 # Set inner/outer gaps
-gaps inner 14
+gaps inner 10
 gaps outer -2
 
 # Additionally, you can issue commands with the following syntax. This is useful to bind keys to changing the gap size.
@@ -177,33 +177,42 @@ for_window [class="font-manager"] floating enable
 # {{{ Bar Config
  # Start i3bar to display a workspace bar (plus the system information i3status if available)
 bar {
-	i3bar_command i3bar
-	status_command py3status
-	position bottom
-  # font pango:Weather Icons $barFontSize, SF Pro Display $barFontSize
-  font xft:SF Pro Display $barFontSize
-
-## please set your primary output first. Example: 'xrandr --output eDP1 --primary'
-#	tray_output primary
-#	tray_output eDP1
-
-	bindsym button4 nop
-	bindsym button5 nop
-#   font xft:URWGothic-Book 11
-	strip_workspace_numbers yes
-
+    font xft:SF Pro Display, Font Awesome 6 Free $barFontSize
+    position bottom
+    status_command /usr/bin/i3status-rs /home/chad/.config/i3status-rust/config.toml
     colors {
-        background #282A36
-        statusline #F8F8F2
-        separator  #44475A
-
-        focused_workspace  #44475A #44475A #F8F8F2
-        active_workspace   #282A36 #44475A #F8F8F2
-        inactive_workspace #282A36 #282A36 #BFBFBF
-        urgent_workspace   #FF5555 #FF5555 #F8F8F2
-        binding_mode       #FF5555 #FF5555 #F8F8F2
+        separator #666666
+        background #222222
+        statusline #dddddd
+        focused_workspace #0088CC #0088CC #ffffff
+        active_workspace #333333 #333333 #ffffff
+        inactive_workspace #333333 #333333 #888888
+        urgent_workspace #2f343a #900000 #ffffff
     }
 }
+
+# bar {
+# 	i3bar_command i3bar
+# 	status_command i3status-rs
+# 	position bottom
+#   font xft:SF Pro Display $barFontSize
+#
+# 	bindsym button4 nop
+# 	bindsym button5 nop
+# 	strip_workspace_numbers yes
+#
+#     colors {
+#         background #282A36
+#         statusline #F8F8F2
+#         separator  #44475A
+#
+#         focused_workspace  #44475A #44475A #F8F8F2
+#         active_workspace   #282A36 #44475A #F8F8F2
+#         inactive_workspace #282A36 #282A36 #BFBFBF
+#         urgent_workspace   #FF5555 #FF5555 #F8F8F2
+#         binding_mode       #FF5555 #FF5555 #F8F8F2
+#     }
+# }
 
  # hide/unhide i3status bar
  # bindsym $mod+m bar mode toggle
@@ -291,18 +300,9 @@ bindsym $mod+Shift+z move container to workspace 犯
 bindsym XF86AudioNext exec playerctl next
 bindsym XF86AudioPlay exec playerctl play-pause
 bindsym XF86AudioPrev exec playerctl previous
-# bindsym XF86AudioRaiseVolume exec --no-startup-id /home/chad/.bin/change-volume-and-notify +2dB
-# bindsym XF86AudioRaiseVolume exec --no-startup-id pamixer -i 5 && dunstify -a "changeVolume" -u low -r "991049" -t 1000 "󰕾: $(pamixer --get-volume-human)"
-# bindsym XF86AudioLowerVolume exec --no-startup-id /home/chad/.bin/change-volume-and-notify -2dB
-# bindsym XF86AudioLowerVolume exec --no-startup-id pamixer -d 5 && dunstify -a "changeVolume" -u low -r "991049" -t 1000 "󰖀: $(pamixer --get-volume-human)"
-# bindsym XF86AudioMute exec --no-startup-id pamixer -t && dunstify -a "changeVolume" -u low -r "991049" -t 1000 "󰕾: $(pamixer --get-volume-human)"
 bindsym XF86Favorites exec playerctl play-pause
 
 # Brightness controls
-# bindsym XF86MonBrightnessDown exec --no-startup-id /home/chad/.bin/change-brightness-and-notify 10%-
-# bindsym XF86MonBrightnessUp exec --no-startup-id /home/chad/.bin/change-brightness-and-notify +10%
-# bindsym XF86MonBrightnessDown exec --no-startup-id /home/chad/.bin/change-brightness-and-notify 10%-
-# bindsym XF86MonBrightnessUp exec --no-startup-id /home/chad/.bin/change-brightness-and-notify +10%
 bindsym XF86MonBrightnessDown exec --no-startup-id /home/chad/.bin/change-brightness-and-notify -U
 bindsym XF86MonBrightnessUp exec --no-startup-id /home/chad/.bin/change-brightness-and-notify -A
 
@@ -612,10 +612,20 @@ mode "$wallpaper_mode" {
 # }}}
 # }}}
 
+#  {{{ Volume control
+set $volumepath /usr/bin/i3-volume
+set $statuscmd i3status-rs
+set $statussig SIGRTMIN+10
+set $volumestep 3
+bindsym XF86AudioRaiseVolume exec $volumepath -np up $volumestep -t $statuscmd -u $statussig
+bindsym XF86AudioLowerVolume exec $volumepath -np down $volumestep -t $statuscmd -u $statussig
+bindsym XF86AudioMute        exec $volumepath -n mute -t $statuscmd -u $statussig
+#  }}}
+
 # {{{ Autostart programs
 exec --no-startup-id /usr/bin/dunst
 exec --no-startup-id /usr/bin/greenclip daemon
-exec --no-startup-id /usr/bin/nm-applet
+# exec --no-startup-id /usr/bin/nm-applet
 exec --no-startup-id /usr/bin/galculator
 exec --no-startup-id /usr/bin/pa-applet
 exec --no-startup-id /usr/lib/xfce-polkit/xfce-polkit
@@ -628,3 +638,4 @@ exec --no-startup-id /usr/bin/obsidian
 # }}}
 
 include ~/.config/i3/`hostname`.conf
+
