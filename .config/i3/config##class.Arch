@@ -239,7 +239,8 @@ set $browser google-chrome-stable
 bindsym $mod+9 exec --no-startup-id /usr/bin/xtrlock
 # bindsym $mod+Return exec WINIT_X11_SCALE_FACTOR=1.66 alacritty --config-file /home/chad/.config/alacritty/tmux.yml
 # bindsym $mod+Return exec kitty --title=kitty tmux
-bindsym $mod+Return exec kitty
+# bindsym $mod+Return exec kitty
+bindsym --release $mod+Return exec --no-startup-id /home/chad/.bin/open-terminal.sh
 bindsym $mod+Tab workspace back_and_forth
 bindsym $mod+a focus parent
 bindsym $mod+b [con_mark="ranger"] scratchpad show
@@ -253,6 +254,7 @@ bindsym $mod+i exec --no-startup-id rofi -modi "clipboard:greenclip print" -show
 bindsym $mod+e workspace 
 bindsym $mod+f fullscreen toggle
 bindsym $mod+g [con_mark="galculator"] scratchpad show
+bindsym $mod+Shift+c append_layout ~/.config/i3/codespace.json
 bindsym $mod+v layout toggle splitv tabbed stacking
 bindsym $mod+h focus left
 bindsym $mod+j focus down
@@ -358,17 +360,17 @@ mode "resize" {
 
 # {{{ Change layout mode
 # change container layout (stacked, tabbed, toggle split)
-set $change_container_layout_mode Container Layout: (s)tacked | (t)abbed | t(o)ggle split
-bindsym $mod+Shift+c mode $change_container_layout_mode
-mode "$change_container_layout_mode" {
-        bindsym s layout stacking
-        bindsym t layout tabbed
-        bindsym o layout toggle split
-
-        # exit mode: Enter or Escape
-        bindsym Return mode "default"
-        bindsym Escape mode "default"
-}
+# set $change_container_layout_mode Container Layout: (s)tacked | (t)abbed | t(o)ggle split
+# bindsym $mod+Shift+c mode $change_container_layout_mode
+# mode "$change_container_layout_mode" {
+#         bindsym s layout stacking
+#         bindsym t layout tabbed
+#         bindsym o layout toggle split
+#
+#         # exit mode: Enter or Escape
+#         bindsym Return mode "default"
+#         bindsym Escape mode "default"
+# }
 # }}}
 
 # {{{ mode: launch_app_mode
@@ -640,4 +642,3 @@ exec --no-startup-id /usr/bin/obsidian
 # }}}
 
 include ~/.config/i3/`hostname`.conf
-
