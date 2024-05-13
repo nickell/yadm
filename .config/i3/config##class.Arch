@@ -1,89 +1,27 @@
 # vim: set fdm=marker fmr={{{,}}} fdl=0 ft=i3config:
 
-# i3 config file (v4)
-# Please see http://i3wm.org/docs/userguide.html for a complete reference!
-
 # {{{ Appearance
-# set default desktop layout (default is tiling)
 workspace_layout tabbed
 
-# Configure border style <normal|1pixel|pixel xx|none|pixel>
 default_border pixel 3
 default_floating_border pixel 3
 
-# Hide borders
 hide_edge_borders none
 
 set_from_resource $fontSize      i3FontSize    14
 set_from_resource $barFontSize   i3BarFontSize 11
 
-# Font for window titles. Will also be used by the bar unless a different font
-# is used in the bar {} block below.
-font xft:SF Pro Display $fontSize
-# font pango:SF Pro Display $fontSize
+# Font for window titles. Will also be used by the bar unless a different font is used in the bar {} block below.
+font xft:SF Pro Display, Font Awesome 6 Free $fontSize
 
 for_window [class=".*"] title_format "<span size=\\"small\\"> %title</span>"
 
 for_window [class=".*"] border pixel 3
 
-# {{{ i3-gaps
-#############################
-### settings for i3-gaps: ###
-#############################
-
-# Set inner/outer gaps
 gaps inner 10
 gaps outer -2
 
-# Additionally, you can issue commands with the following syntax. This is useful to bind keys to changing the gap size.
-# gaps inner|outer current|all set|plus|minus <px>
-# gaps inner all set 10
-# gaps outer all plus 5
-
-# Smart gaps (gaps used if only more than one container on the workspace)
-# smart_gaps on
-
-# Smart borders (draw borders around container only if it is not the only container on this workspace) 
-# on|no_gaps (on=always activate and no_gaps=only activate if the gap size to the edge of the screen is 0)
 smart_borders on
-
-# Press $mod+Shift+g to enter the gap mode. Choose o or i for modifying outer/inner gaps. Press one of + / - (in-/decrement for current workspace) or 0 (remove gaps for current workspace). If you also press Shift with these keys, the change will be global for all workspaces.
-# set $mode_gaps Gaps: (o) outer, (i) inner
-# set $mode_gaps_outer Outer Gaps: +|-|0 (local), Shift + +|-|0 (global)
-# set $mode_gaps_inner Inner Gaps: +|-|0 (local), Shift + +|-|0 (global)
-# bindsym $mod+Shift+g mode "$mode_gaps"
-
-# mode "$mode_gaps" {
-#         bindsym o      mode "$mode_gaps_outer"
-#         bindsym i      mode "$mode_gaps_inner"
-#         bindsym Return mode "default"
-#         bindsym Escape mode "default"
-# }
-# mode "$mode_gaps_inner" {
-#         bindsym plus  gaps inner current plus 5
-#         bindsym minus gaps inner current minus 5
-#         bindsym 0     gaps inner current set 0
-
-#         bindsym Shift+plus  gaps inner all plus 5
-#         bindsym Shift+minus gaps inner all minus 5
-#         bindsym Shift+0     gaps inner all set 0
-
-#         bindsym Return mode "default"
-#         bindsym Escape mode "default"
-# }
-# mode "$mode_gaps_outer" {
-#         bindsym plus  gaps outer current plus 5
-#         bindsym minus gaps outer current minus 5
-#         bindsym 0     gaps outer current set 0
-
-#         bindsym Shift+plus  gaps outer all plus 5
-#         bindsym Shift+minus gaps outer all minus 5
-#         bindsym Shift+0     gaps outer all set 0
-
-#         bindsym Return mode "default"
-#         bindsym Escape mode "default"
-# }
-# }}}
 # }}}
 
 # {{{ Behavior
@@ -165,7 +103,7 @@ for_window [class="Timeset-gui"] floating enable border normal
 for_window [class="(?i)virtualbox"] floating enable border normal
 for_window [class="Xfburn"] floating enable
 for_window [class="Xfce4-power-manager-settings"] floating enable
-for_window [class="kitty" title="Scratchpad"] mark "kitty" move scratchpad
+for_window [class="kitty" title="Scratchpad"] border pixel 1, mark "kitty" move scratchpad
 for_window [class="kitty" title="Ranger"] border pixel 1, mark "ranger", move scratchpad
 for_window [class="obsidian"] border pixel 1, mark "obsidian", move scratchpad
 for_window [class="Variety"] floating enable
@@ -175,7 +113,6 @@ for_window [class="font-manager"] floating enable
 # }}}
 
 # {{{ Bar Config
- # Start i3bar to display a workspace bar (plus the system information i3status if available)
 bar {
     font xft:SF Pro Display, Font Awesome 6 Free $barFontSize
     position bottom
@@ -190,32 +127,6 @@ bar {
         urgent_workspace #2f343a #900000 #ffffff
     }
 }
-
-# bar {
-# 	i3bar_command i3bar
-# 	status_command i3status-rs
-# 	position bottom
-#   font xft:SF Pro Display $barFontSize
-#
-# 	bindsym button4 nop
-# 	bindsym button5 nop
-# 	strip_workspace_numbers yes
-#
-#     colors {
-#         background #282A36
-#         statusline #F8F8F2
-#         separator  #44475A
-#
-#         focused_workspace  #44475A #44475A #F8F8F2
-#         active_workspace   #282A36 #44475A #F8F8F2
-#         inactive_workspace #282A36 #282A36 #BFBFBF
-#         urgent_workspace   #FF5555 #FF5555 #F8F8F2
-#         binding_mode       #FF5555 #FF5555 #F8F8F2
-#     }
-# }
-
- # hide/unhide i3status bar
- # bindsym $mod+m bar mode toggle
 # }}}
 
 # {{{ Theme Colors
@@ -231,15 +142,10 @@ client.background       #F8F8F2
 
 # {{{ Variables
 set $browser google-chrome-stable
-# set $browser firefox
-# set $browser brave
 # }}}
 
 # {{{ Keybindings
 bindsym $mod+9 exec --no-startup-id /usr/bin/xtrlock
-# bindsym $mod+Return exec WINIT_X11_SCALE_FACTOR=1.66 alacritty --config-file /home/chad/.config/alacritty/tmux.yml
-# bindsym $mod+Return exec kitty --title=kitty tmux
-# bindsym $mod+Return exec kitty
 bindsym --release $mod+Return exec --no-startup-id /home/chad/.bin/open-terminal.sh
 bindsym $mod+Tab workspace back_and_forth
 bindsym $mod+a focus parent
@@ -247,8 +153,6 @@ bindsym $mod+b [con_mark="ranger"] scratchpad show
 bindsym $mod+o [con_mark="obsidian"] scratchpad show
 bindsym $mod+bracketright mode $shortcut_mode
 bindsym $mod+c exec $browser
-# bindsym $mod+d exec --no-startup-id rofi -show drun
-# bindsym $mod+d exec --no-startup-id rofi -no-config -no-lazy-grab -show drun -modi drun -theme ~/.config/polybar/forest/scripts/rofi/launcher.rasi
 bindsym $mod+d exec --no-startup-id ~/.config/rofi/launchers/type-2/launcher.sh
 bindsym $mod+i exec --no-startup-id rofi -modi "clipboard:greenclip print" -show clipboard -run-command '{cmd}' -theme $HOME/.config/rofi/launchers/type-2/style-1.rasi
 bindsym $mod+e workspace 
@@ -261,9 +165,7 @@ bindsym $mod+j focus down
 bindsym $mod+k focus up
 bindsym $mod+l focus right
 bindsym $mod+m exec --no-startup-id /usr/bin/rofimoji
-# bindsym $mod+minus [con_mark="default-scratchpad"] scratchpad show
 bindsym $mod+minus [con_mark="kitty"] scratchpad show
-# bindsym $mod+o workspace 
 bindsym $mod+q kill
 bindsym $mod+r mode "resize"
 bindsym $mod+s workspace 
@@ -272,7 +174,6 @@ bindsym $mod+t workspace 僧
 bindsym $mod+x workspace 
 bindsym $mod+p mode $print_mode
 bindsym $mod+u mode $launch_app_mode
-# bindsym $mod+w [con_mark="scratchpad-galculator"] scratchpad show
 bindsym $mod+z workspace 犯
 
 bindsym $mod+Ctrl+h focus parent; focus left
@@ -282,7 +183,6 @@ bindsym $mod+Shift+Down move workspace to output down
 bindsym $mod+Shift+Left move workspace to output left
 bindsym $mod+Shift+Right move workspace to output right
 bindsym $mod+Shift+Up move workspace to output up
-# bindsym $mod+Shift+b exec WINIT_X11_SCALE_FACTOR=1.66 alacritty -t "Sudo Ranger" -e bash -c "sudo -E ranger"
 bindsym $mod+Shift+b exec kitty --title="Sudo Ranger" -e bash -c "sudo -E ranger"
 bindsym $mod+Shift+e move container to workspace 
 bindsym $mod+Shift+equal floating toggle; mark "default-scratchpad"; move scratchpad; scratchpad show
@@ -358,47 +258,14 @@ mode "resize" {
 }
 # }}}
 
-# {{{ Change layout mode
-# change container layout (stacked, tabbed, toggle split)
-# set $change_container_layout_mode Container Layout: (s)tacked | (t)abbed | t(o)ggle split
-# bindsym $mod+Shift+c mode $change_container_layout_mode
-# mode "$change_container_layout_mode" {
-#         bindsym s layout stacking
-#         bindsym t layout tabbed
-#         bindsym o layout toggle split
-#
-#         # exit mode: Enter or Escape
-#         bindsym Return mode "default"
-#         bindsym Escape mode "default"
-# }
-# }}}
-
 # {{{ mode: launch_app_mode
-set $launch_app_mode Launch app: sp(o)tify | (s)lack | (1)password | (v)im mode | (e)mail | (i)cloud launch mode | (t)rello | a(l)acritty mode | (x)db launch mode
+set $launch_app_mode Launch app: (s)lack | (1)password | (e)mail | (x)db launch mode | li(n)ear
 mode "$launch_app_mode" {
         bindsym n exec google-chrome-stable --app="https://linear.app/get-robin/view/c58cfa9a-3d94-4368-8262-fa41f71d4ea5"; mode "default"
-        bindsym o exec spotify; mode "default"
         bindsym s exec /usr/bin/slack; mode "default"
         bindsym 1 exec /usr/bin/1password; mode "default"
-        bindsym l mode $alacritty_launch_mode
-        bindsym t exec google-chrome-stable --app="https://trello.com/b/WRMeLooU/kanban"; mode "default"
-        bindsym v mode $vim_launch_mode
         bindsym e mode $email_launch_mode
-        bindsym i mode $icloud_launch_mode
         bindsym x mode $db_launch_mode
-
-        # exit mode: Enter or Escape
-        bindsym Return mode "default"
-        bindsym Escape mode "default"
-}
-# }}}
-
-# {{{ mode: alacritty_launch_mode
-set $alacritty_launch_mode Launch alacritty session: (x)ps | (a)md ubuntu | (p)i
-mode "$alacritty_launch_mode" {
-        bindsym x exec WINIT_X11_SCALE_FACTOR=1.66 alacritty --title=XPS -e /usr/bin/zsh --login -c "ssh xps -t \"tmux attach || tmux new\""
-        bindsym a exec WINIT_X11_SCALE_FACTOR=1.66 alacritty --title="AMD Ubuntu" -e /usr/bin/zsh --login -c "ssh amd-ubuntu -t \"tmux attach || tmux new\""
-        bindsym p exec WINIT_X11_SCALE_FACTOR=1.66 alacritty --title="Pi" -e /usr/bin/zsh --login -c "ssh pi -t \"tmux attach || tmux new\""
 
         # exit mode: Enter or Escape
         bindsym Return mode "default"
@@ -471,64 +338,14 @@ mode "$db_launch_mode" {
 }
 # }}}
 
-# {{{ mode: icloud_launch_mode
-set $icloud_launch_mode (r)eminders | (n)otes | (p)hotos | (d)rive
-mode "$icloud_launch_mode" {
-        bindsym r exec google-chrome-stable --app="https://www.icloud.com/reminders/"
-        bindsym n exec google-chrome-stable --app="https://www.icloud.com/notes/"
-        bindsym p exec google-chrome-stable --app="https://www.icloud.com/photos/"
-        bindsym d exec google-chrome-stable --app="https://www.icloud.com/iclouddrive/"
-
-        # exit mode: Enter or Escape
-        bindsym Return mode "default"
-        bindsym Escape mode "default"
-}
-# }}}
-
 # {{{ mode: shortcut_mode
-set $shortcut_mode Shortcut: (a)udio mode | (b)luetooth mode | (m)onitor mode | (k)ill mode | (s)hortcut mode | (n)/(p) variety
+set $shortcut_mode Shortcut: (m)onitor mode | (k)ill mode | (s)hortcut mode | (n)/(p) variety
 mode "$shortcut_mode" {
         bindsym k mode $kill_mode
         bindsym m mode $monitor_mode
-        bindsym a mode $audio_mode
         bindsym s mode $seldom_shortcut_mode
-        bindsym b mode $bluetooth_mode
         bindsym n exec /usr/bin/variety --next
         bindsym p exec /usr/bin/variety --previous
-
-        # exit mode: Enter or Escape
-        bindsym Return mode "default"
-        bindsym Escape mode "default"
-}
-# }}}
-
-# {{{ mode: audio_mode
-set $audio_mode Audio: (h)eadset mode (a)2dp mode
-mode "$audio_mode" {
-        # bindsym a exec pactl set-card-profile bluez_card.94_DB_56_A3_2B_BF a2dp_sink; mode "default"
-        # bindsym h exec pactl set-card-profile bluez_card.94_DB_56_A3_2B_BF headset_head_unit; mode "default"
-
-        bindsym a exec pactl set-card-profile bluez_card.F8_4D_89_05_7F_48 a2dp_sink; mode "default"
-        bindsym h exec pactl set-card-profile bluez_card.F8_4D_89_05_7F_48 handsfree_head_unit; mode "default"
-
-        # exit mode: Enter or Escape
-        bindsym Return mode "default"
-        bindsym Escape mode "default"
-}
-# }}}
-
-# {{{ mode: audio_mode
-set $bluetooth_mode Bluetooth: (o)n | (x)off | (r)estart | (s)ony | (a)irpods | (d)isconnect airpods
-mode "$bluetooth_mode" {
-        # bindsym a exec pactl set-card-profile bluez_card.94_DB_56_A3_2B_BF a2dp_sink; mode "default"
-        # bindsym h exec pactl set-card-profile bluez_card.94_DB_56_A3_2B_BF headset_head_unit; mode "default"
-
-        bindsym o exec rfkill unblock bluetooth; mode "default"
-        bindsym x exec rfkill block bluetooth; mode "default"
-        bindsym r exec sudo systemctl restart bluetooth; mode "default"
-        bindsym s exec bluetoothctl -- connect 94:DB:56:A3:2B:BF; mode "default"
-        bindsym a exec bluetoothctl -- connect F8:4D:89:05:7F:48; mode "default"
-        bindsym d exec bluetoothctl -- disconnect F8:4D:89:05:7F:48; mode "default"
 
         # exit mode: Enter or Escape
         bindsym Return mode "default"
@@ -552,7 +369,6 @@ mode "$kill_mode" {
 set $seldom_shortcut_mode Seldom Used Shortcuts: restart (d)unst | (r)anger | (o)bsidian
 mode "$seldom_shortcut_mode" {
         bindsym d exec "killall dunst; exec notify-send 'restart dunst'"; mode "default"
-        # bindsym r exec --no-startup-id WINIT_X11_SCALE_FACTOR=1.66 alacritty --title="Ranger" -e /usr/bin/zsh --login -c /usr/bin/ranger; mode "default"
         bindsym r exec --no-startup-id kitty --title="Ranger" ranger; mode "default"
         bindsym o exec --no-startup-id /usr/bin/obsidian; mode "default"
 
@@ -588,7 +404,7 @@ mode "$monitor_mode" {
 set $print_mode Print screen: (w)indow | (s)election to clipboard | (c)ast screen | (k)ill screencast
 mode "$print_mode" {
         bindsym w --release exec --no-startup-id /home/chad/.bin/current-window-to-clipboard, mode "default"
-        bindsym s --release exec scrot -s 'screenshot_%Y%m%d_%H%M%S.png' -e 'mkdir -p ~/Pictures/screenshots && mv $f ~/Pictures/screenshots && xclip -selection clipboard -t image/png -i ~/Pictures/screenshots/`ls -1 -t ~/Pictures/screenshots | head -1`', mode "default"
+        bindsym s --release exec flameshot gui --clipboard --path /home/chad/Pictures/screenshots, mode "default"
         bindsym c --release exec ffcast -q -s rec /home/chad/Videos/screencast-"$(date +%F\ %T)".mp4, mode "default"
         bindsym k --release exec pkill -fxn '(/\S+)*ffmpeg\s.*\sx11grab\s.*', mode "default"
 
@@ -629,14 +445,10 @@ bindsym XF86AudioMute        exec $volumepath -n mute -t $statuscmd -u $statussi
 # {{{ Autostart programs
 exec --no-startup-id /usr/bin/dunst
 exec --no-startup-id /usr/bin/greenclip daemon
-# exec --no-startup-id /usr/bin/nm-applet
 exec --no-startup-id /usr/bin/galculator
-# exec --no-startup-id /usr/bin/pa-applet
 exec --no-startup-id /usr/lib/xfce-polkit/xfce-polkit
-# exec --no-startup-id /usr/bin/pamac-tray
-# exec --no-startup-id /usr/bin/blueberry-tray
 exec --no-startup-id /usr/bin/picom -b
-exec --no-startup-id kitty --title="Scratchpad" tmux
+exec --no-startup-id kitty --title="Scratchpad"
 exec --no-startup-id kitty --title="Ranger" ranger
 exec --no-startup-id /usr/bin/obsidian
 # }}}
