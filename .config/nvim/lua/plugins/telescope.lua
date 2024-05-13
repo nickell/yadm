@@ -30,6 +30,10 @@ return {
       '<leader>fw',
       function() require('telescope.builtin').live_grep { default_text = vim.fn.expand '<cword>' } end,
     },
+    {
+      '<leader>le',
+      '<cmd>Telescope lsp_references<cr>',
+    },
   },
   config = function()
     local telescope = require 'telescope'
