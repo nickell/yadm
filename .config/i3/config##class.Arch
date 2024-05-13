@@ -238,7 +238,8 @@ set $browser google-chrome-stable
 # {{{ Keybindings
 bindsym $mod+9 exec --no-startup-id /usr/bin/xtrlock
 # bindsym $mod+Return exec WINIT_X11_SCALE_FACTOR=1.66 alacritty --config-file /home/chad/.config/alacritty/tmux.yml
-bindsym $mod+Return exec kitty --title=kitty tmux
+# bindsym $mod+Return exec kitty --title=kitty tmux
+bindsym $mod+Return exec kitty
 bindsym $mod+Tab workspace back_and_forth
 bindsym $mod+a focus parent
 bindsym $mod+b [con_mark="ranger"] scratchpad show

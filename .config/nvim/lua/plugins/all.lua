@@ -1,5 +1,5 @@
 return {
-  { 'kylechui/nvim-surround', version = '*', event = 'VeryLazy', config = true },
+  { 'kylechui/nvim-surround',  version = '*', event = 'VeryLazy', config = true },
   {
     'akinsho/bufferline.nvim',
     version = '*',
@@ -7,17 +7,17 @@ return {
     event = 'VeryLazy',
     opts = {},
   },
-  {
-    'navarasu/onedark.nvim',
-    config = function()
-      local onedark = require 'onedark'
-      onedark.setup { style = 'deep' }
-      onedark.load()
-    end,
-  },
+  -- {
+  --   'navarasu/onedark.nvim',
+  --   config = function()
+  --     local onedark = require 'onedark'
+  --     onedark.setup { style = 'deep' }
+  --     onedark.load()
+  --   end,
+  -- },
   'christoomey/vim-sort-motion',
   { 'numToStr/Navigator.nvim', config = true },
-  { 'ellisonleao/glow.nvim', config = true, cmd = 'Glow' },
+  { 'ellisonleao/glow.nvim',   config = true, cmd = 'Glow' },
   {
     'vimwiki/vimwiki',
     init = function()
