@@ -164,7 +164,8 @@ bindsym $mod+h focus left
 bindsym $mod+j focus down
 bindsym $mod+k focus up
 bindsym $mod+l focus right
-bindsym $mod+m exec --no-startup-id /usr/bin/rofimoji
+bindsym $mod+m workspace 
+bindsym $mod+Shift+m exec --no-startup-id /usr/bin/rofimoji
 bindsym $mod+minus [con_mark="kitty"] scratchpad show
 bindsym $mod+q kill
 bindsym $mod+r mode "resize"

@@ -1,13 +1,22 @@
+# vim: set ft=toml:
+
 icons_format = "{icon}"
 
 [theme]
 theme = "dracula"
+[theme.overrides]
+separator = " "
 
 [icons]
 icons = "awesome6"
 
 [[block]]
-block = "backlight"
+block = "music"
+format = " $icon {$combo.str(max_w:40) }"
+player = "spotify"
+[[block.click]]
+button = "left"
+action = "play_pause"
 
 [[block]]
 block = "cpu"
@@ -16,8 +25,14 @@ warning_cpu = 50
 critical_cpu = 90
 
 [[block]]
-block = "net"
-format = " $icon {$signal_strength $ssid $frequency|Wired connection} "
+block = "temperature"
+format = " $icon $max  "
+chip = "k10temp-*"
+
+[[block]]
+block = "memory"
+format = " $icon $mem_total_used_percents.eng(w:2) "
+format_alt = " $icon_swap $swap_used_percents.eng(w:2) "
 
 [[block]]
 block = "disk_space"
@@ -30,9 +45,11 @@ alert = 10.0
 format = " $icon $available.eng(w:3) "
 
 [[block]]
-block = "memory"
-format = " $icon $mem_total_used_percents.eng(w:2) "
-format_alt = " $icon_swap $swap_used_percents.eng(w:2) "
+block = "net"
+format = " $icon {$signal_strength $ssid $frequency|Wired connection} "
+
+[[block]]
+block = "backlight"
 
 [[block]]
 block = "sound"
