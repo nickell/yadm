@@ -12,7 +12,6 @@ icons = "awesome6"
 
 [[block]]
 block = "music"
-format = " $icon {$combo.str(max_w:40) }"
 player = "spotify"
 [[block.click]]
 button = "left"

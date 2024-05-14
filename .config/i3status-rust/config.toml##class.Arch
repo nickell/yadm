@@ -12,7 +12,6 @@ icons = "awesome6"
 
 [[block]]
 block = "music"
-format = " $icon {$combo.str(max_w:40) }"
 player = "spotify"
 [[block.click]]
 button = "left"
@@ -46,19 +45,13 @@ format = " $icon $available.eng(w:3) "
 
 [[block]]
 block = "net"
-format = " $icon {$signal_strength $ssid $frequency|Wired connection} "
-
-[[block]]
-block = "backlight"
+format = " $icon {$signal_strength $ssid $frequency|Eth} "
 
 [[block]]
 block = "sound"
 [[block.click]]
 button = "left"
 cmd = "pavucontrol"
-
-[[block]]
-block = "battery"
 
 [[block]]
 block = "time"
