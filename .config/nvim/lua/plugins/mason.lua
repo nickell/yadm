@@ -54,6 +54,7 @@ return {
         'eslint',
         'html',
         'jsonls',
+        'marksman',
         'pyright',
         'lua_ls',
         'tailwindcss',

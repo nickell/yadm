@@ -1,0 +1,10 @@
+{
+  "sqlParamTypes": [":name"],
+  "plugins": ["prettier-plugin-sql-cst"],
+  "overrides": [
+    {
+      "files": ["*.sql"],
+      "options": { "parser": "postgresql" }
+    }
+  ]
+}
