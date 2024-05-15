@@ -5,12 +5,12 @@
     "floating": "auto_off",
     "layout": "tabbed",
     "marks": [],
-    "percent": 0.69742198100407,
+    "percent": 0.414947987336047,
     "type": "con",
     "nodes": [
         {
             "border": "pixel",
-            "current_border_width": 5,
+            "current_border_width": 3,
             "floating": "auto_off",
             "geometry": {
                 "height": 1443,
@@ -19,7 +19,7 @@
                 "y": 0
             },
             "marks": [],
-            "name": "name",
+            "name": "Terminal",
             "percent": 1,
             "swallows": [
                 {
@@ -37,7 +37,7 @@
     "floating": "auto_off",
     "layout": "tabbed",
     "marks": [],
-    "percent": 0.30257801899593,
+    "percent": 0.15171867933062,
     "type": "con",
     "nodes": [
         {
@@ -51,7 +51,7 @@
             "nodes": [
                 {
                     "border": "pixel",
-                    "current_border_width": 5,
+                    "current_border_width": 3,
                     "floating": "auto_off",
                     "geometry": {
                         "height": 1400,
@@ -60,7 +60,7 @@
                         "y": 0
                     },
                     "marks": [],
-                    "name": "~",
+                    "name": "Terminal",
                     "percent": 0.333333333333333,
                     "swallows": [
                         {
@@ -71,7 +71,7 @@
                 },
                 {
                     "border": "pixel",
-                    "current_border_width": 5,
+                    "current_border_width": 3,
                     "floating": "auto_off",
                     "geometry": {
                         "height": 1400,
@@ -80,7 +80,7 @@
                         "y": 0
                     },
                     "marks": [],
-                    "name": "~",
+                    "name": "Terminal",
                     "percent": 0.333333333333333,
                     "swallows": [
                         {
@@ -100,7 +100,7 @@
                     "nodes": [
                         {
                             "border": "pixel",
-                            "current_border_width": 5,
+                            "current_border_width": 3,
                             "floating": "auto_off",
                             "geometry": {
                                 "height": 1443,
@@ -109,7 +109,7 @@
                                 "y": 0
                             },
                             "marks": [],
-                            "name": "~",
+                            "name": "Terminal",
                             "percent": 0.5,
                             "swallows": [
                                 {
@@ -120,7 +120,7 @@
                         },
                         {
                             "border": "pixel",
-                            "current_border_width": 5,
+                            "current_border_width": 3,
                             "floating": "auto_off",
                             "geometry": {
                                 "height": 1443,
@@ -129,7 +129,7 @@
                                 "y": 0
                             },
                             "marks": [],
-                            "name": "~",
+                            "name": "Terminal",
                             "percent": 0.5,
                             "swallows": [
                                 {
@@ -141,6 +141,38 @@
                     ]
                 }
             ]
+        }
+    ]
+}
+
+{
+    // tabbed split container with 1 children
+    "border": "pixel",
+    "floating": "auto_off",
+    "layout": "tabbed",
+    "marks": [],
+    "percent": 0.433333333333333,
+    "type": "con",
+    "nodes": [
+        {
+            "border": "pixel",
+            "current_border_width": 3,
+            "floating": "auto_off",
+            "geometry": {
+                "height": 1369,
+                "width": 1644,
+                "x": 1795,
+                "y": 46
+            },
+            "marks": [],
+            "name": "Chrome",
+            "percent": 1,
+            "swallows": [
+                {
+                    "class": "^Google\\-chrome$"
+                }
+            ],
+            "type": "con"
         }
     ]
 }
