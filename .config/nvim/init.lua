@@ -43,7 +43,7 @@ o.swapfile = false
 o.writebackup = true
 
 o.history = 100
-o.sessionoptions = 'blank,buffers,curdir,folds'
+o.sessionoptions = 'blank,buffers,curdir,help,tabpages,winsize,winpos,terminal,localoptions'
 o.undofile = true
 o.undolevels = 100
 
