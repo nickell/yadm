@@ -9,7 +9,7 @@ local function nmap(key, command, options) map('n', key, command, options) end
 
 local function git_keymaps(params)
   local _opts = { expr = true, buffer = params.bufnr }
-  nmap('<leader>gb', function() require('gitsigns').blame_line { full = true } end, {})
+  -- nmap('<leader>gb', function() require('gitsigns').blame_line { full = true } end, {})
   nmap('[c', params.prev_hunk, _opts)
   nmap(']c', params.next_hunk, _opts)
 end
@@ -44,6 +44,23 @@ return {
         end,
       }
     end,
+  },
+  {
+    'NeogitOrg/neogit',
+    dependencies = {
+      'nvim-lua/plenary.nvim', -- required
+      'sindrets/diffview.nvim', -- optional - Diff integration
+      'nvim-telescope/telescope.nvim',
+    },
+    config = {
+      integrations = {
+        telescope = false,
+      },
+    },
+    keys = {
+      { '<leader>gs', function() require('neogit').open() end, { desc = 'Open neogit' } },
+      { '<leader>gb', function() require('neogit').action('branch', 'checkout_local_branch')() end },
+    },
   },
   {
     'sindrets/diffview.nvim',

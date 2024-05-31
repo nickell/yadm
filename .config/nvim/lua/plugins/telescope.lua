@@ -5,9 +5,6 @@ return {
     'nvim-lua/plenary.nvim',
     { 'nvim-telescope/telescope-fzf-native.nvim', build = 'make' },
     'nvim-telescope/telescope-live-grep-args.nvim',
-    'aaronhallaert/advanced-git-search.nvim',
-    'tpope/vim-fugitive',
-    'tpope/vim-rhubarb',
   },
   keys = {
     { '<leader>ff', '<cmd>Telescope find_files<cr>', { desc = 'Fuzzy find files' } },
@@ -19,21 +16,11 @@ return {
       function() require('telescope.builtin').lsp_document_symbols { ignore_symbols = 'property' } end,
     },
     {
-      '<leader>gb',
-      function() require('telescope.builtin').git_branches { initial_mode = 'normal', default_selection_index = 2 } end,
-    },
-    {
-      '<leader>gc',
-      function() require('telescope.builtin').git_commits { initial_mode = 'normal', default_selection_index = 2 } end,
-    },
-    {
       '<leader>fw',
       function() require('telescope.builtin').live_grep { default_text = vim.fn.expand '<cword>' } end,
     },
-    {
-      '<leader>le',
-      '<cmd>Telescope lsp_references<cr>',
-    },
+    { '<leader>fr', '<cmd>Telescope lsp_references<cr>' },
+    { '<leader>fb', function() require('neogit').action('branch', 'checkout_local_branch')() end },
   },
   config = function()
     local telescope = require 'telescope'
@@ -88,6 +75,5 @@ return {
     }
 
     telescope.load_extension 'fzf'
-    telescope.load_extension 'advanced_git_search'
   end,
 }
