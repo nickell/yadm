@@ -18,6 +18,9 @@ return {
   {
     'lewis6991/gitsigns.nvim',
     event = 'VeryLazy',
+    keys = {
+      { '<leader>gh', function() require('gitsigns').stage_hunk() end, { desc = 'Stage hunk' } },
+    },
     config = function()
       require('gitsigns').setup {
         on_attach = function(bufnr)
@@ -52,6 +55,7 @@ return {
       'sindrets/diffview.nvim', -- optional - Diff integration
       'nvim-telescope/telescope.nvim',
     },
+    event = 'VeryLazy',
     config = {
       integrations = {
         telescope = false,
@@ -65,6 +69,12 @@ return {
   {
     'sindrets/diffview.nvim',
     dependencies = 'nvim-lua/plenary.nvim',
+    event = 'VeryLazy',
+    keys = {
+      { '<leader>dm', ':DiffviewOpen origin/main...HEAD<CR>', { desc = 'Diffview main' } },
+      { '<leader>do', ':DiffviewOpen<CR>', { desc = 'Diffview' } },
+      { '<leader>dc', ':DiffviewClose<CR>', { desc = 'Diffview close' } },
+    },
     config = function()
       local actions = require 'diffview.actions'
 

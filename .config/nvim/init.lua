@@ -56,6 +56,21 @@ o.backupdir = vim.fn.expand '~/.config/nvim/backup/'
 o.directory = vim.fn.expand '~/.config/nvim/swap/'
 o.undodir = vim.fn.expand '~/.config/nvim/undo/'
 
+-- Make DiffView look cool
+o.fillchars:append { diff = '╱' }
+-- o.fillchars = {
+--   fold = ' ',
+--   diff = '╱',
+--   wbr = '─',
+--   msgsep = '─',
+--   horiz = ' ',
+--   horizup = '│',
+--   horizdown = '│',
+--   vertright = '│',
+--   vertleft = '│',
+--   verthoriz = '│',
+-- }
+
 local opts = { noremap = true, silent = true }
 
 local function map(mode, key, command, options)
@@ -77,10 +92,8 @@ nmap('<C-l>', '<CMD>NavigatorRight<CR>')
 nmap('<CR>', 'i<CR><ESC>')
 nmap('<Leader><CR>', ':noh<CR>')
 nmap('<Leader>bo', ':%bd|e#|bd#<CR>')
-nmap('<Leader>dc', ':DiffviewClose<CR>')
 nmap('<Leader>df', ':DiffviewFileHistory %<CR>')
 nmap('<Leader>dl', ':DiffviewFileHistory<CR>')
-nmap('<Leader>do', ':DiffviewOpen<CR>')
 -- nmap('<Leader>e', vim.diagnostic.open_float)
 nmap('<Leader>j', vim.diagnostic.goto_next)
 nmap('<Leader>k', vim.diagnostic.goto_prev)

@@ -3,7 +3,7 @@ return {
   dependencies = { 'nvim-tree/nvim-web-devicons', 'Mofiqul/dracula.nvim' },
   opts = {
     options = {
-      theme = 'dracula-nvim',
+      theme = 'nordic',
     },
     sections = {
       lualine_b = { { 'branch', fmt = function(str) return str:sub(1, 30) end }, 'diff', 'diagnostics' },
