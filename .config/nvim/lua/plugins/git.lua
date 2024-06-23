@@ -71,7 +71,7 @@ return {
     dependencies = 'nvim-lua/plenary.nvim',
     event = 'VeryLazy',
     keys = {
-      { '<leader>dm', ':DiffviewOpen origin/main...HEAD<CR>', { desc = 'Diffview main' } },
+      { '<leader>dm', ':DiffviewOpen origin/HEAD...HEAD<CR>', { desc = 'Diffview main' } },
       { '<leader>do', ':DiffviewOpen<CR>', { desc = 'Diffview' } },
       { '<leader>dc', ':DiffviewClose<CR>', { desc = 'Diffview close' } },
     },
@@ -159,7 +159,7 @@ return {
         },
         default_args = {
           -- Default args prepended to the arg-list for the listed commands
-          DiffviewOpen = {},
+          DiffviewOpen = { '--imply-local' },
           DiffviewFileHistory = {},
         },
         hooks = {}, -- See ':h diffview-config-hooks'
