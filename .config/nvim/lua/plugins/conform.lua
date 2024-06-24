@@ -11,6 +11,7 @@ return {
   },
   -- Everything in opts will be passed to setup()
   opts = {
+    notify_on_error = false,
     -- Define your formatters
     formatters_by_ft = {
       lua = { 'stylua' },
