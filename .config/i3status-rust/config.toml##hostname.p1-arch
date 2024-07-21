@@ -11,13 +11,6 @@ separator = " "
 icons = "awesome6"
 
 [[block]]
-block = "music"
-player = "spotify"
-[[block.click]]
-button = "left"
-action = "play_pause"
-
-[[block]]
 block = "cpu"
 info_cpu = 20
 warning_cpu = 50
@@ -26,7 +19,7 @@ critical_cpu = 90
 [[block]]
 block = "temperature"
 format = " $icon $max  "
-chip = "k10temp-*"
+chip = "coretemp-*"
 
 [[block]]
 block = "memory"
